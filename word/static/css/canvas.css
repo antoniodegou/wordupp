@@ -1,0 +1,283 @@
+ 
+:root {
+    /*   --my-red: #ce3731;
+      --my-yellow: #efb042;
+      --my-blue: #438bc8;
+       */
+        --my-red: #F59C98;
+      --my-yellow: #FACDAB;
+      --my-blue:#C8C9A8;
+      
+      
+          --my-red: #E19591;
+      --my-yellow: #E05745;
+      --my-blue:#EEA932;
+      
+      --my-white: #fff;
+      --my-black: #000;
+      --my-width: 3px;
+    }
+    @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+    
+    #userText{
+      background: var(--my-black);
+      color: var(--my-white)!important;
+      outline: none;
+    }
+    
+    #userText:focus{
+       outline: none;
+      box-shadow: none;
+      border:none;
+    }
+    
+    #buttonsLegend {
+      padding:0!important;
+        background-color: var(--my-black)!important;
+    
+    }
+    #buttonsLegend .legend{
+        background-color: var(--my-black)!important;
+    }
+    #buttonsLegend .legend p{
+      font-family: "Roboto Condensed";
+      color: var(--my-white);
+    }
+    .mySquare {
+      margin-right: -.6rem;
+    }
+    .input-look{
+      border: var(--my-width) solid var(--my-black);
+      color: var(--my-black)!important;
+      font-weight: 900!important;
+      text-align:center!important;
+    }
+    
+     
+    label[for]{
+    /*   color: red!important; */
+      font-family: 'Roboto Condensed', sans-serif;
+       font-weight: 500!important;
+      text-transform: uppercase;
+    }
+    
+    .button-row {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem;
+        background-color: #f6f6f6;
+        border-bottom: 0px solid #e0e0e0;
+    }
+    
+    .pane-button {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+    }
+    
+    .content-pane {
+        display: flex;
+        overflow-x: scroll;
+          white-space: nowrap;
+    /*     gap: 2rem; */
+    /*     padding: 1rem; */
+    /*     height: 300px; /* or any desired height */ 
+          overflow-x: auto;
+        cursor: grab;
+    }
+    
+    .pane-content {
+        flex: 0 0 100%; /* makes each pane the full width of the container */
+        padding: 1rem;
+    /*     border: 1px solid #e0e0e0; */
+    /*     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); */
+      display: none;
+    /*     display: inline-block; */
+        width: 100%;
+    /*   min-height: 150px; */
+    }
+    
+    #canvas {
+        display: block;
+    }
+    
+    .pane-content{
+      overflow: hidden;
+      cursor: grab;
+    }
+    
+    .pane-content:active{
+       cursor: -webkit-grabbing; cursor: grabbing;
+    }
+    
+    .pane-content.active {
+        cursor: grabbing;
+    }
+    
+    
+    
+    /* colour */
+    
+    /* color picker styling */
+    
+    /* General styles for the color picker container */
+    .color-picker-container {
+        position: relative;
+        font-family: Arial, sans-serif;
+    }
+    
+    /* Styles for the color input field */
+    .color-picker-input {
+        appearance: none; /* Disable browser default styling */
+        -webkit-appearance: none;
+        border:0px solid pink;
+        width: 100%;
+        height: 40px;
+        border-radius: 0px;
+        padding: 3px;
+        cursor: pointer;
+      border: var(--my-width) var(--my-black) solid;
+    }
+    
+    /* For WebKit browsers (like Chrome and Safari) */
+    .color-picker-input::-webkit-color-swatch-wrapper {
+        padding: 0;
+    }
+    
+    .color-picker-input::-webkit-color-swatch {
+        border: none;
+        border-radius: 0px;
+    }
+    
+    /* For Firefox */
+    .color-picker-input::-moz-color-swatch-wrapper {
+        padding: 0;
+    }
+    
+    .color-picker-input::-moz-color-swatch {
+        border: none;
+        border-radius: 0px;
+    }
+    
+    .slidervalues{
+      background: var(--my-black);
+      color: var(--my-white);
+      padding:  5px ;
+      margin:  0; 
+    }
+    
+    .form-control, .form-range {
+        height: 45px!important; /* Adjust as needed */
+    }
+    
+    #draggableContainer{
+      background: var(--my-yellow);
+    }
+    
+    
+    
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        background-color: #000; /* or any other color you prefer */
+        width: 35px; /* Adjust as needed */
+        height: 35px; /* Adjust as needed */
+        border-radius: 50%; 
+        cursor: pointer;
+        transition: background 0.15s ease-in-out;
+        margin-top:0px;
+    }
+    
+    input[type="range"]:active::-webkit-slider-thumb {
+        background-color: #666; /* Change color on active state, if desired */
+    }
+    
+    /* Style the track for the range input */
+    input[type="range"]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 35px; /* Adjust as needed */
+        cursor: pointer;
+        background:  white; /* or any other color you prefer for the track */
+        border-radius: 3px;
+      margin-top:1px;
+    }
+    
+    #draggableContainer{
+     
+    }
+    
+    #draggableContainer, .content-pane ,.pane-content , .content-pane {
+    /*    background: pink; */
+      width:100%;
+      height:100%;
+    /*   padding: 1rem;
+      margin: 1rem; */
+     transition: height 1s ease!important; 
+    }
+    
+    .red-bg{
+      background: var(--my-red);
+    }
+     .checkcheck {
+        transform: scale(1.5); /* Adjust the scale value as needed */
+        margin-right: 0.5rem; /* Adjust the spacing between the checkbox and label */
+        vertical-align: middle; /* Aligns checkbox with the text */
+        margin-top: -0.2rem; /* Adjust vertical position */
+        margin-bottom: -0.2rem; /* Adjust vertical position */
+       border: black solid 2px;
+    }
+    
+    
+    canvas {
+        max-width: 100%;
+        display: block;
+        margin: 20px auto;
+        border: var(--my-width) solid var(--my-black);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        image-rendering: -webkit-optimize-contrast;
+    }
+    
+    
+    #resetButton{
+    /*   background: var(--my-red)!important; */
+    /*   border-color: var(--my-white); */
+    /*   color: var(--my-white)!important; */
+    }
+    
+    .mySquare{
+      width: 25px;
+      height: 25px;
+      
+    }
+    
+    .yellowSquare{
+      background-color: var(--my-yellow);
+      
+    }
+    .myred{
+      background-color: var(--my-red);
+      
+    }
+    
+    .myblue{
+        background-color: var(--my-blue);
+    }
+    
+    .myyellow{
+       background-color: var(--my-yellow);
+    }
+    
+    .pane-button {
+        position: relative;
+      text-transform: uppercase!important;
+    /*   color: white!important; */
+      font-weight:700!important;
+    }
+    
+    .pane-button.active::after{
+      position: absolute;
+      content: '';
+      bottom: -.7rem ;
+      left: -3px;
+      right: 100px;
+      width: calc(100% + 6px);
+      border: var(--my-black) 2px solid;
+    }
