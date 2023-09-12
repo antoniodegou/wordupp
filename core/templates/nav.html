@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg   bg-black">
     <div class="container-fluid bg-black">
-      <a class="navbar-brand" href="{% url 'homepage' %}">wordUpp</a>
+      <a class="navbar-brand" href="{% url 'core:homepage' %}">wordUpp</a>
       <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <!-- <span class="navbar-toggler-icon "></span> -->
         <span class="icon-list"></span>
@@ -8,24 +8,24 @@
       <div class="collapse navbar-collapse bg-black" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}">Home</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'core:homepage' %}">Home</a>
           </li>
-          {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+         {# {% if user.is_authenticated %}#} 
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="{# {% url 'logout' %}#} ">Logout</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
-            </li>
+              <a class="nav-link" href="{#{% url 'dashboard' %}#} ">Dashboard</a>
+            </li> -->
   
-          {% else %}
+            {#  {% else %}#} 
             <li class="nav-item">
               <a class="nav-link" href="{% url 'login' %}">Login</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'register'  %}">Register</a>
             </li>
-          {% endif %}
+            {#   {% endif %}#} 
           <!-- Dropdown only if needed -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
