@@ -200,9 +200,7 @@
       margin-top:1px;
     }
     
-    #draggableContainer{
-     
-    }
+ 
     
     #draggableContainer, .content-pane ,.pane-content , .content-pane {
     /*    background: pink; */
@@ -236,11 +234,7 @@
     }
     
     
-    #resetButton{
-    /*   background: var(--my-red)!important; */
-    /*   border-color: var(--my-white); */
-    /*   color: var(--my-white)!important; */
-    }
+ 
     
     .mySquare{
       width: 25px;
