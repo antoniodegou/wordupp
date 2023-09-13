@@ -9,12 +9,12 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container mt-5 pt-5">
     <div class="row">
         <div class="col-md-6 offset-md-3">
 <div class="register-container row justify-content-center">
-    <h2>Register</h2>
-    <form method="post" action="{% url 'register' %}" class="w-100 col-md-6 bg-red p-4 black-border">
+    <h2 class="big-title">Register</h2>
+    <form method="post" action="{% url 'register' %}" class="w-100 col-md-6 bg-red p-4 black-border pb-5">
         {% csrf_token %}
         <!-- Username -->
         <div class="form-floating mb-3">
@@ -42,11 +42,18 @@
         
         <button type="submit" class="btn rounded-0 bg-yellow btn-lg">Register</button>
     </form>
+ 
     {% if form.errors %}
-        <div class="alert alert-danger">
-            {{ form.errors }}
-        </div>
-    {% endif %}
+    <div class="alert rounded-0 black-border mt-3">
+        {% for field, errors in form.errors.items %}
+        <p class="m-0"><strong>{{ field }}</strong>:
+            {% for error in errors %}
+               {{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endif %}
+
 </div>
 </div>
 </div>  <!-- row -->
