@@ -1,6 +1,4 @@
-import * as bootstrap from "https://cdn.skypack.dev/bootstrap@5.2.3";
-import bootstrapIcons from "https://cdn.skypack.dev/bootstrap-icons@1.10.4";
-import popperJs from "https://cdn.skypack.dev/popper.js@1.16.1";
+
 
 class WordCanvas {
     constructor() {
@@ -469,12 +467,13 @@ class WordCanvas {
               'bgSize', 'bgPosX', 'bgPosY', 'bgColor', 'brushSize', 
               'minSize', 'maxSize', 'brushColor'
         ];
-        
 
- 
+
+        this.initializeSliders()
         this.addEventListeners(idsForChangeEvent, 'change', this.updateAndRender.bind(this, false));
         this.addEventListeners(idsForInputEventWithoutReinitialize, 'input', this.updateAndRender.bind(this, false));
         this.addEventListeners(sharedIds, 'input', this.updateAndRender.bind(this, true));
+        this.addEventListeners(sharedIds, 'change', this.updateAndRender.bind(this, true));
     }
  
 
@@ -581,7 +580,7 @@ class WordCanvas {
         ];
 
         sliderMappings.forEach(([sliderId, displayId]) => {
-            this.updateSliderValueDisplay(sliderId, displayId);
+            this.updateSliderValueDisplay(sliderId, displayId).bind(this, false);
         });
     }
 
@@ -777,9 +776,41 @@ class WordCanvas {
 
 document.addEventListener('DOMContentLoaded', function() {
     const wordCanvas = new WordCanvas();
+    // wordCanvas.initializeSliders()
+
+
+    const sliderMappings = [
+        ['bgSize', 'bgSizeValue'],
+        ['bgPosX', 'bgPosXValue'],
+        ['bgPosY', 'bgPosYValue'],
+        ['hSpacing', 'hSpacingValue'],
+        ['vSpacing', 'vSpacingValue'],
+        ['vLines', 'vLinesValue'],
+        ['hLines', 'hLinesValue'],
+        ['brushSize', 'brushSizeValue']
+    ];
+    sliderMappings.forEach(([sliderId, displayId]) => {
+        updateSliderValueDisplay(sliderId, displayId);
+    });
 });
 
- 
+
+
+function updateSliderValueDisplay(sliderId, displayId) {
+const slider = document.getElementById(sliderId);
+const display = document.getElementById(displayId);
+if (slider && display) {
+    display.textContent = slider.value;
+    slider.addEventListener('input', function() {
+        display.textContent = this.value;
+        updateAndRender();
+    });
+}
+}
+
+
+// Set up event listeners for all sliders
+
  
     // Get all pane-buttons
     const buttons2 = document.querySelectorAll('.pane-button');

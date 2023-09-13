@@ -1,27 +1,6 @@
- 
-:root {
-    /*   --my-red: #ce3731;
-      --my-yellow: #efb042;
-      --my-blue: #438bc8;
-       */
-        --my-red: #F59C98;
-      --my-yellow: #FACDAB;
-      --my-blue:#C8C9A8;
-      
-      
-          --my-red: #E19591;
-      --my-yellow: #E05745;
-      --my-blue:#EEA932;
-      
-      --my-white: #fff;
-      --my-black: #000;
-      --my-width: 3px;
-    }
-    @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
-    
     #userText{
-      background: var(--my-black);
-      color: var(--my-white)!important;
+      background: var(--black);
+      color: var(--white)!important;
       outline: none;
     }
     
@@ -33,22 +12,22 @@
     
     #buttonsLegend {
       padding:0!important;
-        background-color: var(--my-black)!important;
+        background-color: var(--black)!important;
     
     }
     #buttonsLegend .legend{
-        background-color: var(--my-black)!important;
+        background-color: var(--black)!important;
     }
     #buttonsLegend .legend p{
       font-family: "Roboto Condensed";
-      color: var(--my-white);
+      color: var(--white);
     }
     .mySquare {
       margin-right: -.6rem;
     }
     .input-look{
-      border: var(--my-width) solid var(--my-black);
-      color: var(--my-black)!important;
+      border: var(--lineWidth) solid var(--black);
+      color: var(--black)!important;
       font-weight: 900!important;
       text-align:center!important;
     }
@@ -135,7 +114,7 @@
         border-radius: 0px;
         padding: 3px;
         cursor: pointer;
-      border: var(--my-width) var(--my-black) solid;
+      border: var(--lineWidth) var(--black) solid;
     }
     
     /* For WebKit browsers (like Chrome and Safari) */
@@ -159,8 +138,8 @@
     }
     
     .slidervalues{
-      background: var(--my-black);
-      color: var(--my-white);
+      background: var(--black);
+      color: var(--white);
       padding:  5px ;
       margin:  0; 
     }
@@ -170,7 +149,7 @@
     }
     
     #draggableContainer{
-      background: var(--my-yellow);
+      background: var(--red);
     }
     
     
@@ -212,7 +191,7 @@
     }
     
     .red-bg{
-      background: var(--my-red);
+      background: var(--pink);
     }
      .checkcheck {
         transform: scale(1.5); /* Adjust the scale value as needed */
@@ -228,7 +207,7 @@
         max-width: 100%;
         display: block;
         margin: 20px auto;
-        border: var(--my-width) solid var(--my-black);
+        border: var(--lineWidth) solid var(--black);
         box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         image-rendering: -webkit-optimize-contrast;
     }
@@ -243,20 +222,20 @@
     }
     
     .yellowSquare{
-      background-color: var(--my-yellow);
+      background-color: var(--red);
       
     }
     .myred{
-      background-color: var(--my-red);
+      background-color: var(--pink);
       
     }
     
     .myblue{
-        background-color: var(--my-blue);
+        background-color: var(--yellow);
     }
     
     .myyellow{
-       background-color: var(--my-yellow);
+       background-color: var(--red);
     }
     
     .pane-button {
@@ -273,5 +252,5 @@
       left: -3px;
       right: 100px;
       width: calc(100% + 6px);
-      border: var(--my-black) 2px solid;
+      border: var(--black) 2px solid;
     }
