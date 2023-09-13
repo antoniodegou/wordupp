@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 # Create your views here.
 # def login(request):
 #     return render(request, 'login.html')
@@ -16,6 +17,9 @@ from users.forms import UserRegisterForm
 from django.contrib.auth.forms import AuthenticationForm
 # Registration View
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')  # If already logged go here
+    
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -29,6 +33,9 @@ def register(request):
 
 # Login View
 def user_login(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard') # If already logged go here
+    
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
@@ -43,3 +50,10 @@ def user_login(request):
 @login_required
 def dashboard(request):
     return render(request, 'dashboard.html')
+
+
+
+def user_logout(request):
+    logout(request)
+    # After logging out, redirect the user to the homepage or login page.
+    return redirect('login')  # adjust as needed
