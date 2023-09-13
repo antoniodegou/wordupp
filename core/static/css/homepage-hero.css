@@ -84,3 +84,9 @@ root{
     background-color: rgba(0,0,0,0)!important;
     /* background: unset; */
 }
+
+
+.icon-heart,.icon-textsms,.icon-camera{
+    font-size: 3.3rem;
+   margin-top: 25px;
+}
