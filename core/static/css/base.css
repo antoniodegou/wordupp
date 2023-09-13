@@ -65,6 +65,10 @@ html,body{
     border: var(--black) var(--lineWidth) solid!important;
 }
 
+.bottom-black-border{
+  border-bottom: var(--black) var(--lineWidth) solid!important;
+}
+
 .make-bold{
     font-weight: 900;
 }

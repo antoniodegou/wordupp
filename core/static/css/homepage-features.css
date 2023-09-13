@@ -9,10 +9,14 @@
 
 
 .card-animation {
-    height: 100px;
+    height: 100px!important;
     display: flex;
     /* align-items: center;
     justify-content: center; */
+}
+
+.height-card-header{
+    height: 100px!important;
 }
 
 .predefined-sizes {
@@ -44,7 +48,7 @@
 
 /* Additional CSS for typewriter effect */
 .dynamic-canvas {
-    margin-bottom:calc( 100px - 2rem);
+    margin-bottom:calc( 100px - 1.3rem);
     margin-top:1rem;
     overflow: hidden;
     white-space: nowrap;
@@ -79,11 +83,7 @@
 
 text effects
 */
-:root {
-    --pink: #E19591;
-    --red: #E05745;
-    --yellow: #EEA932;
-  }
+
 /* Custom Colors */
 /* Grid for Text Effects */
 .txt-grid {
@@ -95,6 +95,8 @@ text effects
     justify-content: flex-start; 
     margin-left: 1rem;
     margin-top: 1rem;
+    margin-bottom: 14.1rem;
+    /* height:100px; */
   }
   
   /* Text Styling */
