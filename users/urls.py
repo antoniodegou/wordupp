@@ -13,5 +13,7 @@ urlpatterns = [
     # path('dashboard/', views.update_user_details, name='dashboard'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('logout/', views.user_logout, name='logout'),
+    path('delete_account/', views.delete_account, name='delete_account'),
+
     
 ]

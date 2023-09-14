@@ -313,3 +313,13 @@ def handle_password_change(request):
     else:
         errors = {field: error_list[0] for field, error_list in p_form.errors.items()}
         return {'success': False, 'errors': errors}
+
+
+@login_required
+def delete_account(request):
+    if request.method == "POST":
+        user = request.user
+        user.delete()  # This deletes the user and associated data.
+        messages.success(request, "Your account has been deleted successfully.")
+        return redirect('login')  # Redirect to a safe page after deletion.
+    return redirect('dashboard')  # In case of any other request type, redirect back to the dashboard.

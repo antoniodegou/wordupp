@@ -9,30 +9,34 @@
             <form method="post" id="changePasswordForm" action="{% url 'dashboard' %}">
                 {% csrf_token %}
                 <h2 class="my-4">Change Your Password</h2>
-        
+            
+                <!-- Hidden Input for username for accessibility -->
+                <input type="text" name="username" value="{{ request.user.username }}" style="display: none;">
+            
                 <!-- Hidden Input for Action -->
                 <input type="hidden" name="action" value="change_password">
-        
+            
                 <!-- Old Password -->
                 <div class="form-floating mb-3">
-                    <input type="password" name="{{ p_form.old_password.name }}" class="form-control rounded-0 black-border" id="{{ p_form.old_password.id_for_label }}" placeholder="Old Password">
+                    <input type="password" name="{{ p_form.old_password.name }}" class="form-control rounded-0 black-border" id="{{ p_form.old_password.id_for_label }}" placeholder="Old Password" autocomplete="current-password">
                     <label for="{{ p_form.old_password.id_for_label }}">Old Password</label>
                 </div>
-        
+            
                 <!-- New Password -->
                 <div class="form-floating mb-3">
-                    <input type="password" name="{{ p_form.new_password1.name }}" class="form-control rounded-0 black-border" id="{{ p_form.new_password1.id_for_label }}" placeholder="New Password">
+                    <input type="password" name="{{ p_form.new_password1.name }}" class="form-control rounded-0 black-border" id="{{ p_form.new_password1.id_for_label }}" placeholder="New Password" autocomplete="new-password">
                     <label for="{{ p_form.new_password1.id_for_label }}">New Password</label>
                 </div>
-        
+            
                 <!-- Confirm New Password -->
                 <div class="form-floating mb-3">
-                    <input type="password" name="{{ p_form.new_password2.name }}" class="form-control rounded-0 black-border" id="{{ p_form.new_password2.id_for_label }}" placeholder="Confirm New Password">
+                    <input type="password" name="{{ p_form.new_password2.name }}" class="form-control rounded-0 black-border" id="{{ p_form.new_password2.id_for_label }}" placeholder="Confirm New Password" autocomplete="new-password">
                     <label for="{{ p_form.new_password2.id_for_label }}">Confirm New Password</label>
                 </div>
-        
+            
                 <button type="submit" class="btn rounded-0 bg-red btn-lg">Change Password</button>
             </form>
+            
             <div id="passwordErrors" class="alert alert-danger black-border bg-red rounded-0 mt-4" style="display:none;"></div>
 
             {% if u_form.username.errors %}
