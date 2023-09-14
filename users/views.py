@@ -258,7 +258,12 @@ def dashboard(request):
                 return JsonResponse(update_response)
         
         elif action == 'change_password':
-            context.update(handle_password_change(request))
+            password_change_response = handle_password_change(request)
+            context.update(password_change_response)
+            
+            if "success" in password_change_response:
+                return JsonResponse(password_change_response)
+        
         
         # Handle other actions like upgrade_subscription here if needed
 
@@ -297,7 +302,14 @@ def handle_password_change(request):
     
     if p_form.is_valid():
         p_form.save()
+        
+        # Re-authenticate and login the user after changing password
+        user = authenticate(username=request.user.username, password=request.POST['new_password1'])
+        if user is not None:
+            login(request, user)
+
         messages.success(request, f'Your password has been updated!')
         return {'success': True}
     else:
-        return {'success': False, 'p_form': p_form}
+        errors = {field: error_list[0] for field, error_list in p_form.errors.items()}
+        return {'success': False, 'errors': errors}

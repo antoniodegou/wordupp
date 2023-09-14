@@ -1,18 +1,77 @@
 <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+      <div class="modal-content rounded-0 bg-yellow black-border">
         <div class="modal-header">
           <h5 class="modal-title" id="passwordModalLabel">Change Password</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="post" id="changePasswordForm" action="{% url 'dashboard' %}">
-              {% csrf_token %}
-              <input type="hidden" name="action" value="change_password">
-              {{ p_form.as_p }}
-              <button type="submit">Change Password</button>
-          </form>
+            <form method="post" id="changePasswordForm" action="{% url 'dashboard' %}">
+                {% csrf_token %}
+                <h2 class="my-4">Change Your Password</h2>
+        
+                <!-- Hidden Input for Action -->
+                <input type="hidden" name="action" value="change_password">
+        
+                <!-- Old Password -->
+                <div class="form-floating mb-3">
+                    <input type="password" name="{{ p_form.old_password.name }}" class="form-control rounded-0 black-border" id="{{ p_form.old_password.id_for_label }}" placeholder="Old Password">
+                    <label for="{{ p_form.old_password.id_for_label }}">Old Password</label>
+                </div>
+        
+                <!-- New Password -->
+                <div class="form-floating mb-3">
+                    <input type="password" name="{{ p_form.new_password1.name }}" class="form-control rounded-0 black-border" id="{{ p_form.new_password1.id_for_label }}" placeholder="New Password">
+                    <label for="{{ p_form.new_password1.id_for_label }}">New Password</label>
+                </div>
+        
+                <!-- Confirm New Password -->
+                <div class="form-floating mb-3">
+                    <input type="password" name="{{ p_form.new_password2.name }}" class="form-control rounded-0 black-border" id="{{ p_form.new_password2.id_for_label }}" placeholder="Confirm New Password">
+                    <label for="{{ p_form.new_password2.id_for_label }}">Confirm New Password</label>
+                </div>
+        
+                <button type="submit" class="btn rounded-0 bg-red btn-lg">Change Password</button>
+            </form>
+            <div id="passwordErrors" class="alert alert-danger black-border bg-red rounded-0 mt-4" style="display:none;"></div>
+
+            {% if u_form.username.errors %}
+                <div class="alert alert-danger black-border bg-red">
+                    {{ u_form.username.errors }}
+                </div>
+            {% endif %}
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+    document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevents normal form submission
+
+    // Use the FormData object to gather form data
+    let formData = new FormData(this);
+
+    // Send the data using the Fetch API
+    fetch('/dashboard/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        } else {
+            // Handle errors
+            let allErrors = '';
+            for (const [field, error] of Object.entries(data.errors)) {
+                allErrors += error + '<br>'; // concatenate errors
+            }
+
+            const errorDiv = document.querySelector('#passwordErrors'); // Assuming an error div with this ID for password errors
+            errorDiv.innerHTML = allErrors; // update error div content
+            errorDiv.style.display = 'block'; // show the error div
+        }
+    });
+});
+  </script>
