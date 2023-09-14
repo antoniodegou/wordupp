@@ -1,0 +1,45 @@
+<div class="container mt-5 pt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+
+<form method="post">
+    {% csrf_token %}
+    <h2 class="my-4">Update Your Profile</h2>
+    <!-- Username -->
+    <input type="hidden" name="action" value="update_details">
+    <div class="form-floating mb-3">
+        <input type="text" name="username" class="form-control  rounded-0" id="{{ u_form.username.id_for_label }}" placeholder="Username" value="{{ u_form.username.value|default:'' }}">
+        <label for="{{ u_form.username.id_for_label }}">Username</label>
+        <p>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
+    </div>
+    
+    <!-- Email -->
+    <div class="form-floating mb-3">
+        <input type="email" name="email" class="form-control  rounded-0" id="{{ u_form.email.id_for_label }}" placeholder="Email" value="{{ u_form.email.value|default:'' }}">
+        <label for="{{ u_form.email.id_for_label }}">Email</label>
+    </div>
+    
+    <!-- First Name -->
+    <div class="form-floating mb-3">
+        <input type="text" name="first_name" class="form-control  rounded-0" id="{{ u_form.first_name.id_for_label }}" placeholder="First Name" value="{{ u_form.first_name.value|default:'' }}">
+        <label for="{{ u_form.first_name.id_for_label }}">First Name</label>
+    </div>
+    
+    <!-- Last Name -->
+    <div class="form-floating mb-3">
+        <input type="text" name="last_name" class="form-control  rounded-0" id="{{ u_form.last_name.id_for_label }}" placeholder="Last Name" value="{{ u_form.last_name.value|default:'' }}">
+        <label for="{{ u_form.last_name.id_for_label }}">Last Name</label>
+    </div>
+    
+    <button type="submit" class="btn rounded-0 bg-yellow btn-lg">Update</button>
+</form>
+{% if u_form.username.errors %}
+    <div class="alert alert-danger">
+        {{ u_form.username.errors }}
+    </div>
+{% endif %}
+
+
+</div>
+</div>  <!-- row -->
+</div><!--containers -->

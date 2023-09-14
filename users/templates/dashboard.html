@@ -24,10 +24,10 @@
     <a class="nav-link " id="dashboard-tab" data-bs-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="true">Dashboard</a>
   </li> -->
   <li class="nav-item" role="presentation">
-    <a class="nav-link " id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+    <a class="nav-link  active " id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
   </li>
   <li class="nav-item" role="presentation">
-    <a class="nav-link active" id="subscription-tab" data-bs-toggle="tab" href="#subscription" role="tab" aria-controls="subscription" aria-selected="false">Subscription</a>
+    <a class="nav-link" id="subscription-tab" data-bs-toggle="tab" href="#subscription" role="tab" aria-controls="subscription" aria-selected="false">Subscription</a>
   </li>
 </ul>
 
@@ -35,22 +35,72 @@
   
   
   <!-- Profile Tab -->
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+  <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
  
+    <h2>Hello, {{user.username}}</h2>
+    <h3>You emaill: {{user.email}}</h3>
 
-    {#{% include "pane-profile.html" %}#}
-
+    <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-toggle="modal" data-bs-target="#detailsModal">
+      Update Details
+    </button>
+    
+    <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-toggle="modal" data-bs-target="#passwordModal">
+      Change Password
+    </button>
+  
   </div>
   
   <!-- Subscription Tab -->
-  <div class="tab-pane fade  show active" id="subscription" role="tabpanel" aria-labelledby="subscription-tab">
+  <div class="tab-pane fade  " id="subscription" role="tabpanel" aria-labelledby="subscription-tab">
  
-    {# {% include "pane-subscription.html" %}#}
-
+    {% include "dash-subscription.html" %} 
+    
   </div>
 </div>
 
+{% include "dash-change-details.html" %}
+{% include "dash-change-pass.html" %}
  
+
+
+<script>
+  document.getElementById('updateDetailsForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevents normal form submission
+
+    // Use the FormData object to gather form data
+    let formData = new FormData(this);
+
+    // Send the data using the Fetch API
+    fetch('/dashboard/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+
+          location.reload();
+        } else {
+        // Handle errors
+
+ 
+          let allErrors = '';
+          for (const [field, error] of Object.entries(data.errors)) {
+              allErrors += error + '<br>'; // concatenate errors
+          }
+    
+          const errorDiv = document.querySelector('#formErrors');
+          errorDiv.innerHTML = allErrors; // update error div content
+          errorDiv.style.display = 'block'; // show the error div
+
+            
+        }
+    });
+});
+
+
+ 
+</script>
     
 {% endblock %}
 

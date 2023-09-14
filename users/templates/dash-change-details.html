@@ -1,0 +1,54 @@
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content rounded-0 bg-yellow black-border">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detailsModalLabel">Update Your Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="post" id="updateDetailsForm">
+                {% csrf_token %}
+                <h2 class="my-4">Update Your Profile</h2>
+                <!-- Username -->
+                <input type="hidden" name="action" value="update_details">
+                <div class="form-floating mb-3 ">
+                    <input type="text" name="username" class="form-control  rounded-0 black-border" id="{{ u_form.username.id_for_label }}" placeholder="Username" value="{{ u_form.username.value|default:'' }}">
+                    <label for="{{ u_form.username.id_for_label }}">Username</label>
+          
+                </div>
+                
+                <!-- Email -->
+                <div class="form-floating mb-3">
+                    <input type="email" name="email" class="form-control  rounded-0 black-border" id="{{ u_form.email.id_for_label }}" placeholder="Email" value="{{ u_form.email.value|default:'' }}">
+                    <label for="{{ u_form.email.id_for_label }}">Email</label>
+                </div>
+                
+                <!-- First Name -->
+                <div class="form-floating mb-3">
+                    <input type="text" name="first_name" class="form-control  rounded-0 black-border" id="{{ u_form.first_name.id_for_label }}" placeholder="First Name" value="{{ u_form.first_name.value|default:'' }}">
+                    <label for="{{ u_form.first_name.id_for_label }}">First Name</label>
+                </div>
+                
+                <!-- Last Name -->
+                <div class="form-floating mb-3">
+                    <input type="text" name="last_name" class="form-control  rounded-0 black-border" id="{{ u_form.last_name.id_for_label }}" placeholder="Last Name" value="{{ u_form.last_name.value|default:'' }}">
+                    <label for="{{ u_form.last_name.id_for_label }}">Last Name</label>
+                </div>
+                
+                <button type="submit" class="btn rounded-0 bg-red btn-lg">Update</button>
+ 
+
+            </form>
+
+            <div id="formErrors" class="alert alert-danger black-border bg-red rounded-0 mt-4" style="display:none;"></div>
+
+            {% if u_form.username.errors %}
+                <div class="alert alert-danger black-border bg-red">
+                    {{ u_form.username.errors }}
+                </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  

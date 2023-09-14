@@ -44,7 +44,7 @@
     </form>
  
     {% if form.errors %}
-    <div class="alert rounded-0 black-border mt-3">
+    <div class="alert rounded-0 black-border mt-3 bg-pink">
         {% for field, errors in form.errors.items %}
         <p class="m-0"><strong>{{ field }}</strong>:
             {% for error in errors %}
