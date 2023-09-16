@@ -25,9 +25,11 @@
               <a class="nav-link" href="{% url 'canvas' %} ">Canvas</a>
             </li>  
             <li class="nav-item">
+              <a class="nav-link" href="{% url 'canvas_grid' %}">grid</a>
+            </li>  
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>  
-  
              {% else %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'login' %}">Login</a>

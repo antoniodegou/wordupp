@@ -1,8 +1,7 @@
 
 
-
 class WordCanvas {
-    constructor(  initialState = null) {
+    constructor(initialState = null) {
         this.canvas = document.getElementById('worduppCanvas');
         this.ctx = this.canvas.getContext('2d');
         this.canvasElement = document.getElementById('worduppCanvas'); // Add this line
@@ -23,7 +22,6 @@ class WordCanvas {
         };
 
         if (initialState) {
-            console.log("AAAA")
             this.collectCanvasState(initialState)
           }
    
@@ -63,17 +61,7 @@ class WordCanvas {
 
 
     }
-  // New method to load a state into the canvas
-  loadCanvasState(state) {
-    this.canvasState = JSON.parse(state);
-    // Here, you'll also want to update any other properties based on this.canvasState.
-    // For example:
-    this.wordsData = this.canvasState.wordsData;
-    this.settings = this.canvasState.settings;
-    // ... etc ...
 
-    // You may also want to redraw the canvas here
-  }
 
     /**
      * Shuffles an array in-place.
@@ -86,6 +74,16 @@ class WordCanvas {
         }
     }
 
+    /**
+     * Displays a Bootstrap toast message.
+     * @param {string} message - The message to display in the toast.
+    */
+    static showToast(message) {
+        const toastEl = document.getElementById('errorToast');
+        const toast = new bootstrap.Toast(toastEl);
+        toastEl.querySelector('.toast-body').textContent = message;
+        toast.show();
+    }
 
     /**
      * Updates and renders the text on the canvas.
@@ -234,68 +232,7 @@ class WordCanvas {
         if (state) {
             // If a saved state is provided, apply it
             this.canvasState = JSON.parse(state);
-            // console.log("AAABBBCC")
-            console.log(this.canvasState )
-            // Populate the input fields with values from saved state
-                document.getElementById("userText").value = this.canvasState.originalWords.join(" ");
-                document.getElementById("canvasWidth").value = this.canvasState.settings.canvasWidth;
-                document.getElementById("canvasHeight").value = this.canvasState.settings.canvasHeight;
-                document.getElementById("fontSelector").value = this.canvasState.settings.font;
-                document.getElementById("textSize").value = this.canvasState.settings.textSize;
-                document.getElementById("textColor").value = this.canvasState.settings.textColor;
-                document.getElementById("randomOrder").checked = this.canvasState.settings.randomOrder;
-                document.getElementById("bgColor").value = this.canvasState.settings.bgColor;
-                document.getElementById("bgSize").value = this.canvasState.settings.bgSize;
-                document.getElementById("bgPosX").value = this.canvasState.settings.bgPosX;
-                document.getElementById("bgPosY").value = this.canvasState.settings.bgPosY;
-                document.getElementById("primaryColor").value = this.canvasState.settings.color1;
-                document.getElementById("secondaryColor").value = this.canvasState.settings.color2;
-                document.getElementById("bgPresets").value = this.canvasState.settings.bgPreset;
-                document.getElementById("vLines").value = this.canvasState.settings.vLines;
-                document.getElementById("hLines").value = this.canvasState.settings.hLines;
-                document.getElementById("hSpacing").value = this.canvasState.settings.hSpacing;
-                document.getElementById("vSpacing").value = this.canvasState.settings.vSpacing;
-                document.getElementById("brushMode").value = this.canvasState.settings.brushMode;
-                document.getElementById("brushSize").value = this.canvasState.settings.brushSize;
-                document.getElementById("brushColor").value = this.canvasState.settings.brushColor;
-                document.getElementById("minSize").value = this.canvasState.settings.minSize;
-                document.getElementById("maxSize").value = this.canvasState.settings.maxSize;
-                // Populate the input fields with values from saved state
-                document.getElementById("userText").value = this.canvasState.originalWords.join(" ");
-                document.getElementById("canvasWidth").value = this.canvasState.settings.canvasWidth;
-                document.getElementById("canvasHeight").value = this.canvasState.settings.canvasHeight;
-                document.getElementById("fontSelector").value = this.canvasState.settings.font;
-                document.getElementById("textSize").value = this.canvasState.settings.textSize;
-                document.getElementById("textColor").value = this.canvasState.settings.textColor;
-                document.getElementById("randomOrder").checked = this.canvasState.settings.randomOrder;
-                document.getElementById("bgColor").value = this.canvasState.settings.bgColor;
-                document.getElementById("bgSize").value = this.canvasState.settings.bgSize;
-                document.getElementById("bgPosX").value = this.canvasState.settings.bgPosX;
-                document.getElementById("bgPosY").value = this.canvasState.settings.bgPosY;
-                document.getElementById("primaryColor").value = this.canvasState.settings.color1;
-                document.getElementById("secondaryColor").value = this.canvasState.settings.color2;
-                document.getElementById("bgPresets").value = this.canvasState.settings.bgPreset;
-                document.getElementById("vLines").value = this.canvasState.settings.vLines;
-                document.getElementById("hLines").value = this.canvasState.settings.hLines;
-                document.getElementById("hSpacing").value = this.canvasState.settings.hSpacing;
-                document.getElementById("vSpacing").value = this.canvasState.settings.vSpacing;
-                document.getElementById("brushMode").value = this.canvasState.settings.brushMode;
-                document.getElementById("brushSize").value = this.canvasState.settings.brushSize;
-                document.getElementById("brushColor").value = this.canvasState.settings.brushColor;
-                document.getElementById("minSize").value = this.canvasState.settings.minSize;
-                document.getElementById("maxSize").value = this.canvasState.settings.maxSize;
 
-                // this.initializeWordsData(this.canvasState.wordsData);
-                this.wordsData = this.canvasState.wordsData 
-                // console.log("XZZ"+ this.canvasState.wordsData )
-                // this.wordsData = this.canvasState.wordsData;
-                // Trigger a re-render to apply the changes visually
-                // this.updateAndRender(false);
-                // this.initializeWordsData(this.wordsData);
-                // this.renderText() 
-                // this.updateAndRender(true);
-                this.updateAndRender(true);
-                return
         } else {
         // main text
         const userText = document.getElementById("userText").value;
@@ -361,7 +298,6 @@ class WordCanvas {
         this.canvasState.settings.bgPreset =  bgPreset 
         this.canvasState.settings.color1 = color1;
         this.canvasState.settings.color2 = color2;
-
         this.canvasState.wordsData = this.wordsData;
         this.canvasState.originalWords = inputWords;
 
@@ -884,7 +820,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //     // Initialize it without a state, if none is saved
     //       myCanvas = new WordCanvas();
     //   }
-    // wordCanvas.initializeSliders()
+    // // wordCanvas.initializeSliders()
 
 
     const sliderMappings = [
@@ -941,51 +877,38 @@ if (slider && display) {
     });
 
 
+// Function to save canvas state
+async function saveCanvasState() {
+    let state = JSON.stringify(wordCanvas.canvasState);  // Serialize the canvas state
+    let csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    let title = document.getElementById("canvasTitle").value;  // Get the title from an input field
+    console.log(title);  // Now this should work!
+ 
 
-    /**
-     * Displays a Bootstrap toast message.
-     * @param {string} message - The message to display in the toast.
-    */
-  function showToast(message) {
-        const toastEl = document.getElementById('errorToast');
-        const toast = new bootstrap.Toast(toastEl);
-        toastEl.querySelector('.toast-body').textContent = message;
-        toast.show();
-    }
+    const response = await fetch("/save_canvas_state/", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrfToken
+        },
+        body: `state=${encodeURIComponent(state)}&title=${encodeURIComponent(title)}`  // Include title in the body
 
-// Added by Reba for brush state functionality
-
-// 1. Add brushedWords array in this.canvasState
-
-this.canvasState = {
-    // ... existing properties ...
-    brushedWords: []
-};
-
-
-// 2. Modify collectCanvasState() method
-
-if (this.canvasState && this.wordsData) {
-    this.canvasState.brushedWords = this.wordsData
-        .filter(word => word.brushed)
-        .map(word => word.text);
-} else {
-    console.error('Either canvasState or wordsData is undefined');
-}
-
-// 3. Modify initializeWordsData() method
-
-const word = {
-    // ... existing properties ...
-    brushed: this.canvasState.brushedWords.includes(currentWord)
-};
-
-
-// 4. Modify loadCanvasState() method
-
-if (this.canvasState.brushedWords) {
-    this.wordsData.forEach(word => {
-        word.brushed = this.canvasState.brushedWords.includes(word.text);
     });
+    const data = await response.json();
+    if (data.status === 'success') {
+        alert("Canvas state saved!");
+    } else {
+        alert("Oops! Something went wrong.");
+    }
 }
 
+// Function to load canvas state
+async function loadCanvasState() {
+    const response = await fetch("/load_canvas_state/");
+    const data = await response.json();
+    if (data.state) {
+        let loadedState = JSON.parse(data.state);  // Deserialize the canvas state
+        wordCanvas.canvasState = loadedState;  // Load it into your WordCanvas instance
+        // You may also want to redraw the canvas here
+    }
+}

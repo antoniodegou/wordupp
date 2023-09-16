@@ -12,7 +12,7 @@
 
 /* Change header background color on hover */
 .card:hover .card-header {
-    background-color: #f2f2f2;
+    /* background-color: #f2f2f2; */
     transition: background-color 0.3s ease-in-out;
 }
 
@@ -22,3 +22,6 @@
     transition: margin-top 0.2s ease-in-out;
 }
 
+.card{
+    --bs-card-border-color: unset!important;
+}

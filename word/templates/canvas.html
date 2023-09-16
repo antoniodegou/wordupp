@@ -9,7 +9,8 @@
 {% load static %}
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/canvas.css' %}">
-    <script src="{% static '/js/canvas.js' %}" type="text/javascript"></script> 
+    <script src="{% static '/js/canvas-interface.js' %}" type="text/javascript"></script> 
+    <script src="{% static '/js/canvas-re.js' %}" type="text/javascript"></script> 
 {% endblock %}
 
 {% block content %}
@@ -252,10 +253,202 @@
             <div class="mt-3">
                 <button class="btn btn-primary rounded-0" onclick="downloadCanvas()" aria-label="Download canvas button">Download</button>
                 <button type="button" class="btn btn-primary rounded-0" onclick="toggleNavbar()"><a class="navbar-brand" href="#">More options</a></button>
+                {% csrf_token %}
+                <button id="saveButton">Save</button>
+                
+                <input type="text" id="canvasTitle" placeholder="Enter title" value="Untitled">
             </div>
         </div>
     </div>
-
+ 
 </div>
+
+<script>
+
+function updateCaretPosition() {
+    const caretPos = getCaretPosition(inputElem);
+    const correctionFactor = 3;  // Adjust this value as needed to perfect the positioning
+    underscoreElem.style.left = (caretPos + correctionFactor) + 'px'; 
+}
+
+
+// let wordCanvas;
+// // document.body.setAttribute('data-saved-state', "{{ canvas_state.state|safe }}");
+
+// // let savedState = JSON.parse("{{ canvas_state.state }}");
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     fetch('/load_canvas_state/', {
+//         method: 'GET',
+//         credentials: 'include',  // This line ensures cookies are sent, important for logged-in sessions
+//         })  // Replace this with the actual URL
+//     .then(response =>   response.json())
+//     .then(data => {
+//         // console.log("Canvas State:", data.state);
+//         // Initialize your canvas using this state
+//     })
+//     .catch(error => {
+//         console.log("There was an error fetching the canvas state:", error);
+//     });
+// });
+
+
+// async function loadCanvasState() {
+//   const response = await fetch("/load_canvas_state/");
+//   const data = await response.json();
+//   if (data.state) {
+//     wordCanvas.loadCanvasState(data.state);  // Use the new method here
+//   }
+// }
+
+
+
+
+
+// // Function to save canvas state
+// async function saveCanvasState() {
+//     let state = JSON.stringify(wordCanvas.canvasState);  // Serialize the canvas state
+
+// console.log("AA  " + state)
+
+//     let csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+//     let title = document.getElementById("canvasTitle").value;  // Get the title from an input field
+//     console.log(title);  // Now this should work!
+ 
+
+//     const response = await fetch("/save_canvas_state/", {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/x-www-form-urlencoded',
+//             'X-CSRFToken': csrfToken
+//         },
+//         body: `state=${encodeURIComponent(state)}&title=${encodeURIComponent(title)}`  // Include title in the body
+
+//     });
+//     const data = await response.json();
+//     if (data.status === 'success') {
+//         alert("Canvas state saved!");
+//     } else {
+//         alert("Oops! Something went wrong.");
+//     }
+// }
+
+ 
+
+// let wordCanvas;
+ 
+// document.addEventListener('DOMContentLoaded', function() {
+//     fetch('/load_canvas_state/', {
+//         method: 'GET',
+//         credentials: 'include',
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         let savedState = data.state;  // Define savedState here
+//         if (savedState) {
+//             // Initialize your WordCanvas with the saved state
+//             wordCanvas = new WordCanvas(savedState);
+//         } else {
+//             // Initialize it without a state, if none is saved
+//             wordCanvas = new WordCanvas();
+//         }
+//     })
+//     .catch(error => {
+//         console.log("There was an error fetching the canvas state:", error);
+//     });
+// });
+
+// async function loadCanvasState() {
+//     const response = await fetch("/load_canvas_state/");
+//     const data = await response.json();
+//     if (data.state) {
+//         wordCanvas.loadCanvasState(data.state);
+//         // Call any additional update functions here
+//     }
+// }
+
+const urlParts = window.location.pathname.split('/');
+const title = urlParts[urlParts.length - 1];
+
+ 
+function saveToDjango() {
+  const savedState = myCanvas.saveCanvasState();
+  fetch('/save_canvas_state/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': csrf_token,  // Django CSRF token
+      credentials: 'include',
+    },
+    body: JSON.stringify(savedState)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+
+// window.onload = function() {
+//   // Initialize your WordUpp canvas here
+//   var myCanvas = new WordUpp('canvasElementId');  // Replace 'canvasElementId' with the actual ID of your canvas element
+  
+//   // Fetch the saved canvas state from the server
+//   fetch(`/load_canvas_state/${title}/`)  // Replace with the actual URL to your Django view that returns the saved state
+//   .then(response => response.json())
+//   .then(data => {
+//     console.log("Received from server:", data);
+//     const parsedState = JSON.parse(data.state);
+//     myCanvas.loadState(data);
+//   })
+//   .catch((error) => {
+//     console.error('Error:', error);
+//   });
+// };
+
+window.onload = function() {
+    let title = window.location.pathname.split('/').pop();
+    if (title && title !== 'canvas') {
+        loadCanvasStateFromServer(title);
+    } else {
+        // Load default settings or start fresh
+        loadDefaultSettings();
+    }
+};
+
+
+function loadDefaultSettings() {
+  // Set canvas to default settings
+  myCanvas.canvasState = { ...canvas_state_defaults };
+  myCanvas.applySettings();
+}
+
+
+function loadCanvasStateFromServer(title) {
+  fetch(`/load_canvas_state/${title}/`, {
+    method: 'GET',
+    // Add other headers as needed
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.state) {
+      myCanvas.loadState(JSON.parse(data.state));
+    } else {
+      console.error('No saved state found for this title');
+    }
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+
+
+const myCanvas = new WordUpp()
+
+</script>
 
 {% endblock %}

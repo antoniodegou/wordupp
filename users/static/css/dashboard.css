@@ -10,16 +10,16 @@ root{
 #dashboard-tab,#profile-tab, #subscription-tab{
     background-color: var(--red);
     border-bottom: none;
-    color: var(--white);
+    /* color: var(--white); */
 }
 
 #subscription-tab.active, #profile-tab.active{
-    background-color: var(--black)!important;
+    background-color: var(--red)!important;
  
 }
 
 .tab-pane{
-    background-color: var(--white);
+    background-color: var(--actual-white);
    padding:1rem;
 }
 
@@ -31,4 +31,9 @@ root{
 
 form{
     border: unset!important;;
+}
+
+
+.nav-tabs{
+    --bs-nav-tabs-border-color: rgba(0,0,0,0);
 }

@@ -3,8 +3,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     const txtElements = document.querySelectorAll('.txt');
     //have more chances of picking pink
-    const colors = ['var(--pink)', 'var(--red)','var(--pink)','var(--pink)', 'var(--yellow)'];
-  
+    // const colors = ['var(--pink)', 'var(--red)','var(--pink)','var(--pink)', 'var(--yellow)'];
+    const colors = ['var(--actual-white)', 'var(--actual-white)', ];
     const alterElement = (element) => {
       const randomDuration = (Math.random() * (3 - 1) + 1).toFixed(1); // Random duration between 3s and 5s
       const randomSize = Math.random() * (2 - 1) + 1; // Random size between 1 and 2

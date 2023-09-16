@@ -17,50 +17,46 @@
     {% endfor %}
   </ul>
 {% endif %}
-<h1>Welcome, {{ user.username }}</h1>
 
-<ul class="nav nav-tabs" id="userTabs" role="tablist">
-  <!-- <li class="nav-item" role="presentation">
-    <a class="nav-link " id="dashboard-tab" data-bs-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="true">Dashboard</a>
-  </li> -->
+<ul class="nav nav-tabs mt-5" id="userTabs" role="tablist">
   <li class="nav-item" role="presentation">
-    <a class="nav-link  active " id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+    <a class="nav-link  btn active  rounded-0 bg-yellow btn-lg black-border btn-lg me-4" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
   </li>
   <li class="nav-item" role="presentation">
-    <a class="nav-link" id="subscription-tab" data-bs-toggle="tab" href="#subscription" role="tab" aria-controls="subscription" aria-selected="false">Subscription</a>
+    <a class="nav-link  btn rounded-0 bg-yellow btn-lg black-border" id="subscription-tab" data-bs-toggle="tab" href="#subscription" role="tab" aria-controls="subscription" aria-selected="false">Subscription</a>
   </li>
 </ul>
 
+<h2 class="big-title mt-4">{{ user.username }}'s Stuff</h2>
+
+
+
 <div class="tab-content" id="userTabsContent">
-  
   
   <!-- Profile Tab -->
   <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
  
-    <h2>Hello, {{user.username}}</h2>
-    <h3>You emaill: {{user.email}}</h3>
+      <h2>Hello, {{user.username}}</h2>
+      <h3>You emaill: {{user.email}}</h3>
 
-    <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-toggle="modal" data-bs-target="#detailsModal">
-      Update Details
-    </button>
-    
-    <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-toggle="modal" data-bs-target="#passwordModal">
-      Change Password
-    </button>
+      <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-toggle="modal" data-bs-target="#detailsModal">
+        Update Details
+      </button>
+      
+      <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-toggle="modal" data-bs-target="#passwordModal">
+        Change Password
+      </button>
 
-
-    <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
-      Delete Account
-  </button>
+      <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+        Delete Account
+      </button>
   
   </div>
   
   <!-- Subscription Tab -->
   <div class="tab-pane fade  " id="subscription" role="tabpanel" aria-labelledby="subscription-tab">
- 
-    
-    
   </div>
+
 </div>
 
 {% include "dash-change-details.html" %}

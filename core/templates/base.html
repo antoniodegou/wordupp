@@ -30,7 +30,11 @@
         <script src="https://js.stripe.com/v3/"></script>
  
 </head>
-<body  >
+<body data-saved-state="{{ canvas_state|safe }}">
+    <script>console.log("From inline script:", "{{canvas_state.state|safe}}");</script>
+    <script>
+        console.log("From inline script:", "{{ canvas_state|safe }}");
+      </script>
     <div class="container d-flex flex-column min-vh-100">
 
         <!-- Navigation -->

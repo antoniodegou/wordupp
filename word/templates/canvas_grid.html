@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+
+{% load static %}
+{% block content %}
+  <div class="container">
+    <h1>Your Saved Canvases</h1>
+    <div class="row">
+      {% for canvas_state in canvas_states %}
+        <div class="col-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ canvas_state.title }}</h5>
+              <!-- You can add a preview here if you like -->
+              <div>
+                <a href="{% url 'canvas' canvas_state.title %}">Load this canvas</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
