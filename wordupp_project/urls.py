@@ -23,6 +23,9 @@ urlpatterns = [
     path('', include('core.urls')),
     path('', include('word.urls')),
     path('', include('users.urls')),
+    path('wordupp/', include('WordUpp.urls')),  # Add this line
+
+ 
     # path('word/', include('word.urls')), if you want word on the link, on the word app
     # path('canvas/', word_views.canvas_view, name='canvas_view'), general app
 ]

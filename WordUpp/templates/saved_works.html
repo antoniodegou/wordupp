@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Your Saved Works</h1>
+
+<div class="grid-container">
+  {% for canvas in canvases %}
+    <div class="grid-item">
+        <h2>{{ canvas.name }}</h2>
+      <!-- Display canvas details -->
+      <a href="{% url 'edit_canvas' canvas.id %}">Edit</a>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

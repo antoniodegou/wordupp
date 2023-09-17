@@ -178,3 +178,14 @@ document.addEventListener('DOMContentLoaded', function() {
         updateSliderValueDisplay(sliderId, displayId);
     });
 })
+
+
+
+// In some initialization function or another file
+function initializeEventHandlers(wordUpp, wordCanvas) {
+    document.getElementById("canvasWidth").addEventListener('change', function() {
+        wordUpp.updateCanvasSize(this.value, null);
+        wordCanvas.renderText();
+    });
+    // ...more event handlers
+}
