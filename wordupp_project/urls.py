@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('word.urls')),
     path('', include('users.urls')),
     path('wordupp/', include('WordUpp.urls')),  # Add this line
+    path('subscription/', include('subscription.urls')),
 
  
     # path('word/', include('word.urls')), if you want word on the link, on the word app

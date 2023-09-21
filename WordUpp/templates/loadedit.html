@@ -1,0 +1,172 @@
+<script>
+
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    // Inside your <script> tag in create_canvas.html
+
+
+window.onload = function() {
+  // Your existing setup code here...
+
+  // Check if we're in edit mode
+  const canvasId = document.getElementById('canvasId');
+  if (canvasId && canvasId.value) {
+    // We're editing an existing canvas, load its state
+    loadCanvasState(canvasId.value);
+  }
+}
+
+function saveCanvasState() {
+  const canvasData = {
+    name: document.getElementById('canvasName').value,
+    user_text: userText.value(),
+    text_color: textColor.value(),
+    bg_color: bgColor.value(),
+    wordObjects: wordObjects,
+    horizontal_slider_value: horizontalSlider.value(),
+    vertical_slider_value: verticalSlider.value()
+  };
+
+  if (isEditing && document.getElementById('canvasId').value) {
+    // Update existing canvas
+    updateCanvasState(document.getElementById('canvasId').value, canvasData);
+  } else {
+    // Create a new canvas
+    fetch('/wordupp/api/save/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken,
+      },
+      body: JSON.stringify(canvasData),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("New canvas saved:", data);
+    });
+  }
+}
+
+function updateCanvasState(canvas_id, canvasData) {
+  fetch(`/wordupp/api/update/${canvas_id}/`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': csrftoken,
+    },
+    body: JSON.stringify(canvasData),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("Existing canvas updated:", data);
+  });
+}
+
+
+
+function loadCanvasState(canvas_id) {
+    isEditing = true;  // We're in edit mode
+
+  fetch(`/wordupp/api/load/${canvas_id}/`)
+  .then(response => response.json())
+  .then(data => {
+    console.log("Loaded data:", data); // This should print the fetched data to the console
+
+    // Set the text and color inputs based on the data received
+    document.getElementById('canvasName').value = data.name;
+    userText.value(data.user_text);
+    textColor.value(data.text_color);
+    bgColor.value(data.bg_color);
+    
+ 
+    if (data.word_objects && Array.isArray(data.word_objects)) {
+      wordObjects = data.word_objects;
+      console.log("Updated wordObjects:", data.word_objects);
+
+      // Assuming we have at least one word object to calculate the repeats
+      if(wordObjects.length > 0) {
+        // Calculate slider values based on the first word object
+        let centerX = width / 2;
+        let centerY = height / 2;
+        let firstWord = wordObjects[0];
+        
+        let horizontalRepeats = Math.abs((firstWord.x - centerX) * (2 * int(horizontalSlider.value()) + 1) / width);
+        let verticalRepeats = Math.abs((firstWord.y - centerY) * (2 * int(verticalSlider.value()) + 1) / height);
+
+        horizontalSlider.value(horizontalRepeats);
+        verticalSlider.value(verticalRepeats);
+        // redraw();  // Force p5.js to execute draw()
+
+        if (data.horizontal_slider_value !== undefined) {
+            horizontalSlider.value(int(data.horizontal_slider_value));
+        }
+        if (data.vertical_slider_value !== undefined) {
+            verticalSlider.value(int(data.vertical_slider_value));
+        }
+
+ 
+        console.log("REAPEATS: " +  verticalRepeats)
+        if (horizontalRepeats == 0) {
+            horizontalSpacing.attribute('disabled', '');
+        } else {
+                horizontalSpacing.removeAttribute('disabled');
+        }
+
+        if (verticalRepeats == 0) {
+             verticalSpacing.attribute('disabled', '');
+        } else {
+                verticalSpacing.removeAttribute('disabled');
+        }
+
+
+      }
+    }
+
+    // Call your update function to redraw the canvas
+
+
+
+
+
+
+
+    
+    // if (data.word_objects && Array.isArray(data.word_objects)) {
+  // wordObjects = data.word_objects;
+  updateSpacing2( data.word_objects);
+  // redraw();
+// }
+
+    // updateSpacing()
+    console.log('Should trigger a new draw now.');
+    redraw();  // Force p5.js to execute draw()
+    
+    isEditing = false;  // We're done editing
+  })
+  .catch(error => console.log('Oh darlin\', something went wrong: ', error));
+}
+
+
+
+function updateCanvasState(canvas_id, canvasData) {
+  fetch(`/wordupp/api/update/${canvas_id}/`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': csrftoken,
+    },
+    body: JSON.stringify(canvasData),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("Existing canvas updated:", data);
+  });
+}
+let oldHorizontalSpacing = 0;
+let oldVerticalSpacing = 0;
+
+ 
+
+
+
+
+</script>

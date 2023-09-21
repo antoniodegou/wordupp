@@ -15,8 +15,8 @@ class Canvas(models.Model):
     text_color = models.CharField(max_length=7)
     bg_color = models.CharField(max_length=7)
     word_objects = models.JSONField(default=list)  # or default=dict
-    horizontal_slider_value = models.IntegerField(default=1)  # New field
-    vertical_slider_value = models.IntegerField(default=1)    # New field
+    horizontal_slider_value = models.IntegerField(null=True, blank=True)
+    vertical_slider_value = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.name or 'Untitled Canvas'

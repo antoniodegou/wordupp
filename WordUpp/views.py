@@ -31,7 +31,9 @@ def save_canvas(request):
                 user_text=data.get('user_text'),
                 text_color=data.get('text_color'),
                 bg_color=data.get('bg_color'),
-                word_objects=data.get('wordObjects')  # Add this line
+                word_objects=data.get('wordObjects'),  # Add this line
+                horizontal_slider_value=data.get('horizontal_slider_value'),
+                vertical_slider_value=data.get('vertical_slider_value')
             )
             return JsonResponse({'status': 'Saved'})
         except Exception as e:

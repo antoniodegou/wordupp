@@ -136,3 +136,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core/static')]
 
 LOGIN_URL = 'login'  # or whatever your login url name is
+from dotenv import load_dotenv
+load_dotenv()
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')

@@ -2,35 +2,51 @@
 
 {% block content %}
  
-
+{% load static %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/canvas.css' %}">
  
+{% endblock %}
 
 <form id="canvas-form">
     {% csrf_token %}
 
     {% if is_editing %}
-  <input type="hidden" id="canvasId" value="{{ canvas.id }}">
-{% endif %}
-    <input type="text" id="userText" placeholder="Your Text" value="wordupp">
-    <input type="color" id="textColor" value="#ffffff">
-    <input type="color" id="bgColor" value="#000000">
+        <input type="hidden" id="canvasId" value="{{ canvas.id }}">
+    {% endif %}
 
-<!-- New sliders -->
-<input type="range" id="horizontalSlider" min="0" max="100" value="0">
-<input type="range" id="verticalSlider" min="0" max="100" value="0">
-<input type="color" id="brushColor">
+    <div class="change p-4 black-border mt-3">
+        <input type="text" id="userText" placeholder="Your Text" value="word upp">
+        <input type="color" id="textColor" value="#ffffff">
+        <label for="horizontalSlider">H Collumns</label>
+        <input type="range" id="horizontalSlider" min="0" max="100" value="2">
+        <label for="verticalSlider">V Rows</label>
+        <input type="range" id="verticalSlider" min="0" max="100" value="1">    
+    </div>
 
+    <div class="nochange p-4 black-border">
+        <label for="bgColor">bgColor</label>
+        <input type="color" id="bgColor" value="#000000">
+        <label for="brushColor">brushColor</label>
+        <input type="color" id="brushColor">
+        <label for="horizontalSpacing">H spacing</label>
+        <input type="range" id="horizontalSpacing" min="0" max="100" value="0">
+        <label for="verticalSpacing">V Spacing</label>
+        <input type="range" id="verticalSpacing" min="0" max="100" value="0">
 
-    <input type="text" id="canvasName" placeholder="Canvas Name" value="untitled">
+    </div>
 
-    <button type="button" onclick="saveCanvasState()">Save</button>
-    <button type="button" onclick="loadCanvasState()">Load</button>
-    <!-- Add more buttons or fields as needed -->
+    <div class="thework p-4 black-border">
+        <input type="text" id="canvasName" placeholder="Canvas Name" value="untitled">
+        <button type="button" onclick="saveCanvasState()">Save</button>
+        <button type="button" onclick="loadCanvasState()">Load</button>
+    </div>
+
   </form>
 
 <div id="canvas-container"></div>
 
- 
+{% include "loadedit.html" %}
 
 <script>
 let userText;
@@ -40,30 +56,37 @@ let horizontalSlider;
 let verticalSlider;
 let brushColor;
 let wordObjects = [];
+let horizontalSpacing;
+let verticalSpacing;
+let inputWords =[];
 
 function setup() {
-  let canvas = createCanvas(400, 400);
-  canvas.parent('canvas-container');
-  userText = select('#userText');
-  textColor = select('#textColor');
-  bgColor = select('#bgColor');
-  horizontalSlider = select('#horizontalSlider');
-  verticalSlider = select('#verticalSlider');
-  brushColor = select('#brushColor');
-  
-  userText.input(handleResettingAction);
-  horizontalSlider.input(handleResettingAction);
-  verticalSlider.input(handleResettingAction);
+    console.log("Setup running...")
+    let canvas = createCanvas(400, 400);
+    canvas.parent('canvas-container');
+    userText = select('#userText');
+    textColor = select('#textColor');
+    bgColor = select('#bgColor');
+    horizontalSlider = select('#horizontalSlider');
+    verticalSlider = select('#verticalSlider');
+    brushColor = select('#brushColor');
+    horizontalSpacing = select('#horizontalSpacing');
+    verticalSpacing = select('#verticalSpacing');
 
-  // Non-resetting actions
-  textColor.input(handleNonResettingAction);
-  bgColor.input(handleNonResettingAction);
+    //  resetting actions
+    userText.input(handleResettingAction);
+    horizontalSlider.input(updateWords2);
+    verticalSlider.input(updateWords2);
+    textColor.input(updateTextColor);
 
-  updateWords();
-  noLoop();
-
+    // Non-resetting actions
  
-  noLoop()
+    bgColor.input(updateBackgroundColor);
+    horizontalSpacing.input(updateSpacing2);
+verticalSpacing.input(updateSpacing2);
+
+    updateWords();
+    noLoop()
 }
 
 function draw() {
@@ -74,56 +97,116 @@ function draw() {
 
   // Draw each word with its own color
   for (const word of wordObjects) {
+    // background(bgColor.value());
     fill(word.color);
     text(word.text, word.x, word.y);
   }
   
 }
 
+let isMousePressed = false; 
+
 function mousePressed() {
-  // Check if any word is clicked and update its color
+  isMousePressed = true;
+  
   for (const word of wordObjects) {
     let d = dist(mouseX, mouseY, word.x, word.y);
-    if (d < 20) {
+    
+    let textW = textWidth(word.text);
+    let textH = textAscent() + textDescent();
+    let dynamicThreshold = Math.max(textW, textH) / 2;
+    
+    if (d < dynamicThreshold/2) {
       word.color = brushColor.value();
     }
   }
   redraw();  // Force p5.js to execute draw()
-
 }
+
+
+
+function mouseDragged() {
+  // Similar logic to mousePressed
+  if (isMousePressed) {
+    for (const word of wordObjects) {
+      let d = dist(mouseX, mouseY, word.x, word.y);
+      
+      // Get dynamic dimensions
+      let textW = textWidth(word.text);
+      let textH = textAscent() + textDescent();
+      let dynamicThreshold = Math.max(textW, textH) / 2;
+      
+      if (d < dynamicThreshold/2) {
+        word.color = brushColor.value();
+      }
+    }
+    redraw(); // Force the canvas to update
+  }
+  redraw();  // Force p5.js to execute draw()
+}
+
+
+function mouseReleased() {
+  isMousePressed = false;
+}
+
 let isEditing = false;  // Add this global variable
 
 function updateWords() {
-    if (!isEditing) {
-        wordObjects = [];  // Clear previous words
-        
-        let horizontalRepeats = int(horizontalSlider.value());
-        let verticalRepeats = int(verticalSlider.value());
+    const words = userText.value().split(" ");
+    let newWordPositions = calculateWordPositions(words);
 
-        let centerX = width / 2;
-        let centerY = height / 2;
-        let stepX = horizontalRepeats > 0 ? width / (horizontalRepeats * 2 + 1) : 0;
-        let stepY = verticalRepeats > 0 ? height / (verticalRepeats * 2 + 1) : 0;
+    // Store the existing wordObjects array
+    let oldWordObjects = [...wordObjects];
 
-        // Create word objects based on current settings
-        for (let i = -horizontalRepeats; i <= horizontalRepeats; i++) {
-        for (let j = -verticalRepeats; j <= verticalRepeats; j++) {
+    // Clear and populate the wordObjects array with new positions
+    wordObjects = [];
+
+    for (const {x, y, word} of newWordPositions) {
+        // Check if this word was in the old array
+        let oldWord = oldWordObjects.find(w => w.text === word);
+        let colorToUse = oldWord ? oldWord.color : textColor.value();
+
+        wordObjects.push({
+            text: word,
+            x: x,
+            y: y,
+            color: colorToUse
+        });
+    }
+ 
+    redraw();  // Redraw the canvas
+}
+
+
+function updateWords2(data) {
+    if (data.word_objects && Array.isArray(data.word_objects)) {
+        let wordsFromData = data.word_objects.map(obj => obj.text);
+        let newWordPositions = calculateWordPositions(wordsFromData);
+
+        wordObjects = [];
+
+        for (let i = 0; i < newWordPositions.length; i++) {
+            let word = newWordPositions[i].word;
+
+            // Find the original word in data.word_objects to get its color
+            let originalWordObject = data.word_objects.find(w => w.text === word);
+
+            let colorToUse = originalWordObject ? originalWordObject.color : textColor.value();
+
             wordObjects.push({
-            text: userText.value(),
-            x: centerX + i * stepX,
-            y: centerY + j * stepY,
-            color: textColor.value()
+                text: word,
+                x: newWordPositions[i].x,
+                y: newWordPositions[i].y,
+                color: colorToUse
             });
         }
-        }
-    }
-  
-    // Your existing code for drawing each word
-    for (const wordObj of wordObjects) {
-        fill(wordObj.color);  // Set the color
-        text(wordObj.text, wordObj.x, wordObj.y);  // Draw the text
+        redraw();  // Redraw the canvas
     }
 }
+
+
+
 
  
 </script>
@@ -133,136 +216,149 @@ function updateWords() {
 <script>
 
 
-const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    // Inside your <script> tag in create_canvas.html
+function handleResettingAction() {
+    inputWords = userText.value().split(" ");  // Split the input into words here
+    // wordObjects = calculateWordPositions();  // Update the positions
 
-
-window.onload = function() {
-  // Your existing setup code here...
-
-  // Check if we're in edit mode
-  const canvasId = document.getElementById('canvasId');
-  if (canvasId && canvasId.value) {
-    // We're editing an existing canvas, load its state
-    loadCanvasState(canvasId.value);
-  }
+    wordObjects = [];  // Clear the array
+    updateWords();  // Populate it based on new settings
+    redraw();  // Redraw the canvas
 }
 
-function saveCanvasState() {
-  const canvasData = {
-    name: document.getElementById('canvasName').value,
-    user_text: userText.value(),
-    text_color: textColor.value(),
-    bg_color: bgColor.value(),
-    wordObjects: wordObjects
-  };
+ 
 
-  if (isEditing && document.getElementById('canvasId').value) {
-    // Update existing canvas
-    updateCanvasState(document.getElementById('canvasId').value, canvasData);
-  } else {
-    // Create a new canvas
-    fetch('/wordupp/api/save/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': csrftoken,
-      },
-      body: JSON.stringify(canvasData),
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log("New canvas saved:", data);
-    });
-  }
-}
-
-function updateCanvasState(canvas_id, canvasData) {
-  fetch(`/wordupp/api/update/${canvas_id}/`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRFToken': csrftoken,
-    },
-    body: JSON.stringify(canvasData),
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log("Existing canvas updated:", data);
-  });
-}
-
-
-
-function loadCanvasState(canvas_id) {
-    isEditing = true;  // We're in edit mode
-
-  fetch(`/wordupp/api/load/${canvas_id}/`)
-  .then(response => response.json())
-  .then(data => {
-    // Set the text and color inputs based on the data received
-    document.getElementById('canvasName').value = data.name;
-    userText.value(data.user_text);
-    textColor.value(data.text_color);
-    bgColor.value(data.bg_color);
-
-    if (data.word_objects && Array.isArray(data.word_objects)) {
-      wordObjects = data.word_objects;
-      console.log("Updated wordObjects:", wordObjects);
-
-      // Assuming we have at least one word object to calculate the repeats
-      if(wordObjects.length > 0) {
-        // Calculate slider values based on the first word object
-        let centerX = width / 2;
-        let centerY = height / 2;
-        let firstWord = wordObjects[0];
-        
-        let horizontalRepeats = Math.abs((firstWord.x - centerX) * (2 * int(horizontalSlider.value()) + 1) / width);
-        let verticalRepeats = Math.abs((firstWord.y - centerY) * (2 * int(verticalSlider.value()) + 1) / height);
-
-        horizontalSlider.value(horizontalRepeats);
-        verticalSlider.value(verticalRepeats);
-      }
+function handleNonResettingAction() {
+    const words = userText.value().split(" ");
+    let newWordPositions = calculateWordPositions(words);
+    // background(bgColor.value());
+    for (const {x, y, word} of newWordPositions) {
+        text(word, x, y);
     }
 
-    // Call your update function to redraw the canvas
-    updateWords();
-    console.log('Should trigger a new draw now.');
-    redraw();  // Force p5.js to execute draw()
-    
-    isEditing = false;  // We're done editing
-  })
-  .catch(error => console.log('Oh darlin\', something went wrong: ', error));
+    redraw();  // Force a redraw
 }
 
 
 
-function updateCanvasState(canvas_id, canvasData) {
-  fetch(`/wordupp/api/update/${canvas_id}/`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRFToken': csrftoken,
-    },
-    body: JSON.stringify(canvasData),
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log("Existing canvas updated:", data);
-  });
-}
+function updateTextColor() {
+  const newColor = textColor.value();
 
-function handleResettingAction() {
-  wordObjects = [];  // Clear the array
-  updateWords();  // Populate it based on new settings
+  for (const word of wordObjects) {
+    word.color = newColor;
+  }
   redraw();  // Redraw the canvas
 }
 
-function handleNonResettingAction() {
-  // Update just the relevant properties
-  for (const word of wordObjects) {
-    word.color = textColor.value();
+
+
+
+function calculateWordPositions(words) {
+  let newWordPositions = [];
+  let vLines = int(verticalSlider.value());
+  let hLines = int(horizontalSlider.value());
+  let hSpacing = int(horizontalSpacing.value());
+  let vSpacing = int(verticalSpacing.value());
+  let averageWordWidth = 0;
+
+  // Calculate average word width
+  for (let word of words) {
+    averageWordWidth += textWidth(word);
   }
+  averageWordWidth /= words.length;
+
+  for (let i = -vLines; i <= vLines; i++) {
+    for (let j = -hLines; j <= hLines; j++) {
+      let x = width / 2 + textSize();
+      let y = height / 2 + i * (textSize() + vSpacing);
+
+      let totalWidth = averageWordWidth * words.length + hSpacing * (words.length - 1);
+      
+      // Adjust for the horizontal repetitions
+      x += j * (totalWidth + hSpacing);
+
+      // Adjust for centering the grid
+      let gridCenter = totalWidth / 2 + hSpacing * (hLines - j);
+      let startX = x - gridCenter;
+
+      for (let word of words) {
+        newWordPositions.push({ x: startX, y: y, word: word });
+        startX += textWidth(word) + hSpacing - (textWidth(word) - averageWordWidth);
+      }
+    }
+  }
+
+  return newWordPositions;
+}
+
+
+
+
+
+
+// Function to update the spacing
+function updateSpacing() {
+  // Reset wordObjects array
+  wordObjects = [];
+  // Get the words from the user's input
+  const words = userText.value().split(" ");
+  // Calculate new positions for these words
+  const newWordPositions = calculateWordPositions(words);
+
+  // Populate wordObjects with the new positions
+  for (const {x, y, word} of newWordPositions) {
+    wordObjects.push({
+      text: word,
+      x: x,
+      y: y,
+      color: textColor.value()
+    });
+  }
+
+  // Force a redraw
+  redraw();
+}
+
+
+function updateSpacing2(wordObjects) {
+  // Use the global wordObjects
+  let wordsFromData = wordObjects.map(obj => obj.text);
+
+  // Calculate new positions
+  let newWordPositions = calculateWordPositions(wordsFromData);
+
+  // Store old state
+  let oldWordObjects = [...wordObjects];
+
+  // Clear array
+  wordObjects3 = [];
+
+  // Populate with new positions
+  for (let i = 0; i < newWordPositions.length; i++) {
+    let word = newWordPositions[i].word;
+
+    // Find original word to preserve color
+    let originalWordObject = oldWordObjects.find(w => w.text === word);
+
+    let colorToUse = originalWordObject ? originalWordObject.color : textColor.value();
+
+    wordObjects3.push({
+      text: word,
+      x: newWordPositions[i].x,
+      y: newWordPositions[i].y,
+      color: colorToUse
+    });
+  }
+  console.log("wordObjects before map:", wordObjects);
+  // Force redraw
+  redraw();
+}
+
+
+
+
+function updateBackgroundColor() {
+
+  background(bgColor.value());
   redraw();  // Redraw the canvas
 }
 

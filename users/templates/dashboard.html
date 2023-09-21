@@ -29,7 +29,7 @@
 
 <h2 class="big-title mt-4">{{ user.username }}'s Stuff</h2>
 
-
+<a href="{% url 'customer_portal' %}">Manage your subscription</a>
 
 <div class="tab-content" id="userTabsContent">
   
@@ -38,7 +38,11 @@
  
       <h2>Hello, {{user.username}}</h2>
       <h3>You emaill: {{user.email}}</h3>
-
+      {% if user_subscription %}
+      <p>Yee-haw! You're on the {{ user_subscription.plan.name }} plan!</p>
+  {% else %}
+      <p>Howdy, partner! Looks like you haven't picked a subscription plan yet.</p>
+  {% endif %}
       <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-toggle="modal" data-bs-target="#detailsModal">
         Update Details
       </button>
@@ -50,7 +54,25 @@
       <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
         Delete Account
       </button>
-  
+
+      <br>
+ <h1>{{user_subscription }}</h1>
+
+      {% if user_subscription %}
+      <p>Yee-haw! You're on the {{ user_subscription.plan.name }} plan! (Price: {{ user_subscription.plan.price }})</p>
+      {% if user_subscription.plan.price == "0.00" or user_subscription.plan.price == 0 or user_subscription.plan.price == "0" %}
+          <!-- Show the "Upgrade to Premium" button only if the user is on the Free plan -->
+          <a href="{% url 'upgrade_subscription' %}">Upgrade to Premium</a>
+      {% else %}
+          <!-- Show the "Downgrade to Free" button only if the user is on the Premium plan -->
+          <a href="{% url 'downgrade_subscription' %}">Downgrade to Free</a>
+      {% endif %}
+  {% else %}
+      <p>Howdy, partner! Looks like you haven't picked a subscription plan yet.</p>
+      <!-- Show the "Subscribe to Free" and "Subscribe to Premium" buttons if the user has no subscription -->
+      <a href="{% url 'subscribe_free' %}">Subscribe to Free</a>
+      <a href="{% url 'subscribe_premium' %}">Subscribe to Premium</a>
+  {% endif %}
   </div>
   
   <!-- Subscription Tab -->
