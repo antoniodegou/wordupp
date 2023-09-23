@@ -12,7 +12,7 @@ class SubscriptionPlan(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     duration = models.DurationField(default=timedelta(days=30))
     stripe_plan_id = models.CharField(max_length=255, null=True, blank=True)  # New field
-
+ 
 
     def __str__(self):
         return self.name
@@ -24,7 +24,7 @@ class UserSubscription(models.Model):
     end_date = models.DateField(null=True, blank=True)
     stripe_customer_id = models.CharField(max_length=50, null=True, blank=True)
     stripe_subscription_id = models.CharField(max_length=50, null=True, blank=True)
-
+    is_active = models.BooleanField(default=True)
     def __str__(self):
         return f"{self.user.username}'s {self.plan.name if self.plan else 'No'} subscription"
 

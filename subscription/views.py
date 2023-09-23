@@ -62,6 +62,7 @@ def subscribe_premium(request):
         )
         if not created:
             user_subscription.stripe_customer_id = stripe_customer.id
+            user_subscription.is_active = True
             user_subscription.save()
 
         # Fetch the premium plan
@@ -127,6 +128,7 @@ def cancel_subscription(request):
         # Update the user's subscription record in the database
         user_sub.plan = None
         user_sub.end_date = datetime.now().date()  # Or set this to None, depending on your needs
+
         user_sub.stripe_subscription_id = None
         user_sub.save()
 
@@ -183,29 +185,41 @@ def stripe_webhook(request):
     if MyStripeEventModel.objects.filter(stripe_event_id=stripe_event_id).exists():
         return HttpResponse(status=200)  # Already processed this event
 
+    print("MYE EVENTS GURL:", event['type'])
+ 
     # Handle the event
     if event['type'] == 'customer.subscription.updated':
         stripe_subscription_id = event['data']['object']['id']
-
+        subscription_status = event['data']['object']['status']
+        previous_attributes = event['data'].get('previous_attributes', {})
+        
         try:
             user_subscription = UserSubscription.objects.get(stripe_subscription_id=stripe_subscription_id)
+
+            # Check if the subscription was previously canceled
+            if previous_attributes.get('canceled_at'):
+                free_plan = SubscriptionPlan.objects.get(name='WordUpp Free')
+                user_subscription.plan = free_plan
+                user_subscription.is_active = False
+            elif event['data']['object'].get('cancel_at_period_end'):
+                user_subscription.is_active = False
+            else:
+                premium_plan = SubscriptionPlan.objects.get(name='WordUpp Premium')
+                user_subscription.plan = premium_plan
+                user_subscription.is_active = True
 
             # Update the end date
             end_date_timestamp = event['data']['object']['current_period_end']
             end_date = datetime.fromtimestamp(end_date_timestamp).date()
             user_subscription.end_date = end_date
 
-            # Fetch the premium plan from your database
-            premium_plan = SubscriptionPlan.objects.get(name='WordUpp Premium')
-            
-            # Update the user's plan
-            user_subscription.plan = premium_plan
             user_subscription.save()
-
             print("User Subscription updated successfully!")
 
         except UserSubscription.DoesNotExist:
             print("User Subscription not found.")
+
+ 
 
     elif event['type'] == 'customer.subscription.created':
         stripe_subscription_id = event['data']['object']['id']
@@ -229,12 +243,25 @@ def stripe_webhook(request):
             print("User Subscription not found.")
 
     elif event['type'] == 'customer.subscription.deleted':
+        print("Subscription deleted event triggered!")
         stripe_subscription_id = event['data']['object']['id']
         try:
             user_subscription = UserSubscription.objects.get(stripe_subscription_id=stripe_subscription_id)
-            user_subscription.delete()  # or mark as inactive based on your needs
+            
+            # Fetch the free plan from your database
+            free_plan = SubscriptionPlan.objects.get(name='WordUpp Free')
+            
+            # Update the UserSubscription
+            user_subscription.plan = free_plan
+            user_subscription.stripe_subscription_id = None  # You can set this to None since the subscription is deleted
+            user_subscription.is_active = False  # Set to inactive
+            user_subscription.save()
+            user_subscription.save()
+
+            print("Subscription canceled and reverted to free plan.")
+            
         except UserSubscription.DoesNotExist:
-            print(f"User Subscription with stripe_customer_id {stripe_customer_id} not found.")
+            print(f"User Subscription with stripe_subscription_id {stripe_subscription_id} not found.")
 
     # Log the processed event
     MyStripeEventModel.objects.create(
