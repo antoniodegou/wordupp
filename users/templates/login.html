@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static '/css/logregister.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="container mt-5 pt-5">
     <div class="row">
@@ -13,13 +17,13 @@
                 <form method="post" action="{% url 'login' %}" class="bg-red p-4 black-border">
                     {% csrf_token %}
                     <div class="form-floating mb-3">
-                        <input type="text" name="{{ form.username.name }}" class="form-control rounded-0 black-border" id="{{ form.username.id_for_label }}" placeholder="Username">
+                        <input type="text" name="{{ form.username.name }}" class="form-control rounded-0 black-border {% if form.username.errors %}has-error{% endif %}" id="{{ form.username.id_for_label }}" placeholder="Username">
                         <label for="{{ form.username.id_for_label }}">Username</label>
                     </div>
                     
                     <!-- Password -->
                     <div class="form-floating mb-3">
-                        <input type="password" name="{{ form.password.name }}" class="form-control rounded-0 black-border" id="{{ form.password.id_for_label }}" placeholder="Password">
+                        <input type="password" name="{{ form.password.name }}" class="form-control rounded-0 black-border {% if form.password.errors %}has-error{% endif %}" id="{{ form.password.id_for_label }}" placeholder="Password">
                         <label for="{{ form.password.id_for_label }}">Password</label>
                     </div>
                     
@@ -39,4 +43,13 @@
         </div>
     </div>  <!-- row -->
 </div><!--containers -->
+
+<script>
+
+    const firstErrorField = document.querySelector('.has-error');
+    if (firstErrorField) {
+        firstErrorField.focus();
+    }
+</script>
+
 {% endblock %}
