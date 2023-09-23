@@ -78,6 +78,11 @@ def dashboard(request):
     """
     Render the dashboard page.
     """
+    subscription_status = request.GET.get('subscription')
+    if subscription_status == 'success':
+        # You already have the user info because they're logged in
+        login(request, request.user)
+        messages.success(request, 'Yeehaw! Your subscription was successful, darlin\'!')
     context = {}
     user_subscription = None
     try:
