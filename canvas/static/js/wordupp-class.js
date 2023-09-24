@@ -251,7 +251,7 @@ class WordCanvas {
         addEventListeners('resetButton', 'click', this.resetCanvas.bind(this));
       
         
-    
+        addEventListeners('download-btn', 'click', this.downloadCanvas.bind(this));
         // Shared IDs that are in both lists
         const sharedIds = ['vLines', 'hLines', 'vSpacing', 'hSpacing', 'userText'];
 
@@ -548,6 +548,14 @@ class WordCanvas {
         }
     }
 
-}
 
+    
+  // download image
+   downloadCanvas() {
+    const link = document.createElement('a');
+    link.download = 'wordupp_canvas.png';  // Specify the name of the downloaded image
+    link.href = this.canvas.toDataURL('image/png');
+    link.click();
+}
+}
 
