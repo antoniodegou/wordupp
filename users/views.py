@@ -13,9 +13,9 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout
 from .forms import UserUpdateForm
 from django.http import JsonResponse
-
+from datetime import datetime 
 from subscription.models import UserSubscription  # Adjust the import based on your project structure
-
+from subscription.models import SubscriptionPlan, UserSubscription 
 # Registration View
 def register(request):
     if request.user.is_authenticated:
@@ -26,6 +26,15 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # Log in the user after successful registration
+
+            # Automatically assign them to the free plan
+            free_plan = SubscriptionPlan.objects.get(name='WordUpp Free')
+            UserSubscription.objects.create(
+                user=user, 
+                plan=free_plan, 
+                start_date=datetime.now()  # Set the start_date to now
+            )
+
             messages.success(request, f'Your account has been created! You are now logged in.')
             return redirect('dashboard')  # Redirect to dashboard or desired page
     else:
