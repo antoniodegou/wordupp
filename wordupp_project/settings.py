@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'core',
     'users',
     'subscription',
-
+    'canvas',
 ]
 
 MIDDLEWARE = [

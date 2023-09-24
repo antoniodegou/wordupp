@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}User Dashboard{% endblock %}
+
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static '/css/canvas.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container  p-0">
+    
+    <!-- TEXT input -->
+    <div class="row m-0 p-0 mt-5">
+          <div class="col-12 m-0 p-0 mb-5 input-group-lg "><!-- Text input control -->
+             <label for="userText">Text:</label>
+             <input type="text" id="userText" value="Wordupp, Everybody say" class="form-control input-look rounded-0" aria-label="Input for text">
+     
+          </div>
+    </div>
+    <!-- BUTTONS row -->
+    <div class="button-row input-look flex-wrap  ">
+      <button id="resetButton" class="  input-look myyellow">Reset</button>
+      <button class="pane-button input-look myblue active" data-pane="canvas">Canvas size</button>
+      <button class="pane-button input-look myred" data-pane="text-controls">Text Controls</button>
+      <button class="pane-button input-look myred" data-pane="backgrounds">Background Controls</button>
+      <button class="pane-button input-look myblue" data-pane="lines">Line Control</button>
+      <button class="pane-button input-look myred" data-pane="brush">Brush Tools</button>
+   
+      
+      
+
+ 
+  
+    </div>
+<!--    botom legend -->
+    <div id="buttonsLegend" class=" legend button-row  flex-wrap ">
+      <div class=" legend button-row  flex-wrap  ">
+            <div class="mySquare myblue"></div>
+            <p class="m-0">  will refresh words</p>
+            <div class="mySquare myred"></div>
+            <p class="m-0">won't refresh words</p>
+       </div>     
+    </div>
+   
+   
+    <!-- MENU options -->
+    <div class="content-pane  pt-3 input-look mb-5" id="draggableContainer">
+        <div class="pane-content" id="canvas">
+            <div class="d-flex flex-row flex-nowrap ">
+              <!-- Input width and Height -->
+              <div class="col-md-3 p-0 pe-5 mb-4">
+                  <label for="canvasWidth">Canvas Width:</label>
+                  <input type="number" id="canvasWidth" value="800" class="form-control rounded-0 input-look mb-4" aria-label="Canvas width input">
+                  <label for="canvasHeight">Canvas Height:</label>
+                  <input type="number" id="canvasHeight" value="400" class="form-control rounded-0 input-look" aria-label="Canvas height input">
+              </div>
+              <!-- Canvas size Presets -->
+              <div class="col-md-4 p-0  mb-4 pe-5">
+                  <label for="canvasPresets">Canvas Presets:</label>
+                  <select id="canvasPresets" class="form-control rounded-0 input-look" aria-label="Canvas presets dropdown">            
+                      <!-- Options for canvas presets will be populated here -->
+                      <option value="" disabled selected>Select a preset</option>
+
+                      <!-- instagram -->
+                      <option value="1080x1080">Instagram Post (1080x1080)</option>
+                      <option value="1080x1920">Instagram Story (1080x1920)</option>
+                      <option value="1080x566">Instagram Landscape (1080x566)</option>
+                      <option value="1080x1350">Instagram Portrait (1080x1350)</option>
+                      <!-- Facebook -->
+                      <option value="1200x630">Facebook Post (1200x630)</option>
+                      <option value="820x312">Facebook Cover (820x312)</option>
+                      <option value="820x462">Facebook Event Image (820x462)</option>
+                      <!-- Twitter -->
+                      <option value="1280x720">Twitter Post (1280x720)</option>
+                      <option value="1500x500">Twitter Cover (1500x500)</option>
+                      <!-- YouTube -->
+                      <option value="1920x1080">YouTube Thumbnail (1920x1080)</option>
+                      <option value="2560x1440">YouTube Channel Art (2560x1440)</option>
+                      <!-- LinkedIn -->
+                      <option value="1200x628">LinkedIn Post (1200x628)</option>
+                      <option value="1584x396">LinkedIn Personal Cover (1584x396)</option>
+                      <option value="1128x376">LinkedIn Company Cover (1128x376)</option>
+                      <!-- Pinterest -->
+                      <option value="1000x1500">Pinterest Pin (1000x1500)</option>
+                      <option value="2000x667">Pinterest Board Cover (2000x667)</option>
+                      <!-- Snapchat -->
+                      <option value="1080x1920">Snapchat Story (1080x1920)</option>
+                      <!-- TikTok -->
+                      <option value="1080x1920">TikTok Video (1080x1920)</option>
+                  </select>
+            </div>
+            </div>
+        </div>
+        <div class="pane-content" id="text-controls">
+            <!-- First row: Contains controls for text, font, word size, and text color -->
+            <div class="d-flex flex-row flex-nowrap">
+              
+              <div class="col-md-4 mb-4 me-4">
+                  <!-- Font selection dropdown -->
+                  <label for="fontSelector">Font:</label>
+                  <select id="fontSelector" class="form-control input-look rounded-0 mb-4" aria-label="Font selector">
+                      <option value="Arial" selected>Arial</option>
+                      <option value="Verdana">Verdana</option>
+                      <option value="Times New Roman">Times New Roman</option>
+                      <option value="Courier New">Courier New</option>
+                  </select>
+                  <!--   font size -->
+                  <label for="textSize">Word Size:</label>
+                  <input type="number" id="textSize" min="10" max="120" value="20" class="form-control input-look rounded-0" aria-label="Word size input">
+              </div>
+
+              <!-- Color picker for text color -->
+              <div class="col-md-3 mb-4 me-4 color-picker-container">
+                  <label for="textColor">Text Colour:</label>
+                  <input type="color" id="textColor" value="#000000" class="form-control color-picker-input input-look rounded-0 mb-5" aria-label="Text color picker">
+                  <input class="form-check-input input-look rounded-0 checkcheck" type="checkbox" value="" id="randomOrder">
+                  <label class="form-check-label" for="randomOrder">
+                        Random Order
+                    </label>
+              </div>
+              <!--   checkbox -->
+              <div class="col-md-4 mb-4 me-4">
+                <div class="form-check mt-4">
+
+                </div>
+              </div>
+           </div>
+        </div>
+        <div class="pane-content" id="backgrounds">
+           <div class="d-flex flex-row flex-nowrap align-items-start ">
+                         <!-- Color picker for background color -->
+             <div class="col-md-3 mb-4 color-picker-container me-4">
+                 <label for="bgColor">Background Color:</label>
+                 <input type="color" id="bgColor" value="#fcecd0" class="form-control color-picker-input input-look " aria-label="Background color picker">
+             </div>
+
+             <!-- Input for selecting a background image -->
+             <div class="col-md-5 mb-4 me-4">
+                 <label for="bgImage">Background Image:</label>
+                 <input type="file" id="backgroundImg" class="form-control input-look rounded-0 mb-4" aria-label="Background image input ">
+                <button id="removeBackground" class="btn btn-primary rounded-0">Remove Background</button>
+
+             </div>
+             <!-- For Background Size -->
+             <div class="col-md-4 mb-4  me-4">
+                 <label for="bgSize" class=" ">Background Size:<span id="bgSizeValue" class="slidervalues">100</span></label>
+                 <input type="range" id="bgSize" min="10" max="500" value="100" class="form-control form-range-lg input-look rounded-0" aria-label="Background size slider">
+             </div>
+
+             <!-- For Background Position X -->
+             <div class="col-md-4 mb-4 me-4 ">
+                 <label for="bgPosX" class=" ">Background Position X:<span id="bgPosXValue" class="slidervalues">400</span></label>
+                 <input type="range" id="bgPosX" min="0" max="800" value="400" class="form-control form-range-lg input-look rounded-0 mb-4" aria-label="Horizontal background position slider">
+                 <label for="bgPosY" class=" ">Background Position Y:<span id="bgPosYValue" class="slidervalues ">200</span></label>
+                 <input type="range" id="bgPosY" min="0" max="400" value="200" class="form-control form-range-lg input-look rounded-0 " aria-label="Vertical background position slider">
+             </div>
+
+
+             <!-- Color pickers for gradient -->
+             <div class="col-md-2 mb-4 me-4 color-picker-container ">
+                 <label for="primaryColor">Primary Color:</label>
+                 <input type="color" id="primaryColor" value="#FF5733" class="form-control   color-picker-input input-look mb-4">
+                 <label for="secondaryColor">Secondary Color:</label>
+                 <input type="color" id="secondaryColor" value="#33D4FF" class="form-control color-picker-input input-look">
+             </div>
+
+             <!-- Dropdown for background presets -->
+             <div class="col-md-4 mb-4 pe-4 ">
+                 <label for="bgPresets">Background Presets:</label>
+                 <select id="bgPresets" class="form-control form-range-lg input-look me-4 rounded-0">
+                     <option value="none" selected>None</option>
+                     <option value="linear-gradient">Linear Gradient</option>
+                     <option value="radial-gradient">Radial Gradient</option>
+                     <option value="geometric-patterns">Geometric Patterns</option>
+                     <option value="wave-patterns">Wave Patterns</option>
+                     <option value="organic-blobs">Organic Blobs</option>
+                     <option value="stripes">Stripes</option>
+                     <!-- Additional presets can be added here -->
+                 </select>
+             </div>
+  </div>
+        </div>
+        <div class="pane-content" id="lines">
+          <div class="d-flex flex-row flex-nowrap">
+            
+            <div class="col-md-4 mb-4 me-4">
+              <!-- For Vertical Lines -->
+                <label for="vLines" class=" ">Vertical Lines:  <span id="vLinesValue" class="slidervalues ">10</span></label>
+                <input type="range" id="vLines" min="1" max="50" value="10" class="form-control rounded-0 mb-4 input-look" aria-label="Vertical lines slider">
+                <!-- For Horizontal Lines -->
+                <label for="hLines" class=" ">Horizontal Lines: <span id="hLinesValue" class="slidervalues">4</span></label>
+                <input type="range" id="hLines" min="1" max="50" value="4" class="form-control rounded-0 input-look" aria-label="Horizontal lines slider">
+           </div>
+
+            <div class="col-md-4 mb-4">
+              <!-- For Horizontal Spacing -->
+                <label for="hSpacing" class=" ">Horizontal Spacing: <span id="hSpacingValue" class="slidervalues">10</span></label>
+                <input type="range" id="hSpacing" min="0" max="100" value="10" class="form-control rounded-0 mb-4 input-look" aria-label="Horizontal spacing slider">
+              <!-- For Vertical Spacing -->
+                <label for="vSpacing mb-3" class=" ">Vertical Spacing:  <span id="vSpacingValue" class="slidervalues">20</span></label>
+                <input type="range" id="vSpacing" min="0" max="100" value="20" class="form-control rounded-0 input-look" aria-label="Vertical spacing slider">
+            </div>
+            
+          </div>
+        </div>
+        <div class="pane-content" id="brush">
+            <div class="d-flex flex-row flex-nowrap">
+                  <div class="col-md-4 mb-4 me-4">
+                      <label for="brushMode">Brush Mode:</label>
+                      <select id="brushMode" class="form-control rounded-0 input-look" >
+                          <option value="delete" selected>Delete</option>
+                          <option value="changeColor">Change Color</option>
+                          <option value="changeSize">Change Size</option>
+                          <option value="randomizeSize">Randomize Size</option>
+                      </select>
+                  </div>
+
+                  <div class="col-md-4 mb-4 me-4" id="brushSizeControl">
+                      <label for="brushSize">
+                         Brush Size:<span id="brushSizeValue" class="sliderValues">0</span>  
+                     </label>
+                     <input type="range" id="brushSize" min="-1" max="1" value="0" class="form-control rounded-0 input-look"  aria-label="brush size" >
+                  </div>
+
+                  <div class="col-md-4 mb-4 me-4 color-picker-container" id="colorPickerControl">
+                      <label for="brushColor">Color:</label>
+                      <input type="color" id="brushColor" value="#000000" class="form-control color-picker-input input-look " aria-label="brush color picker">
+                  </div>
+
+                  <div class="col-md-4 mb-4 me-4" id="minSizeControl">
+                      <label for="minSize">Min Size:</label>
+                      <input type="number" id="minSize" class="form-control rounded-0 input-look"  value="10">
+                  </div>
+
+                  <div class="col-md-4 mb-4 me-4" id="maxSizeControl">
+                      <label for="maxSize">Max Size:</label>
+                      <input type="number" id="maxSize" class="form-control rounded-0 input-look" value="30" >
+                  </div>
+            </div>
+        </div>
+    </div>
+    <!-- CANVAS -->
+    <div class="row">
+            <div class="col-12   mb-5">
+              <!-- The main canvas element where rendering (drawing) takes place -->
+              <canvas id="worduppCanvas" class=" mt-0 pt-0" width="800" height="400" role="img" aria-label="Canvas where words are rendered.">
+              </canvas>
+              <!-- Button to trigger canvas download -->
+              <div class="mt-3">
+                 <button class="btn btn-primary rounded-0" onclick="downloadCanvas()" aria-label="Download canvas button">Download</button>
+                 <button type="button" class="btn btn-primary rounded-0" onclick="toggleNavbar()"><a class="navbar-brand" href="#">More options</a></button>
+              </div>
+            </div>
+        </div>
+
+</div>
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{% static '/js/interface.js' %}"></script>
+<script src="{% static '/js/wordupp-class.js' %}"></script>
+{% endblock %}
