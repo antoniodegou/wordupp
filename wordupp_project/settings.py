@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'core',
     'users',
     'subscription',
-    'word',
-    'WordUpp',
+
 ]
 
 MIDDLEWARE = [

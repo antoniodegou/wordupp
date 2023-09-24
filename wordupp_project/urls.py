@@ -16,17 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path , include
-from word import views as word_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('canvas/', word_views.canvas_view, name='canvas_view'),
     path('', include('core.urls')),
-    path('', include('word.urls')),
     path('', include('users.urls')),
-    path('wordupp/', include('WordUpp.urls')),  # Add this line
     path('subscription/', include('subscription.urls')),
-
- 
-    # path('word/', include('word.urls')), if you want word on the link, on the word app
-    # path('canvas/', word_views.canvas_view, name='canvas_view'), general app
 ]
