@@ -87,17 +87,33 @@ def dashboard(request):
     """
     Render the dashboard page.
     """
+    print(f"User authenticated after Stripe: {request.user.is_authenticated}")
+
+    session_id = request.GET.get('session_id')
     subscription_status = request.GET.get('subscription')
+
+    if session_id:
+        try:
+            user_subscription = UserSubscription.objects.get(stripe_customer_id=session_id)
+            login(request, user_subscription.user)
+        except UserSubscription.DoesNotExist:
+            messages.warning(request, "Couldn't find a subscription with that session ID, sugar.")
+
+
     if subscription_status == 'success':
         # You already have the user info because they're logged in
         login(request, request.user)
         messages.success(request, 'Yeehaw! Your subscription was successful, darlin\'!')
+        
     context = {}
     user_subscription = None
+
     try:
         user_subscription = UserSubscription.objects.get(user=request.user)
     except UserSubscription.DoesNotExist:
         pass  # User has no subscription        
+
+
     if request.method == 'POST':
         action = request.POST.get('action')
 

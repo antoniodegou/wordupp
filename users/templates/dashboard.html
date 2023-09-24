@@ -11,9 +11,9 @@
 
 {% block content %}
 {% if messages %}
-  <div class="messages black-border bg-a-white p-4">
+  <div class="messages black-border bg-a-white p-3 mt-3">
     {% for message in messages %}
-      <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+      <p{% if message.tags %} class="{{ message.tags }} m-0"{% endif %}>{{ message }}</p>
     {% endfor %}
   </div>
 {% endif %}

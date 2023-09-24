@@ -17,7 +17,7 @@ from datetime import datetime
 from django.db import transaction
 from .models import UserSubscription, MyStripeEventModel  # Add the new model here
 from django.http import JsonResponse
-
+from django.contrib.auth import login
 
 
 
@@ -41,6 +41,8 @@ from django.urls import reverse
  
 @login_required
 def subscribe_premium(request):
+    print(f"User authenticated after Stripe: {request.user.is_authenticated}")
+
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You need to be logged in to do that, darlin'!")
     try:
@@ -51,7 +53,7 @@ def subscribe_premium(request):
             }
         )
 
-
+   
         # Save the Stripe customer ID to your UserSubscription model
         user_subscription, created = UserSubscription.objects.get_or_create(
             user=request.user,
@@ -167,6 +169,7 @@ def customer_portal(request):
 @transaction.atomic  # Makes sure all DB operations are atomic
 @csrf_exempt
 def stripe_webhook(request):
+    print("Webhook received")
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
@@ -185,7 +188,7 @@ def stripe_webhook(request):
     if MyStripeEventModel.objects.filter(stripe_event_id=stripe_event_id).exists():
         return HttpResponse(status=200)  # Already processed this event
 
-    print("MYE EVENTS GURL:", event['type'])
+    # print("MYE EVENTS GURL:", event['type'])
  
     # Handle the event
     if event['type'] == 'customer.subscription.updated':
@@ -228,11 +231,12 @@ def stripe_webhook(request):
         try:
             # Find the user by the saved Stripe customer ID
             user_subscription = UserSubscription.objects.get(stripe_customer_id=stripe_customer_id)
-            user = user_subscription.user
+   
 
             # Fetch the premium plan from your database
             premium_plan = SubscriptionPlan.objects.get(name='WordUpp Premium')
-
+            # Log the user in
+  
             # Update the UserSubscription
             user_subscription.stripe_subscription_id = stripe_subscription_id
             user_subscription.plan = premium_plan  # Set the plan here
@@ -262,6 +266,23 @@ def stripe_webhook(request):
             
         except UserSubscription.DoesNotExist:
             print(f"User Subscription with stripe_subscription_id {stripe_subscription_id} not found.")
+
+
+    elif event['type'] == 'checkout.session.completed':
+        stripe_customer_id = event['data']['object']['customer']
+
+        try:
+            user_subscription = UserSubscription.objects.get(stripe_customer_id=stripe_customer_id)
+            user = user_subscription.user
+
+            # Manually log the user in
+            # Note: This won't work in a webhook in a production environment
+            # You'd need to find another way to persist this login
+            login(request, user)
+
+            print("User logged in successfully!")
+        except UserSubscription.DoesNotExist:
+            print("User Subscription not found.")
 
     # Log the processed event
     MyStripeEventModel.objects.create(
