@@ -11,16 +11,32 @@
 
 {% block content %}
 
+
+
+{% if messages %}
+  <div class="messages black-border bg-a-white p-3 mt-3">
+    {% for message in messages %}
+      <p{% if message.tags %} class="{{ message.tags }} m-0"{% endif %}>{{ message }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if is_limit_reached %}
+  <div class="messages black-border bg-a-white p-3 mt-3">
+    <p class="warning m-0">You've reached your download limit for this month, sugar!</p>
+  </div>
+{% endif %}
+
 <div class="container  p-0">
     
     <!-- TEXT input -->
     <div class="row m-0 p-0 mt-5">
           <div class="col-12 m-0 p-0 mb-5 input-group-lg "><!-- Text input control -->
-             <label for="userText">Text:</label>
+             <label for="userText" class="userTextLabel">Text:</label>
              <input type="text" id="userText" value="Wordupp, Everybody say" class="form-control input-look rounded-0" aria-label="Input for text">
-     
           </div>
     </div>
+
     <!-- BUTTONS row -->
     <div class="button-row input-look flex-wrap  ">
       <button id="resetButton" class="  input-look myyellow">Reset</button>
@@ -29,23 +45,17 @@
       <button class="pane-button input-look myred" data-pane="backgrounds">Background Controls</button>
       <button class="pane-button input-look myblue" data-pane="lines">Line Control</button>
       <button class="pane-button input-look myred" data-pane="brush">Brush Tools</button>
-   
-      
-      
-
- 
-  
     </div>
-<!--    botom legend -->
-    <div id="buttonsLegend" class=" legend button-row  flex-wrap ">
-      <div class=" legend button-row  flex-wrap  ">
+
+    <!--botom legend -->
+    <div id="buttonsLegend" class=" legend button-row  flex-wrap p-0 m-0">
+      <div class=" legend button-row  flex-wrap p-0 m-0 ms-4 pt-2 pb-1">
             <div class="mySquare myblue"></div>
             <p class="m-0">  will refresh words</p>
             <div class="mySquare myred"></div>
             <p class="m-0">won't refresh words</p>
        </div>     
     </div>
-   
    
     <!-- MENU options -->
     <div class="content-pane  pt-3 input-look mb-5" id="draggableContainer">
@@ -243,6 +253,7 @@
             </div>
         </div>
     </div>
+
     <!-- CANVAS -->
     <div class="row">
             <div class="col-12   mb-5">
@@ -251,13 +262,83 @@
               </canvas>
               <!-- Button to trigger canvas download -->
               <div class="mt-3">
-                 <button id="download-btn" class="btn btn-primary rounded-0" aria-label="Download canvas button">Download</button>
-                 <button type="button" class="btn btn-primary rounded-0" onclick="toggleNavbar()"><a class="navbar-brand" href="#">More options</a></button>
+            
+
+
+                 <button id="download-btn" class="btn rounded-0 bg-yellow btn-lg" {% if is_limit_reached %}disabled{% endif %}>Download</button>
               </div>
             </div>
         </div>
         <!-- onclick="downloadCanvas()" -->
 </div>
+
+ 
+<p>You have <span id="downloads-left">{{ downloads_left }}</span> downloads left this month.</p>
+
+ 
+<script>
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+document.getElementById('download-btn').addEventListener('click', function() {
+    fetch('/handle_download/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            window.location.reload();  // This will reload the page, showing the new message
+        } 
+        
+        else if (data.status === 'limit_reached') {
+            document.getElementById('download-btn').disabled = true;
+            
+            // Update the message
+            const messageDiv = document.querySelector('.messages');
+            if (!messageDiv) {
+                // Create the message div if it doesn't exist
+                const newMessageDiv = document.createElement('div');
+                newMessageDiv.className = 'messages black-border bg-a-white p-3 mt-3';
+                document.body.appendChild(newMessageDiv);
+            }
+            const newMessage = document.createElement('p');
+            newMessage.className = 'your-css-class m-0';
+            newMessage.textContent = "You've reached your download limit for this month, sugar!";
+            messageDiv.appendChild(newMessage);
+
+            // Update the download count
+            const downloadsLeftElem = document.getElementById('downloads-left');
+            downloadsLeftElem.textContent = "0";
+        }
+        
+        else {
+            // Show an error message or limit reached message
+            document.getElementById('download-btn').disabled = true;
+            alert(data.message);
+        }
+    });
+
+});
+
+
+
+</script>
 
 
 {% endblock %}

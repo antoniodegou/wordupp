@@ -1,13 +1,10 @@
- 
-
-let isMouseDown = false
+ let isMouseDown = false
 let startX = null;
 let scrollLeft = null;
 let touchOnSlider = false;
-let isBrushing = false;
+// let isBrushing = false;
 let brushModeElement = document.getElementById("brushMode");
 let draggableContainers = document.querySelectorAll('.pane-content');
-
 
 class WordCanvas {
     constructor() {
@@ -60,6 +57,9 @@ class WordCanvas {
         }
 
         this.updateAndRender(true); // Reinitialize words
+
+
+        
     }
 
     updateAndRender(shouldReinitialize = false) {
@@ -232,9 +232,9 @@ class WordCanvas {
 
         if (this.canvas) {
             // Event listeners to manage brush state (isBrushing) when mouse button is pressed or released
-            this.canvas.addEventListener('mousedown', () => { isBrushing = true; });
+            this.canvas.addEventListener('mousedown', () => { this.isBrushing = true; });
 
-            this.canvas.addEventListener('mouseup', () => { isBrushing = false; });
+            this.canvas.addEventListener('mouseup', () => { this.isBrushing = false; });
 
             // Event listener to handle brush effects when the mouse is moved over the canvas
             this.canvas.addEventListener('mousemove', (event) => this.handleBrushing(event));
@@ -481,10 +481,7 @@ class WordCanvas {
 
     }
   
-  
 
-  
-  
     removeBackground() {
       this.backgroundImg = null;
       document.getElementById('backgroundImg').value = "";
@@ -552,10 +549,10 @@ class WordCanvas {
     
   // download image
    downloadCanvas() {
-    const link = document.createElement('a');
-    link.download = 'wordupp_canvas.png';  // Specify the name of the downloaded image
-    link.href = this.canvas.toDataURL('image/png');
-    link.click();
-}
+        const link = document.createElement('a');
+        link.download = 'wordupp_canvas.png';  // Specify the name of the downloaded image
+        link.href = this.canvas.toDataURL('image/png');
+        link.click();
+    }
 }
 

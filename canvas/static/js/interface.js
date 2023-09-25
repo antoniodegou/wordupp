@@ -2,23 +2,25 @@
 document.addEventListener('DOMContentLoaded', function() {
     const wordCanvas = new WordCanvas();
   
-          const sliderMappings = [
-            ['bgSize', 'bgSizeValue'],
-            ['bgPosX', 'bgPosXValue'],
-            ['bgPosY', 'bgPosYValue'],
-            ['hSpacing', 'hSpacingValue'],
-            ['vSpacing', 'vSpacingValue'],
-            ['vLines', 'vLinesValue'],
-            ['hLines', 'hLinesValue'],
-            ['brushSize', 'brushSizeValue']
-        ];
-          sliderMappings.forEach(([sliderId, displayId]) => {
-            updateSliderValueDisplay(sliderId, displayId);
-        });
-        // brushModeElement.addEventListener("change", () => handleBrushPaneChanges());
-        initializeDraggableContainers();
-        handleBrushPaneChanges();
-        updateSubmenus()
+    const sliderMappings = [
+        ['bgSize', 'bgSizeValue'],
+        ['bgPosX', 'bgPosXValue'],
+        ['bgPosY', 'bgPosYValue'],
+        ['hSpacing', 'hSpacingValue'],
+        ['vSpacing', 'vSpacingValue'],
+        ['vLines', 'vLinesValue'],
+        ['hLines', 'hLinesValue'],
+        ['brushSize', 'brushSizeValue']
+    ];
+
+    sliderMappings.forEach(([sliderId, displayId]) => {
+        updateSliderValueDisplay(sliderId, displayId);
+    });
+
+ 
+    initializeDraggableContainers();
+    handleBrushPaneChanges();
+    updateSubmenus()
  
 });
 
@@ -34,7 +36,7 @@ buttons2.forEach(button => {
             btn.classList.remove('active');
         });
         // Add active class to the clicked button
-        this.classList.add('active');
+       btn.classList.add('active');
     });
 });
 
@@ -126,7 +128,6 @@ function handleBrushPaneChanges() {
 }
 
 
-
 function initializeDraggableContainers() {
 
      draggableContainers = document.querySelectorAll('.pane-content');
@@ -161,26 +162,26 @@ function initializeDraggableContainers() {
           // Touch events
           draggableContainer.addEventListener('touchstart', (e) => {
               if (e.target.tagName === 'INPUT' && e.target.type === 'range') {
-                  this.touchOnSlider = true;
+                   touchOnSlider = true;
                   return;
               }
-              this.touchOnSlider = false;
-              this.isMouseDown = true;
-              this.startX = e.touches[0].pageX - draggableContainer.offsetLeft;
-              this.scrollLeft = draggableContainer.scrollLeft;
+              touchOnSlider = false;
+               isMouseDown = true;
+               startX = e.touches[0].pageX - draggableContainer.offsetLeft;
+               scrollLeft = draggableContainer.scrollLeft;
           }, { passive: true });
 
           draggableContainer.addEventListener('touchend', () => {
-              this.isMouseDown = false;
-              this.touchOnSlider = false;
+               isMouseDown = false;
+               touchOnSlider = false;
           }, { passive: true });
 
           draggableContainer.addEventListener('touchmove', (e) => {
-              if (!this.isMouseDown || this.touchOnSlider) return;
+              if (!isMouseDown ||  touchOnSlider) return;
               e.preventDefault();
               const x = e.touches[0].pageX - draggableContainer.offsetLeft;
-              const walk = (x - this.startX);
-              draggableContainer.scrollLeft = this.scrollLeft - walk;
+              const walk = (x -  startX);
+              draggableContainer.scrollLeft =  scrollLeft - walk;
           }, { passive: false });
       });
   }

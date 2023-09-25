@@ -88,7 +88,7 @@ def dashboard(request):
     Render the dashboard page.
     """
     print(f"User authenticated after Stripe: {request.user.is_authenticated}")
-
+    downloads_left = 0  # Default value
     session_id = request.GET.get('session_id')
     subscription_status = request.GET.get('subscription')
 
@@ -142,6 +142,12 @@ def dashboard(request):
         context['u_form'] = u_form
         context['p_form'] = p_form
 
+    try:
+        downloads_left = 10 - user_subscription.downloads_this_month  # Replace 10 with your actual limit
+    except UserSubscription.DoesNotExist:
+        pass  # User has no subscription
+    context['downloads_left'] = downloads_left  # Add to context
+    
     context['user_subscription'] = user_subscription
     return render(request, 'dashboard.html', context)
 

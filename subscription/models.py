@@ -25,6 +25,7 @@ class UserSubscription(models.Model):
     stripe_customer_id = models.CharField(max_length=50, null=True, blank=True)
     stripe_subscription_id = models.CharField(max_length=50, null=True, blank=True)
     is_active = models.BooleanField(default=True)
+    downloads_this_month = models.IntegerField(default=0)
     def __str__(self):
         return f"{self.user.username}'s {self.plan.name if self.plan else 'No'} subscription"
 
