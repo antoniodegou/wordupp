@@ -1,6 +1,6 @@
 <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
-      <div class="modal-content rounded-0 bg-yellow black-border">
+      <div class="modal-content rounded-0 bg-pink black-border">
         <div class="modal-header">
           <h5 class="modal-title" id="deleteAccountModalLabel">Confirm Account Deletion</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -10,10 +10,10 @@
           <p><strong>Please note:</strong> Depending on jurisdictional requirements, some of your data may be retained for legal purposes even after account deletion.</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Cancel</button>
           <form method="post" action="{% url 'delete_account' %}">
             {% csrf_token %}
-            <input type="submit" class="btn btn-danger" value="Confirm Delete">
+            <input type="submit" class="btn btn-danger rounded-0" value="Confirm Delete">
           </form>
         </div>
       </div>

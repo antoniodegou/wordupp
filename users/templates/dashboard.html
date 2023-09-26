@@ -10,6 +10,11 @@
 
 
 {% block content %}
+<div class="mt-4 big-title mt-4">
+  <h1>Hello, {{user.username}}!</h1>
+</div>
+
+
 {% if messages %}
   <div class="messages black-border bg-a-white p-3 mt-3">
     {% for message in messages %}
@@ -18,92 +23,17 @@
   </div>
 {% endif %}
 
-<ul class="nav nav-tabs mt-5" id="userTabs" role="tablist">
-  <li class="nav-item" role="presentation">
-    <a class="nav-link  btn active  rounded-0 bg-yellow btn-lg black-border btn-lg me-4" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-  </li>
-  <li class="nav-item" role="presentation">
-    <a class="nav-link  btn rounded-0 bg-yellow btn-lg black-border" id="subscription-tab" data-bs-toggle="tab" href="#subscription" role="tab" aria-controls="subscription" aria-selected="false">Subscription</a>
-  </li>
-</ul>
 
-<h2 class="big-title mt-4">{{ user.username }}'s Stuff</h2>
+{% include "dash-cards.html" %}
 
-<a href="{% url 'customer_portal' %}">Manage your subscription</a>
+{% include "dash-userdetails.html" %}
 
-<div class="tab-content" id="userTabsContent">
-  
-  <!-- Profile Tab -->
-  <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+{% include "dash-subscription.html" %}
+
+{% include "dash-download.html" %}
+
  
-      <h2>Hello, {{user.username}}</h2>
-      <h3>You emaill: {{user.email}}</h3>
-      {% if user_subscription %}
-      <p>Yee-haw! You're on the {{ user_subscription.plan.name }} plan!</p>
-  {% else %}
-      <p>Howdy, partner! Looks like you haven't picked a subscription plan yet.</p>
-  {% endif %}
-      <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-toggle="modal" data-bs-target="#detailsModal">
-        Update Details
-      </button>
-      
-      <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-toggle="modal" data-bs-target="#passwordModal">
-        Change Password
-      </button>
-
-      <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
-        Delete Account
-      </button>
-
-      <br>
- <h1>{{user_subscription }}</h1>
-
- {% if user_subscription %}
-    <p>Yee-haw! You're on the {{ user_subscription.plan.name }} plan! (Price: {{ user_subscription.plan.price }})</p>
-
-    {% if user_subscription.plan.name == "WordUpp Free" %}
-        <!-- Show the "Upgrade to Premium" button only if the user is on the Free plan -->
-        <button onclick="upgradeToPremium()">Upgrade to Premium</button>
-    {% else %}
-        <!-- Show the "Manage Your Subscription" button -->
-        <a href="{% url 'customer_portal' %}">Manage Your Subscription</a>
-    {% endif %}
-
-{% else %}
-    <p>Howdy, partner! Looks like you haven't picked a subscription plan yet.</p>
-    <!-- Show the "Subscribe to Premium" button if the user has no subscription -->
-    <button onclick="upgradeToPremium()">Upgrade to Premium</button>
-{% endif %}
-
-
-
-{% if user_subscription %}
-    <p>Word up! You're on the {{ user_subscription.plan.name }} plan, so slide on! (Price: {{ user_subscription.plan.price }})</p>
-    {% if user_subscription.end_date and not user_subscription.is_active %}
-        {% if user_subscription.end_date < today %}
-            <p>Uh oh! Your premium groove expired on {{ user_subscription.end_date }}. Time to say "Word up!" and renew, you dig?</p>
-        {% else %}
-            <p>Hold on, party people! You've hit the pause on your premium subscription. But don't sweat it, you're still in the mix until {{ user_subscription.end_date }}.</p>
-        {% endif %}
-    {% elif user_subscription.end_date %}
-        <p>Heads up, funky one! Your current jam ends on {{ user_subscription.end_date }}.</p>
-    {% endif %}
-{% else %}
-    <p>Hey, yo, DJ! You haven't jumped on the word train yet. So what's the word? Ready to get down?</p>
-{% endif %}
-
-
-
-<p>You have {{ downloads_left }} downloads left this month.</p>
-
-
-  </div>
-  
-  <!-- Subscription Tab -->
-  <div class="tab-pane fade  " id="subscription" role="tabpanel" aria-labelledby="subscription-tab">
-  </div>
-
-</div>
+ 
 
 {% include "dash-change-details.html" %}
 {% include "dash-change-pass.html" %}

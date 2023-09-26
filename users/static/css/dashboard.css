@@ -37,3 +37,17 @@ form{
 .nav-tabs{
     --bs-nav-tabs-border-color: rgba(0,0,0,0);
 }
+
+.lined-border{
+    border: 3px  dotted black;
+}
+
+.emoji {
+    font-size: 2em;  /* Adjust the size as you like */
+  }
+
+  .number-left{
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 2em;  /* Adjust the size as you like */
+    font-weight: 900;
+  }

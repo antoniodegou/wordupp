@@ -1,0 +1,60 @@
+<div class="row   p-0 m-0">
+
+    <div class="col col-md-5 black-border bg-a-white mt-4 p-0 m-0 me-1">
+      <div class="m-1  p-4 lined-border">
+          <h2 class="p-0 m-0 pb-2">{{ user_subscription.plan.name }} Subscription</h2> 
+          {% if "Premium" in user_subscription.plan.name %}
+            <p class="p-0 m-0">Downloads So Far This Month: <span class="number-left"> {{ downloads_this_month  }}</span>
+              <span class="emoji">
+                {% if downloads_this_month  >= 100 %}🌌🌌{% endif %}
+                {% if downloads_this_month  >= 90 and downloads_this_month < 100 %}🎯{% endif %}
+                {% if downloads_this_month  >= 80 and downloads_this_month < 90 %}🎉{% endif %}
+                {% if downloads_this_month  >= 70 and downloads_this_month < 80 %}💡{% endif %}
+                {% if downloads_this_month  >= 60 and downloads_this_month < 70 %}🏆{% endif %}
+                {% if downloads_this_month  >= 50 and downloads_this_month < 60 %}🌍{% endif %}
+                {% if downloads_this_month  >= 40 and downloads_this_month < 50 %}🦄{% endif %}
+                {% if downloads_this_month  >= 30 and downloads_this_month < 40 %}🌈{% endif %}
+                {% if downloads_this_month  >= 20 and downloads_this_month < 30 %}🚀{% endif %}
+                {% if downloads_this_month >= 10 and downloads_this_month < 20 %}💎{% endif %}
+                {% if downloads_this_month >= 1 and downloads_this_month < 10 %}🌟{% endif %}
+              </span>
+            </p>
+          {% else %}
+            <p class="p-0 m-0">Downloads Left:   <span class="number-left"> {{ downloads_left }}</span>
+              <span class="emoji">
+                {% if downloads_left == 10 %}😃{% endif %}
+                {% if downloads_left == 9 %}😊{% endif %}
+                {% if downloads_left == 8 %}😀{% endif %}
+                {% if downloads_left == 7 %}🙂{% endif %}
+                {% if downloads_left == 6 %}😐{% endif %}
+                {% if downloads_left == 5 %}😶{% endif %}
+                {% if downloads_left == 4 %}😕{% endif %}
+                {% if downloads_left == 3 %}😟{% endif %}
+                {% if downloads_left == 2 %}😦{% endif %}
+                {% if downloads_left == 1 %}😧{% endif %}
+                {% if downloads_left == 0 %}😩{% endif %}
+              </span>
+            </p>
+          {% endif %}
+
+
+      </div>
+
+    </div>
+
+    {% if "Free" in user_subscription.plan.name  %}
+    <script> console.log("{{ user_subscription}}")</script>
+    <div class="col col-md-5 black-border bg-a-white mt-4 p-0 m-0 ms-1">
+      <div class="m-1  p-4 lined-border">
+        <button class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4 mb-4" onclick="upgradeToPremium()">Upgrade</button>
+        <p class="p-0 m-0">Get unimited downloads</p>
+      </div>
+    </div>
+    {% endif %}
+
+ 
+</div>
+
+
+
+ 

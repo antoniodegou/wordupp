@@ -1,0 +1,42 @@
+<div class="mt-4 big-title mt-4 mb-4">
+    <h1>{{ user.username }}'s Subs</h1>
+</div>
+
+<div class="bg-a-white black-border p-4" >
+
+
+{% if user_subscription %}
+    <p>Yee-haw! You're on the {{ user_subscription.plan.name }} plan! (Price: {{ user_subscription.plan.price }})</p>
+
+    {% if user_subscription.plan.name == "WordUpp Free" %}
+        <!-- Show the "Upgrade to Premium" button only if the user is on the Free plan -->
+        <button onclick="upgradeToPremium()">Upgrade to Premium</button>
+    {% else %}
+        <!-- Show the "Manage Your Subscription" button -->
+        <a href="{% url 'customer_portal' %}">Manage Your Subscription</a>
+    {% endif %}
+
+{% else %}
+    <p>Howdy, partner! Looks like you haven't picked a subscription plan yet.</p>
+    <!-- Show the "Subscribe to Premium" button if the user has no subscription -->
+    <button onclick="upgradeToPremium()">Upgrade to Premium</button>
+{% endif %}
+
+
+
+
+{% if user_subscription %}
+    <p>Word up! You're on the {{ user_subscription.plan.name }} plan, so slide on! (Price: {{ user_subscription.plan.price }})</p>
+    {% if user_subscription.end_date and not user_subscription.is_active %}
+        {% if user_subscription.end_date < today %}
+            <p>Uh oh! Your premium groove expired on {{ user_subscription.end_date }}. Time to say "Word up!" and renew, you dig?</p>
+        {% else %}
+            <p>Hold on, party people! You've hit the pause on your premium subscription. But don't sweat it, you're still in the mix until {{ user_subscription.end_date }}.</p>
+        {% endif %}
+    {% elif user_subscription.end_date %}
+        <p>Heads up, funky one! Your current jam ends on {{ user_subscription.end_date }}.</p>
+    {% endif %}
+{% else %}
+    <p>Hey, yo, DJ! You haven't jumped on the word train yet. So what's the word? Ready to get down?</p>
+{% endif %}
+</div>
