@@ -15,9 +15,7 @@
             <a class="nav-link active" aria-current="page" href="{% url 'core:homepage' %}">Home</a>
           </li>
           {% if user.is_authenticated %}
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="{# {% url 'logout' %}#} ">Logout</a>
-            </li>-->  
+  
              <li class="nav-item">
               <a class="nav-link" href="{% url 'dashboard' %} ">Dashboard</a>
             </li>  

@@ -112,7 +112,13 @@
                 <div class="card-body black-border bg-pink   rounded-0">
                     <h5 class="card-title">$0/month</h5>
                     <p class="card-text">Dive into the world of textual design. No cost, no strings attached.</p>
-                    <button class="btn btn-primary rounded-0 bg-yellow">Start for Free</button>
+                    {% if user.is_authenticated %}
+                        <!-- Button for logged-in users -->
+                        <a href="{% url 'dashboard' %}" class="btn btn btn-primary rounded-0 bg-yellow">Go to Dashboard</a>
+                    {% else %}
+                        <!-- Button for guests -->
+                        <a href="{% url 'register' %}" class="btn btn btn-primary rounded-0 bg-yellow">Register</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -126,7 +132,14 @@
                 <div class="card-body black-border bg-red rounded-0">
                     <h5 class="card-title">$1.99/month</h5>
                     <p class="card-text">Save your masterpieces. A world of premium features awaits.</p>
-                    <button class="btn btn-primary rounded-0 bg-yellow">Upgrade to Premium</button>
+ 
+                    {% if user.is_authenticated %}
+                        <!-- Button for logged-in users -->
+                        <a href="{% url 'dashboard' %}" class="btn btn btn-primary rounded-0 bg-yellow">Go to Dashboard</a>
+                    {% else %}
+                        <!-- Button for guests -->
+                        <a href="{% url 'register' %}" class="btn btn btn-primary rounded-0 bg-yellow">Register</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
