@@ -13,15 +13,19 @@
 
 </style>
 
+
 <footer class="footer mt-auto py-3 bg-black text-white mt-5 d-flex justify-content-between   mt-auto ">
     <div class="container">
       <div class="row w-100 text-center">
         <div class="col-md-12">
             <!-- Links -->
             <ul class="list-unstyled text-white">
+              <li><a href="#" data-bs-toggle="modal" data-bs-target="#termsModal" class="text-muted text-white">Terms and Conditions</a></li>
+<li><a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal" class="text-muted text-white">Privacy Policy</a></li>
+
+
               <li><a href="#" class="text-muted text-white">Contact</a></li>
-              <li><a href="#" class="text-muted text-white">Terms and Conditions</a></li>
-              <li><a href="#" class="text-muted text-white">Privacy Policy</a></li>
+ 
             </ul>
           </div>
         <div class="col-md-12">
@@ -34,13 +38,110 @@
     </div>
   </footer>
 
+
+
+
+<!-- Terms and Conditions Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content black-border rounded-5 ">
+      <div class="modal-header bg-black c-a-white black-border">
+        <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+        <button type="button" class="btn-close c-pink" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body">
+            <!-- Terms and Conditions -->
+            <section id="terms">
+              <h1>Terms and Conditions</h1>
+              {% load static %}
+              <img src="{% static 'images/logo.png' %}" alt="Logo" class="w-25">
+              <p><strong>Last Updated:</strong> 27/10/2023</p>
+              <p><strong>Contact Information:</strong><br>
+              Antonio de Gou<br>
+              Email: antdegou@gmail.com</p>
+
+              <h2>1. Terms</h2>
+              <p>By accessing this website, you are agreeing to be bound by these Terms and Conditions of Use, all applicable laws, and regulations, and agree that you are responsible for compliance with any applicable local laws.</p>
+
+              <h2>2. Use License</h2>
+              <p>You may not :</p>
+              <ul>
+                <li>Modify or copy the materials.</li>
+                <li>Use the materials for any commercial purpose, or for any public display.</li>
+                <li>Remove any copyright or other proprietary notations from the materials.</li>
+              </ul>
+
+              <h2>3. Subscription Services</h2>
+              <p>We offer various subscription plans through Stripe. By subscribing, you agree to the terms and conditions of Stripe and bravoisdead.</p>
+
+              <h2>4. Termination</h2>
+              <p>We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
+
+              <h2>5. Governing Law</h2>
+              <p>These terms and conditions are governed by and construed in accordance with the laws of World and Universe</p>
+          </section>
+      </div>
+      <div class="modal-footer bg-black c-a-white black-border">
+        <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Privacy Policy Modal -->
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content  black-border rounded-5">
+      <div class="modal-header bg-black c-a-white black-border c-pink">
+        <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
+        <button type="button" class="btn-close c-pink" data-bs-dismiss="modal" aria-label="Close">X</button>
+      </div>
+      <div class="modal-body">
+        <section id="privacy">
+          <h1>Privacy Policy</h1>
+          <img src="your_logo_here.png" alt="Logo" />
+          <p><strong>Last Updated:</strong> [Date]</p>
+          <p><strong>Contact Information:</strong><br>
+          Antonio de Gou<br>
+          Email: antdegou@gmail.com</p>
+  
+          <h2>1. Personal Information We Collect</h2>
+          <p>We collect information such as your name, email address, and payment details for subscription services.</p>
+  
+          <h2>2. How We Use Your Information</h2>
+          <p>We use the information we collect to provide and improve our services, including subscriptions.</p>
+  
+          <h2>3. Data Retention</h2>
+          <p>If you wish to delete your account, we will remove your data within 30 days.</p>
+  
+          <h2>4. Third-Party Services</h2>
+          <p>We use Stripe for payment processing. Please refer to Stripe's Privacy Policy for more information.</p>
+  
+          <h2>5. Changes to This Privacy Policy</h2>
+          <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+  
+          <h2>6. Contact Us</h2>
+          <p>If you have any questions about these Terms and Conditions or Privacy Policy, please contact us at antdegou@gmail.com.</p>
+      </section>
+      </div>
+      <div class="modal-footer bg-black c-a-white  ">
+        <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
   
   <script>
     // JavaScript
-document.addEventListener('DOMContentLoaded', (event) => {
-  const yearElement = document.getElementById('current-year');
-  const currentYear = new Date().getFullYear();
-  yearElement.textContent = currentYear;
-});
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const yearElement = document.getElementById('current-year');
+    const currentYear = new Date().getFullYear();
+    yearElement.textContent = currentYear;
+  });
 
   </script>
