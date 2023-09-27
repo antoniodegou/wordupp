@@ -1,43 +1,19 @@
-<!-- HTML -->
-<style>
-    /* CSS */
-/* body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.footer {
-  margin-top: auto; */
-/* } */
-
-</style>
-
-
 <footer class="footer mt-auto py-3 bg-black text-white mt-5 d-flex justify-content-between   mt-auto ">
-    <div class="container">
-      <div class="row w-100 text-center">
-        <div class="col-md-12">
-            <!-- Links -->
-            <ul class="list-unstyled text-white">
-              <li><a href="#" data-bs-toggle="modal" data-bs-target="#termsModal" class="text-muted text-white">Terms and Conditions</a></li>
-              <li><a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal" class="text-muted text-white">Privacy Policy</a></li>
-
-              <li><a href="#" class="text-muted text-white" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</a></li>
-
-             
- 
-            </ul>
-          </div>
-        <div class="col-md-12">
-          <!-- Copyright -->
-          <p class="text-muted text-white">&copy; <span id="current-year"></span> wordUpp. All rights reserved.</p>
-        </div>
-
- 
+  <div class="container">
+    <div class="row w-100 text-center">
+      <div class="col-md-12">
+          <ul class="list-unstyled text-white">
+            <li><a href="#" data-bs-toggle="modal" data-bs-target="#termsModal" class="text-muted text-white">Terms and Conditions</a></li>
+            <li><a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal" class="text-muted text-white">Privacy Policy</a></li>
+            <li><a href="#" class="text-muted text-white" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</a></li>
+          </ul>
+      </div>
+      <div class="col-md-12">
+        <p class="text-muted text-white">&copy; <span id="current-year"></span> wordUpp. All rights reserved.</p>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
 
 
@@ -123,7 +99,7 @@
   
           <h2>6. Contact Us</h2>
           <p>If you have any questions about these Terms and Conditions or Privacy Policy, please contact us at antdegou@gmail.com.</p>
-      </section>
+        </section>
       </div>
       <div class="modal-footer bg-black c-a-whiteborder-0  border-0 mt-3 rounded-0">
         <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-dismiss="modal">Close</button>
@@ -155,25 +131,8 @@
 
 
 
-  
-  <script>
-
- 
-  // JavaScript to dynamically insert the email
-  document.addEventListener("DOMContentLoaded", function() {
-    var user = 'antdegou';
-    var domain = 'gmail.com';
-    var element = document.getElementById('email');
-    element.innerHTML = '<a href="mailto:' + user + '@' + domain + '">' + user + '@' + domain + '</a>';
-  });
- 
 
 
-    // JavaScript
-  document.addEventListener('DOMContentLoaded', (event) => {
-    const yearElement = document.getElementById('current-year');
-    const currentYear = new Date().getFullYear();
-    yearElement.textContent = currentYear;
-  });
-
-  </script>
+{% block extra_js %}
+  <script src="{% static '/js/footer.js' %}"></script>
+{% endblock %}

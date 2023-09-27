@@ -1,4 +1,4 @@
-<div class="mt-4 big-title mt-4 mb-4">
+<div class="mt-4 big-title mt-4 mb-2">
     <h1>{{ user.username }}'s Subs</h1>
 </div>
 
@@ -11,10 +11,10 @@
 
     {% if user_subscription.plan.name == "WordUpp Free" %}
         <!-- Show the "Upgrade to Premium" button only if the user is on the Free plan -->
-        <button class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4 mb-4" onclick="upgradeToPremium()">Upgrade to Premium</button>
+        <button class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4  " onclick="upgradeToPremium()">Upgrade to Premium</button>
     {% else %}
         <!-- Show the "Manage Your Subscription" button -->
-        <button  class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4 mb-4" href="{% url 'customer_portal' %}">Manage Your Subscription</button>
+        <button  class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4  " href="{% url 'customer_portal' %}">Manage Your Subscription</button>
     {% endif %}
 
 {% else %}

@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Get all pane-buttons
 const buttons2 = document.querySelectorAll('.pane-button');
-
+ 
 
 // Loop through each button
 buttons2.forEach(button => {
@@ -36,7 +36,7 @@ buttons2.forEach(button => {
             btn.classList.remove('active');
         });
         // Add active class to the clicked button
-       btn.classList.add('active');
+       this.classList.add('active');
     });
 });
 

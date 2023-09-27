@@ -1,21 +1,21 @@
 
-<div class="row  p-0 m-0 d-flex align-items-center">
+<div class="row  p-0 m-0 d-flex align-items-center  mb-5">
 
-  <div class="col-12 col-md-6">
-    <div class=" mt-4 big-title mt-4">
+  <div class="col-12 col-md-6 d-flex align-items-center d-flex justify-content-center">
+    <div class="big-title mt-4">
       <h1>Hello, {{user.username}}!</h1>
     
       <h2>This is you current plan:</h2>
     </div>
   </div>
 
-  <div class="col-12 col-md-6 row   p-0 m-0">
+  <div class="col-12 col-md-6 row   p-0 m-0 d-flex align-items-center  ">
   
       <div class=" black-border bg-a-white mt-4 p-0 m-0 me-1 rounded-5 tier-card">
-        <div class="m-1  p-4  rounded-5">
-            <h2 class="p-0 m-0 pb-2">{{ user_subscription.plan.name }} Subscription</h2> 
+        <div class="m-1  p-4  rounded-5 row ">
+            <h2 class="p-0 m-0 pb-2 col-12 text-center">{{ user_subscription.plan.name }} Subscription</h2> 
             {% if "Premium" in user_subscription.plan.name %}
-              <p class="p-0 m-0">Downloads So Far This Month: <span class="number-left"> {{ downloads_this_month  }}</span>
+              <p class="p-0 m-0 col-12 text-center">Downloads So Far This Month: <span class="number-left"> {{ downloads_this_month  }}</span>
                 <span class="emoji">
                   {% if downloads_this_month  >= 100 %}<span class="icon-diamond"></span>{% endif %}
                   {% if downloads_this_month  >= 90 and downloads_this_month < 100 %}<span class="icon-heart"></span>{% endif %}
@@ -31,7 +31,7 @@
                 </span>
               </p>
             {% else %}
-              <p class="p-0 m-0">Downloads Left:   <span class="number-left"> {{ downloads_left }}</span>
+              <p class="p-0 m-0 col-12  text-center">Downloads Left:   <span class="number-left"> {{ downloads_left }}</span>
                 <span class="emoji">
                   {% if downloads_left == 10 %}<span class="download-icon icon-grin2"></span>{% endif %}
                   {% if downloads_left == 9 %}<span class="download-icon icon-happy2"></span>{% endif %}
@@ -55,9 +55,6 @@
   
       </div>
   
-   
-  
-   
   </div>
 
 </div>

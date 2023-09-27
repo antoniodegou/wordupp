@@ -1,9 +1,9 @@
-
-<div class="mt-4 big-title mt-4 mb-4 ">
+ 
+<div class="mt-4 big-title mt-4 mb-2 ">
     <h1>{{ user.username }}'s Stuff</h1>
 </div>
 
- <div class="bg-a-white black-border p-4 " >
+ <div class="bg-a-white black-border p-4 mb-5 " >
     <h3>Hello, {{user.username}}</h3>
     <h4>You email: {{user.email}}</h4>
     {% if user_subscription %}
@@ -11,15 +11,15 @@
 {% else %}
     <p>Howdy, partner! Looks like you haven't picked a subscription plan yet.</p>
 {% endif %}
-    <button type="button" class="btn rounded-0 bg-yellow btn-lg" data-bs-toggle="modal" data-bs-target="#detailsModal">
+    <button type="button" class="btn rounded-0 bg-yellow btn-lg  m-0 me-3" data-bs-toggle="modal" data-bs-target="#detailsModal">
       Update Details
     </button>
     
-    <button type="button" class="btn rounded-0 bg-red btn-lg" data-bs-toggle="modal" data-bs-target="#passwordModal">
+    <button type="button" class="btn rounded-0 bg-red btn-lg  m-0 me-3" data-bs-toggle="modal" data-bs-target="#passwordModal">
       Change Password
     </button>
 
-    <button type="button" class="btn rounded-0 bg-pink btn-lg" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+    <button type="button" class="btn rounded-0 bg-pink btn-lg  m-0 me-3" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
       Delete Account
     </button>
 </div>

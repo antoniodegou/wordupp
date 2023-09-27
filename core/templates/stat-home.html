@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% load static %} 
 
-
-
 {% block extra_head %}
     <link rel="stylesheet" href="{% static '/css/homepage-hero.css' %}">
     <link rel="stylesheet" href="{% static '/css/homepage-features.css' %}">
@@ -14,47 +12,37 @@
 
 {% block content %}
 
-<!-- <link rel="stylesheet" href="{% static 'core/css/hero.css' %}"> -->
-    <!-- Hero Section -->
-<section id="hero" class="  mt-5 mb-5 pt-5 pb-5 ">
-        <div class="row align-items-center just p-0 m-0  ">
-            <div class="  col col-md-6 ">
+<section id="hero" class="mt-5 mb-5 pt-5 pb-5">
+        <div class="row align-items-center just p-0 m-0">
+            <div class="col col-md-6">
                 <!-- JavaScript will populate this grid -->
                 <h1 class="big-title">wordUpp</h1>
                 <div class="word-grid w-100 black-border bg-white p-5 mb-3 rounded-5"></div>
-
             </div>
-
-
-
             <div class="content col-md-6">
                 <h2 class="second-big-text mb-4 bg-black c-a-white ps-2" >Craft Stunning<span class="icon-heart c-pink"></span> Textual<span class="icon-textsms c-yellow "></span> Imagery<span class="icon-camera c-red"></span> for Social Media</h2>
                 <p  class="text-start">Elevate your content game with wordUpp - the premier tool for creating mesmerizing text visuals tailor-made for the social realm. From tweets to stories, make every word count.</p>
                 {% if user.is_authenticated %}
-                <!-- Button for logged-in users -->
-                <a href="{% url 'dashboard' %}" class="btn btn btn-primary rounded-0 bg-yellow">Go to Dashboard</a>
-            {% else %}
-                <!-- Button for guests -->
-                <a href="{% url 'register' %}" class="btn btn btn-primary rounded-0 bg-yellow">Register</a>
-            {% endif %}
+                    <a href="{% url 'dashboard' %}" class="btn btn btn-primary rounded-0 bg-yellow">Go to Dashboard</a>
+                {% else %}
+                    <a href="{% url 'register' %}" class="btn btn btn-primary rounded-0 bg-yellow">Register</a>
+                {% endif %}
             </div>
-
         </div>
 </section>
 
  
 
 <!-- Features Section -->
-<section id="features" class="   py-5 mb-5 mt-5 pt-5 pb-5  ">
+<section id="features" class="py-5 mb-5 mt-5 pt-5 pb-5">
     <div class="container">
-        <h2 class="  big-title">Features</h2>
+        <h2 class="big-title">Features</h2>
         <div class="row">
             <!-- Dynamic Canvas Card -->
             <div class="col-md-6 col-lg-4 mb-4  ">
                 <div class="card h-100 black-border rounded-0 bg-red">
                     <div class="dynamic-canvas  bg-white rounded-0 ">
                         <span class="type-text height-card-header bg-black" data-icon="&#xf246;">Blank__</span>
-                
                     </div>
                     <div class="card-body  ">
                         <h5 class="card-title"><strong>Dynamic Canvas<span class="icon-refresh"></span></strong></h5>
@@ -95,14 +83,13 @@
                     </div>
                 </div>
             </div>
- 
         </div>
     </div>
 </section>
 
 
 
-<section id="subscription" class="text-start  py-5 mb-5 mt-5 pt-5 pb-5">
+<section id="subscription" class="text-start py-5 mb-5 mt-5 pt-5 pb-5">
     <div class="col-6">
         <h2 class="second-big-text c-a-white bg-black  ">Unleash <span class="icon-lightning"></span>Your Creativity<span class="icon-lamp"></span> with wordUpp Premium<span class="icon-diamond"></span></h2>
         <p class="mb-5">Dive into the full wordUpp experience. Save, share, and shine with our premium subscription. Every design, every platform, every time.</p>
@@ -154,7 +141,10 @@
 </section>
 
 
- 
-
 {% endblock %}
-<link rel="stylesheet" href="{% static 'core/js/hero.js' %}">
+
+
+
+{% block extra_js %}
+  <script src="{% static '/js/hero.js' %}"></script>
+{% endblock %}

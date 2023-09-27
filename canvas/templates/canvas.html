@@ -151,18 +151,17 @@
         </div>
         <div class="pane-content" id="backgrounds">
            <div class="d-flex flex-row flex-nowrap align-items-start ">
-                         <!-- Color picker for background color -->
+            <!-- Color picker for background color -->
              <div class="col-md-3 mb-4 color-picker-container me-4">
                  <label for="bgColor">Background Color:</label>
                  <input type="color" id="bgColor" value="#fcecd0" class="form-control color-picker-input input-look " aria-label="Background color picker">
              </div>
 
-             <!-- Input for selecting a background image -->
+            <!-- Input for selecting a background image -->
              <div class="col-md-5 mb-4 me-4">
-                 <label for="bgImage">Background Image:</label>
-                 <input type="file" id="backgroundImg" class="form-control input-look rounded-0 mb-4" aria-label="Background image input ">
-                <button id="removeBackground" class="btn btn-primary rounded-0">Remove Background</button>
-
+                <label for="bgImage">Background Image:</label>
+                <input type="file" id="backgroundImg" class="form-control input-look rounded-0 mb-4" aria-label="Background image input ">
+                <button id="removeBackground" class="btn btn rounded-0 bg-yellow btn-lg">Remove Background</button>
              </div>
              <!-- For Background Size -->
              <div class="col-md-4 mb-4  me-4">
@@ -182,7 +181,7 @@
              <!-- Color pickers for gradient -->
              <div class="col-md-2 mb-4 me-4 color-picker-container ">
                  <label for="primaryColor">Primary Color:</label>
-                 <input type="color" id="primaryColor" value="#FF5733" class="form-control   color-picker-input input-look mb-4">
+                 <input type="color" id="primaryColor" value="#FF5733" class="form-control color-picker-input input-look mb-4">
                  <label for="secondaryColor">Secondary Color:</label>
                  <input type="color" id="secondaryColor" value="#33D4FF" class="form-control color-picker-input input-look">
              </div>
@@ -265,20 +264,18 @@
 
     <!-- CANVAS -->
     <div class="row">
-            <div class="col-12   mb-5">
-              <!-- The main canvas element where rendering (drawing) takes place -->
-              <canvas id="worduppCanvas" class=" mt-0 pt-0" width="800" height="400" role="img" aria-label="Canvas where words are rendered.">
-              </canvas>
-              <!-- Button to trigger canvas download -->
-              <div class="mt-3">
-            
+        <div class="col-12   mb-5">
+            <!-- The main canvas element where rendering (drawing) takes place -->
+            <canvas id="worduppCanvas" class=" mt-0 pt-0 rounded-5" width="800" height="400" role="img" aria-label="Canvas where words are rendered.">
+            </canvas>
 
-
-                 <button id="download-btn" class="btn rounded-0 bg-yellow btn-lg" {% if is_limit_reached %}disabled{% endif %}>Download</button>
-              </div>
+            <!-- Button to trigger canvas download -->
+            <div class="mt-3">
+                <button id="download-btn" class="btn rounded-0 bg-yellow btn-lg" {% if is_limit_reached %}disabled{% endif %}>Download</button>
             </div>
         </div>
-        <!-- onclick="downloadCanvas()" -->
+    </div>
+      
 </div>
 
  
