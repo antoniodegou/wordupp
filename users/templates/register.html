@@ -9,61 +9,62 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
+
 <div class="container mt-5 pt-5">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-<div class="register-container row justify-content-center">
-    <h2 class="big-title">Register</h2>
-    <form method="post" action="{% url 'register' %}" class="w-100 col-md-6 bg-red p-4 black-border pb-5">
-        {% csrf_token %}
-        <!-- Username -->
-        <div class="form-floating mb-3">
-            <input type="text" name="{{ form.username.name }}" class="form-control rounded-0 " id="{{ form.username.id_for_label }}" placeholder="Username" value="{{ form.username.value|default_if_none:'' }}">
-            <label for="{{ form.username.id_for_label }}">Username</label>
+            <div class="register-container row justify-content-center">
+                <h2 class="big-title">Register</h2>
+                <form method="post" action="{% url 'register' %}" class="w-100 col-md-6 bg-red p-4 black-border pb-5">
+                    {% csrf_token %}
+                    <!-- Username -->
+                    <div class="form-floating mb-3">
+                        <input type="text" name="{{ form.username.name }}" class="form-control rounded-0 " id="{{ form.username.id_for_label }}" placeholder="Username" value="{{ form.username.value|default_if_none:'' }}">
+                        <label for="{{ form.username.id_for_label }}">Username</label>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="form-floating mb-3">
+                        <input type="email" name="{{ form.email.name }}" class="form-control rounded-0 {% if form.email.errors %}has-error{% endif %}" id="{{ form.email.id_for_label }}" placeholder="Email" value="{{ form.email.value|default_if_none:'' }}">
+                        <label for="{{ form.email.id_for_label }}">Email</label>
+                    </div>
+                    
+                    <!-- Password -->
+                    <div class="form-floating mb-3">
+                        <input type="password" name="{{ form.password1.name }}" class="form-control rounded-0 {% if form.password1.errors %}has-error{% endif %}" id="{{ form.password1.id_for_label }}" placeholder="Password" value="{{ form.password1.value|default_if_none:'' }}">
+                        <label for="{{ form.password1.id_for_label }}">Password</label>
+                    </div>
+                    
+                    <!-- Confirm Password -->
+                    <div class="form-floating mb-3">
+                        <input type="password" name="{{ form.password2.name }}" class="form-control rounded-0 {% if form.password2.errors %}has-error{% endif %}" id="{{ form.password2.id_for_label }}" placeholder="Confirm Password" value="{{ form.password2.value|default_if_none:'' }}">
+                        <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                    </div>
+                    
+                    <button type="submit" class="btn rounded-0 bg-yellow btn-lg">Register</button>
+                </form>
+            
+                {% if form.errors %}
+                    <div class="alert rounded-0 black-border mt-3 bg-pink">
+                        {% for field, errors in form.errors.items %}
+                        <p class="m-0"><strong>{{ field }}</strong>:
+                            {% for error in errors %}
+                            {{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                 {% endif %}
+            </div>
         </div>
-        
-        <!-- Email -->
-        <div class="form-floating mb-3">
-            <input type="email" name="{{ form.email.name }}" class="form-control rounded-0 {% if form.email.errors %}has-error{% endif %}" id="{{ form.email.id_for_label }}" placeholder="Email" value="{{ form.email.value|default_if_none:'' }}">
-            <label for="{{ form.email.id_for_label }}">Email</label>
-        </div>
-        
-        <!-- Password -->
-        <div class="form-floating mb-3">
-            <input type="password" name="{{ form.password1.name }}" class="form-control rounded-0 {% if form.password1.errors %}has-error{% endif %}" id="{{ form.password1.id_for_label }}" placeholder="Password" value="{{ form.password1.value|default_if_none:'' }}">
-            <label for="{{ form.password1.id_for_label }}">Password</label>
-        </div>
-        
-        <!-- Confirm Password -->
-        <div class="form-floating mb-3">
-            <input type="password" name="{{ form.password2.name }}" class="form-control rounded-0 {% if form.password2.errors %}has-error{% endif %}" id="{{ form.password2.id_for_label }}" placeholder="Confirm Password" value="{{ form.password2.value|default_if_none:'' }}">
-            <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
-        </div>
-        
-        <button type="submit" class="btn rounded-0 bg-yellow btn-lg">Register</button>
-    </form>
- 
-    {% if form.errors %}
-    <div class="alert rounded-0 black-border mt-3 bg-pink">
-        {% for field, errors in form.errors.items %}
-        <p class="m-0"><strong>{{ field }}</strong>:
-            {% for error in errors %}
-               {{ error }}</p>
-            {% endfor %}
-        {% endfor %}
-    </div>
-{% endif %}
-
-<script>
-
-const firstErrorField = document.querySelector('.has-error');
-if (firstErrorField) {
-    firstErrorField.focus();
-}
-</script>
-
-</div>
-</div>
-</div>  <!-- row -->
+    </div>  <!-- row -->
 </div><!--containers -->
+
+ 
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+  <script src="{% static '/js/logregister.js' %}"></script>
 {% endblock %}
