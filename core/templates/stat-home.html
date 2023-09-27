@@ -30,7 +30,13 @@
             <div class="content col-md-6">
                 <h2 class="second-big-text mb-4 bg-black c-a-white ps-2" >Craft Stunning<span class="icon-heart c-pink"></span> Textual<span class="icon-textsms c-yellow "></span> Imagery<span class="icon-camera c-red"></span> for Social Media</h2>
                 <p  class="text-start">Elevate your content game with wordUpp - the premier tool for creating mesmerizing text visuals tailor-made for the social realm. From tweets to stories, make every word count.</p>
-
+                {% if user.is_authenticated %}
+                <!-- Button for logged-in users -->
+                <a href="{% url 'dashboard' %}" class="btn btn btn-primary rounded-0 bg-yellow">Go to Dashboard</a>
+            {% else %}
+                <!-- Button for guests -->
+                <a href="{% url 'register' %}" class="btn btn btn-primary rounded-0 bg-yellow">Register</a>
+            {% endif %}
             </div>
 
         </div>
@@ -111,7 +117,8 @@
                 </div>
                 <div class="card-body black-border bg-pink   rounded-0">
                     <h5 class="card-title">$0/month</h5>
-                    <p class="card-text">Dive into the world of textual design. No cost, no strings attached.</p>
+                    <p class="card-text">No cost, no strings attached.</p>
+                    <p class="card-text">Limited to 10 downloads per month.</p>
                     {% if user.is_authenticated %}
                         <!-- Button for logged-in users -->
                         <a href="{% url 'dashboard' %}" class="btn btn btn-primary rounded-0 bg-yellow">Go to Dashboard</a>
@@ -131,8 +138,8 @@
                 </div>
                 <div class="card-body black-border bg-red rounded-0">
                     <h5 class="card-title">$1.99/month</h5>
-                    <p class="card-text">Save your masterpieces. A world of premium features awaits.</p>
- 
+                    <p class="card-text">Get all from free.</p>
+                    <p class="card-text">Unlimited Downloads.</p>
                     {% if user.is_authenticated %}
                         <!-- Button for logged-in users -->
                         <a href="{% url 'dashboard' %}" class="btn btn btn-primary rounded-0 bg-yellow">Go to Dashboard</a>

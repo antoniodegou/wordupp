@@ -4,59 +4,13 @@
     --yellow:#EEA932;
     --white: #f4f4f4;
     --white:#d3e1f7;
-    /* --white:#d6dfec; */
-    /* --white:#E6E0CF; */
 
-
-
-    --pink: #B0C4DE;  /* Light Steel Blue */
-    --red: #4682B4;   /* Steel Blue */
-    --yellow: #5F9EA0; /* Cadet Blue */
-
-    --pink: #9370DB; 
-    --red: #40E0D0;   
-    --yellow: #8A2BE2;
-
-    --pink: #A67C52;  /* Earth Brown */
-    --red: #AB9353;   /* Earth Gold */
-    --yellow: #6B8E23; /* Olive Drab */
-
-    --pink: #FFB6C1;  /* Light Pink */
-    --red: #FFDAB9;   /* Peach Puff */
-    --yellow: #FFF0E1; /* Floral White with
-
-
-
-      --pink: #6A5ACD;  /* Slate Blue */
-      --red: #20B2AA;   /* Light Sea Green */
-      --yellow: #00FA9A; /* Medium Spring Green */
-
-
-      --pink: #FF1493;  /* Deep Pink */
-      --red: #00CED1;   /* Dark Turquoise */
-      --yellow: #32CD32; /* Lime Green */
-      --pink: #fbdcd7;  /* Deep Pink */
-      --red: #b4d1d2;   /* Dark Turquoise */
-      --yellow: #b7d2b7; /* Lime Green */
-
-    /* --white: #edf6f9; */
-
-    /* --pink: #FFA07A;  
-    --red: #FF8C00;   
-    --yellow: #FF6347;  */
 
       --pink: #FF6347;  /* Deep Pink */
       --red: #00CED1;   /* Dark Turquoise */
       --yellow: #32CD32; /* Lime Green */
 
 
-      /* --pink: #47C0D9;
-      --red: #F2778A;
-      --yellow:#F9C94A; */
-
-      /* --pink: #b3d3da;
-      --red: #e9c5cb;
-      --yellow:#ebe0c5; */
 
 
     --actual-white: #fafeff;
@@ -72,12 +26,8 @@ html,body{
   position: relative; /* This allows us to position the pseudo-element relative to the body */
   height: 100%;
   margin: 0;
-    font-family: 'Noto Sans', sans-serif;
-    /* background-color: var(--white); */
-    /* background: linear-gradient(45deg, #fbdcd7, #b4d1d2, #b7d2b7); */
-
-    color:var(--black);
-  
+  font-family: 'Noto Sans', sans-serif;
+  color:var(--black);
 }
 
 body::before {
@@ -89,7 +39,6 @@ body::before {
   height: 100vh; /* full viewport height */
   z-index: -1;   /* place it behind the content */
   background: linear-gradient(45deg, #fbdcd7, #b4d1d2, #b7d2b7);
-  /* background: linear-gradient(45deg, #b3d3da, #e9c5cb, #ebe0c5); */
 }
 
 
@@ -222,6 +171,39 @@ font-size: 2rem;
 .icon-refresh:before {
   content: "\e90b";
 }
+.icon-happy2:before {
+  content: "\e9e0";
+}
+.icon-smile2:before {
+  content: "\e9e2";
+}
+.icon-wink2:before {
+  content: "\e9e8";
+}
+.icon-grin2:before {
+  content: "\e9ea";
+}
+.icon-cool2:before {
+  content: "\e9ec";
+}
+.icon-shocked2:before {
+  content: "\e9f2";
+}
+.icon-baffled2:before {
+  content: "\e9f4";
+}
+.icon-neutral2:before {
+  content: "\e9f8";
+}
+.icon-wondering2:before {
+  content: "\e9fc";
+}
+.icon-sleepy2:before {
+  content: "\e9fe";
+}
+.icon-crying2:before {
+  content: "\ea02";
+}
 .icon-lamp:before {
   content: "\e90c";
 }
@@ -245,6 +227,9 @@ font-size: 2rem;
 }
 .icon-heart:before {
   content: "\e906";
+}
+.icon-target-arrow:before {
+  content: "\e910";
 }
 .icon-textsms:before {
   content: "\e907";

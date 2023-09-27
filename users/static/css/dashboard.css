@@ -51,3 +51,7 @@ form{
     font-size: 2em;  /* Adjust the size as you like */
     font-weight: 900;
   }
+
+  .tier-card{
+    box-shadow: var(--shadow);
+  }
