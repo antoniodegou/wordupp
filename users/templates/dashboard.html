@@ -10,9 +10,7 @@
 
 
 {% block content %}
-<div class="mt-4 big-title mt-4">
-  <h1>Hello, {{user.username}}!</h1>
-</div>
+
 
 
 {% if messages %}
@@ -24,12 +22,11 @@
 {% endif %}
 
 
-{% include "dash-cards.html" %}
+
 
 {% include "dash-userdetails.html" %}
-
+{% include "dash-cards.html" %}
 {% include "dash-subscription.html" %}
-
 {% include "dash-download.html" %}
 
  

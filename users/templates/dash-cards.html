@@ -1,54 +1,69 @@
-<div class="row   p-0 m-0">
 
-    <div class="col col-md-5 black-border bg-a-white mt-4 p-0 m-0 me-1 rounded-5 tier-card">
-      <div class="m-1  p-4  rounded-5">
-          <h2 class="p-0 m-0 pb-2">{{ user_subscription.plan.name }} Subscription</h2> 
-          {% if "Premium" in user_subscription.plan.name %}
-            <p class="p-0 m-0">Downloads So Far This Month: <span class="number-left"> {{ downloads_this_month  }}</span>
-              <span class="emoji">
-                {% if downloads_this_month  >= 100 %}<span class="icon-diamond"></span>{% endif %}
-                {% if downloads_this_month  >= 90 and downloads_this_month < 100 %}<span class="icon-heart"></span>{% endif %}
-                {% if downloads_this_month  >= 80 and downloads_this_month < 90 %}<span class="icon-target-arrow"></span>{% endif %}
-                {% if downloads_this_month  >= 70 and downloads_this_month < 80 %}<span class="icon-lightning"></span>{% endif %}
-                {% if downloads_this_month  >= 60 and downloads_this_month < 70 %}<span class="icon-lamp"></span>{% endif %}
-                {% if downloads_this_month  >= 50 and downloads_this_month < 60 %}<span class="icon-star"></span>{% endif %}
-                {% if downloads_this_month  >= 40 and downloads_this_month < 50 %}<span class="icon-brush"></span>{% endif %}
-                {% if downloads_this_month  >= 30 and downloads_this_month < 40 %}<span class="icon-wrench"></span>{% endif %}
-                {% if downloads_this_month  >= 20 and downloads_this_month < 30 %}<span class="icon-paint"></span>{% endif %}
-                {% if downloads_this_month >= 10 and downloads_this_month < 20 %}<span class="icon-gift"></span>{% endif %}
-                {% if downloads_this_month >= 1 and downloads_this_month < 10 %}<span class="icon-image-inverted"></span>{% endif %}
-              </span>
-            </p>
-          {% else %}
-            <p class="p-0 m-0">Downloads Left:   <span class="number-left"> {{ downloads_left }}</span>
-              <span class="emoji">
-                {% if downloads_left == 10 %}<span class="download-icon icon-grin2"></span>{% endif %}
-                {% if downloads_left == 9 %}<span class="download-icon icon-happy2"></span>{% endif %}
-                {% if downloads_left == 8 %}<span class="download-icon icon-wink2"></span>{% endif %}
-                {% if downloads_left == 7 %}<span class="download-icon icon-cool2"></span>{% endif %}
-                {% if downloads_left == 6 %}<span class="download-icon icon-smile2"></span>{% endif %}
-                {% if downloads_left == 5 %}<span class="download-icon icon-neutral2"></span>{% endif %}
-                {% if downloads_left == 4 %}<span class="download-icon icon-baffled2"></span>{% endif %}
-                {% if downloads_left == 3 %}<span class="download-icon icon-wondering2"></span>{% endif %}
-                {% if downloads_left == 2 %}<span class="download-icon icon-crying2"></span>{% endif %}
-                {% if downloads_left == 1 %}<span class="download-icon icon-shocked2"></span>{% endif %}
-                {% if downloads_left == 0 %}<span class="download-icon icon-crying2"></span>{% endif %}
-              </span>
-            </p>
-            <button class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4 mt-3 " onclick="upgradeToPremium()">Upgrade NOW</button>
+<div class="row  p-0 m-0 d-flex align-items-center">
 
-          {% endif %}
-
-
-      </div>
-
+  <div class="col-12 col-md-6">
+    <div class=" mt-4 big-title mt-4">
+      <h1>Hello, {{user.username}}!</h1>
+    
+      <h2>This is you current plan:</h2>
     </div>
+  </div>
 
- 
+  <div class="col-12 col-md-6 row   p-0 m-0">
+  
+      <div class=" black-border bg-a-white mt-4 p-0 m-0 me-1 rounded-5 tier-card">
+        <div class="m-1  p-4  rounded-5">
+            <h2 class="p-0 m-0 pb-2">{{ user_subscription.plan.name }} Subscription</h2> 
+            {% if "Premium" in user_subscription.plan.name %}
+              <p class="p-0 m-0">Downloads So Far This Month: <span class="number-left"> {{ downloads_this_month  }}</span>
+                <span class="emoji">
+                  {% if downloads_this_month  >= 100 %}<span class="icon-diamond"></span>{% endif %}
+                  {% if downloads_this_month  >= 90 and downloads_this_month < 100 %}<span class="icon-heart"></span>{% endif %}
+                  {% if downloads_this_month  >= 80 and downloads_this_month < 90 %}<span class="icon-target-arrow"></span>{% endif %}
+                  {% if downloads_this_month  >= 70 and downloads_this_month < 80 %}<span class="icon-lightning"></span>{% endif %}
+                  {% if downloads_this_month  >= 60 and downloads_this_month < 70 %}<span class="icon-lamp"></span>{% endif %}
+                  {% if downloads_this_month  >= 50 and downloads_this_month < 60 %}<span class="icon-star"></span>{% endif %}
+                  {% if downloads_this_month  >= 40 and downloads_this_month < 50 %}<span class="icon-brush"></span>{% endif %}
+                  {% if downloads_this_month  >= 30 and downloads_this_month < 40 %}<span class="icon-wrench"></span>{% endif %}
+                  {% if downloads_this_month  >= 20 and downloads_this_month < 30 %}<span class="icon-paint"></span>{% endif %}
+                  {% if downloads_this_month >= 10 and downloads_this_month < 20 %}<span class="icon-gift"></span>{% endif %}
+                  {% if downloads_this_month >= 1 and downloads_this_month < 10 %}<span class="icon-image-inverted"></span>{% endif %}
+                </span>
+              </p>
+            {% else %}
+              <p class="p-0 m-0">Downloads Left:   <span class="number-left"> {{ downloads_left }}</span>
+                <span class="emoji">
+                  {% if downloads_left == 10 %}<span class="download-icon icon-grin2"></span>{% endif %}
+                  {% if downloads_left == 9 %}<span class="download-icon icon-happy2"></span>{% endif %}
+                  {% if downloads_left == 8 %}<span class="download-icon icon-wink2"></span>{% endif %}
+                  {% if downloads_left == 7 %}<span class="download-icon icon-cool2"></span>{% endif %}
+                  {% if downloads_left == 6 %}<span class="download-icon icon-smile2"></span>{% endif %}
+                  {% if downloads_left == 5 %}<span class="download-icon icon-neutral2"></span>{% endif %}
+                  {% if downloads_left == 4 %}<span class="download-icon icon-baffled2"></span>{% endif %}
+                  {% if downloads_left == 3 %}<span class="download-icon icon-wondering2"></span>{% endif %}
+                  {% if downloads_left == 2 %}<span class="download-icon icon-crying2"></span>{% endif %}
+                  {% if downloads_left == 1 %}<span class="download-icon icon-shocked2"></span>{% endif %}
+                  {% if downloads_left == 0 %}<span class="download-icon icon-crying2"></span>{% endif %}
+                </span>
+              </p>
+              <button class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4 mt-3 " onclick="upgradeToPremium()">Upgrade NOW</button>
+  
+            {% endif %}
+  
+  
+        </div>
+  
+      </div>
+  
+   
+  
+   
+  </div>
 
- 
 </div>
+
  
+
 
 <script>
   // Define your colors

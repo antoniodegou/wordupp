@@ -81,11 +81,11 @@ body::before {
 }
 
 .bg-pink{
-    background-color: var(--pink);
+    background-color: var(--pink)!important;
 }
 
 .bg-red{
-    background-color: var(--red);
+    background-color: var(--red)!important;
 }
 
 .text-white {
