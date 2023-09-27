@@ -87,6 +87,8 @@ def dashboard(request):
     """
     Render the dashboard page.
     """
+    print(request.user.is_authenticated)
+
     print(f"User authenticated after Stripe: {request.user.is_authenticated}")
     downloads_left = 0  # Default value
     session_id = request.GET.get('session_id')
@@ -102,7 +104,7 @@ def dashboard(request):
 
     if subscription_status == 'success':
         # You already have the user info because they're logged in
-        login(request, request.user)
+        # login(request, request.user)
         messages.success(request, 'Yeehaw! Your subscription was successful, darlin\'!')
         
     context = {}
@@ -145,16 +147,15 @@ def dashboard(request):
     try:
         downloads_left = max(0, 10 - user_subscription.downloads_this_month)  # Replace 10 with your actual limit
         is_limit_reached = downloads_left == 0
+
     except UserSubscription.DoesNotExist:
         pass  # User has no subscription
-    context['downloads_left'] = downloads_left  # Add to context
-    
+
+    context['downloads_left'] = downloads_left  # Add to context    
     context['user_subscription'] = user_subscription
     context['is_limit_reached'] = is_limit_reached  # Add to context
     context['downloads_this_month'] = user_subscription.downloads_this_month  # Add to context
  
-
-
     return render(request, 'dashboard.html', context)
 
 

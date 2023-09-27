@@ -270,17 +270,15 @@ def stripe_webhook(request):
 
     elif event['type'] == 'checkout.session.completed':
         stripe_customer_id = event['data']['object']['customer']
-
+     
         try:
             user_subscription = UserSubscription.objects.get(stripe_customer_id=stripe_customer_id)
-            user = user_subscription.user
+            
+            # Update the user's subscription status here
+            user_subscription.is_active = True  # or whatever you need to update
+            user_subscription.save()
 
-            # Manually log the user in
-            # Note: This won't work in a webhook in a production environment
-            # You'd need to find another way to persist this login
-            login(request, user)
-
-            print("User logged in successfully!")
+            print("User subscription updated successfully!")
         except UserSubscription.DoesNotExist:
             print("User Subscription not found.")
 

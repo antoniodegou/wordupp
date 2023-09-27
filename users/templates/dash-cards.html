@@ -35,6 +35,8 @@
                 {% if downloads_left == 0 %}😩{% endif %}
               </span>
             </p>
+            <button class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4 mt-3 " onclick="upgradeToPremium()">Upgrade NOW</button>
+
           {% endif %}
 
 
@@ -42,15 +44,7 @@
 
     </div>
 
-    {% if "Free" in user_subscription.plan.name  %}
-    <script> console.log("{{ user_subscription}}")</script>
-    <div class="col col-md-5 black-border bg-a-white mt-4 p-0 m-0 ms-1">
-      <div class="m-1  p-4 lined-border">
-        <button class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4 mb-4" onclick="upgradeToPremium()">Upgrade</button>
-        <p class="p-0 m-0">Get unimited downloads</p>
-      </div>
-    </div>
-    {% endif %}
+ 
 
  
 </div>

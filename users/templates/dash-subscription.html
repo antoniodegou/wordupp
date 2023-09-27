@@ -6,37 +6,46 @@
 
 
 {% if user_subscription %}
+
     <p>Yee-haw! You're on the {{ user_subscription.plan.name }} plan! (Price: {{ user_subscription.plan.price }})</p>
 
     {% if user_subscription.plan.name == "WordUpp Free" %}
         <!-- Show the "Upgrade to Premium" button only if the user is on the Free plan -->
-        <button onclick="upgradeToPremium()">Upgrade to Premium</button>
+        <button class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4 mb-4" onclick="upgradeToPremium()">Upgrade to Premium</button>
     {% else %}
         <!-- Show the "Manage Your Subscription" button -->
-        <a href="{% url 'customer_portal' %}">Manage Your Subscription</a>
+        <button  class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4 mb-4" href="{% url 'customer_portal' %}">Manage Your Subscription</button>
     {% endif %}
 
 {% else %}
+     <!--in case for some reason the user doesnt get assign to the free plan -->
     <p>Howdy, partner! Looks like you haven't picked a subscription plan yet.</p>
     <!-- Show the "Subscribe to Premium" button if the user has no subscription -->
-    <button onclick="upgradeToPremium()">Upgrade to Premium</button>
+    <button class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4 mb-4" onclick="upgradeToPremium()">Upgrade to Premium</button>
+
 {% endif %}
 
 
 
 
 {% if user_subscription %}
-    <p>Word up! You're on the {{ user_subscription.plan.name }} plan, so slide on! (Price: {{ user_subscription.plan.price }})</p>
+ 
     {% if user_subscription.end_date and not user_subscription.is_active %}
+
         {% if user_subscription.end_date < today %}
-            <p>Uh oh! Your premium groove expired on {{ user_subscription.end_date }}. Time to say "Word up!" and renew, you dig?</p>
+            <p>Your subscription has expired on {{ user_subscription.end_date }}. Please renew to continue enjoying the premium features.</p>
         {% else %}
-            <p>Hold on, party people! You've hit the pause on your premium subscription. But don't sweat it, you're still in the mix until {{ user_subscription.end_date }}.</p>
+            <p>Your subscription is paused but will remain active until {{ user_subscription.end_date }}.</p>
         {% endif %}
+
     {% elif user_subscription.end_date %}
-        <p>Heads up, funky one! Your current jam ends on {{ user_subscription.end_date }}.</p>
+
+        <p>Your current subscription will end on {{ user_subscription.end_date }}.</p>
+
     {% endif %}
+
 {% else %}
-    <p>Hey, yo, DJ! You haven't jumped on the word train yet. So what's the word? Ready to get down?</p>
+    <p>You are not currently subscribed to any plan. Subscribe now to enjoy premium features.</p>
 {% endif %}
+
 </div>
