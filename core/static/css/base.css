@@ -318,3 +318,9 @@ font-size: 2rem;
 .card-title strong{
  color: var(--black);
 }
+
+.navbar-toggler:focus {
+  text-decoration: none;
+  outline: 0;
+  box-shadow: unset!important;
+}
