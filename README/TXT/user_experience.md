@@ -320,7 +320,7 @@ WordUpp's responsive design ensures a fabulous and consistent user experience ac
 
 
 ### Wireframes
-[Link to my Text File](./README/TXT/user_experience.txt)
+ 
 
 <details><summary>HOMEPAGE laptop</summary>
 
@@ -330,39 +330,39 @@ WordUpp's responsive design ensures a fabulous and consistent user experience ac
 
 <details><summary>HOMEPAGE mobile</summary>
 
-<img src="../../IMG/wireframes/wireframes-02.jpg" width="80%">
+<img src="../IMG/wireframes/wireframes-02.jpg" width="80%">
 
 </details>
 
 <details><summary>LOGIN laptop</summary>
 
-<img src="../../IMG/wireframes/wireframes-03.jpg" width="80%">
+<img src="../IMG/wireframes/wireframes-03.jpg" width="80%">
 
 </details>
 
 <details><summary>LOGIN mobile</summary>
 
-<img src="../../IMG/wireframes/wireframes-04.jpg" width="80%">
+<img src="../IMG/wireframes/wireframes-04.jpg" width="80%">
 
 </details>
 
  
  <details><summary>REGISTER laptop</summary>
 
-<img src="../../IMG/wireframes/wireframes-05.jpg" width="80%">
+<img src="../IMG/wireframes/wireframes-05.jpg" width="80%">
 
 </details>
 
 <details><summary>REGISTER mobile</summary>
 
-<img src="../../IMG/wireframes/wireframes-06.jpg" width="80%">
+<img src="../IMG/wireframes/wireframes-06.jpg" width="80%">
 
 </details>
 
 
  <details><summary>DASHBOARD laptop</summary>
 
-<img src="../../IMG/wireframes/wireframes-07.jpg" width="80%">
+<img src="../IMG/wireframes/wireframes-07.jpg" width="80%">
 
 </details>
 
