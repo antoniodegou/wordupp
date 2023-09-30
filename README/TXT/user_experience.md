@@ -324,7 +324,7 @@ WordUpp's responsive design ensures a fabulous and consistent user experience ac
 
 <details><summary>HOMEPAGE laptop</summary>
 
-<img src="../../IMG/wireframes/wireframes-01.jpg" width="80%">
+<img src="../IMG/wireframes/wireframes-01.jpg" width="80%">
 
 </details>
 
@@ -368,7 +368,7 @@ WordUpp's responsive design ensures a fabulous and consistent user experience ac
 
 <details><summary>DASHBOARD mobile</summary>
 
-<img src="../../IMG/wireframes/wireframes-08.jpg" width="80%">
+<img src="../IMG/wireframes/wireframes-08.jpg" width="80%">
 
 </details>
  

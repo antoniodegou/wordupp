@@ -32,4 +32,4 @@ wordUpp is perfect for digital marketers looking to elevate their social media c
 - [Credits](#Credits)
 
 
-[Link to my Text File](./README/TXT/user_experience.txt)
+[Link to my Text File](./README/TXT/user_experience.md)
