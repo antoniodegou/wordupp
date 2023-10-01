@@ -7,14 +7,14 @@ User Experience (UX) within wordUpp refers to users' overall journey and feeling
  
 
 
-* [Strategy Plane](./README/TXT/ux_strategy.md)
+* [Strategy Plane](ux_strategy.md)
 
-* [Scope Plane](./README/TXT/ux_scope.md)
+* [Scope Plane](ux_scope.md)
 
-* [Structure Plane](./README/TXT/ux_structure.md)
+* [Structure Plane](ux_structure.md)
 
-* [Skeleton Plane](./README/TXT/ux_skeleton.md)
+* [Skeleton Plane](ux_skeleton.md)
 
-* [Surface Plane](./README/TXT/ux_surface.md)
+* [Surface Plane](ux_surface.md)
 
 
