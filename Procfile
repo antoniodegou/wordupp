@@ -1,1 +1,1 @@
-web: gunicorn wordupp-c.wsgi
+web: gunicorn wordupp-project.wsgi
