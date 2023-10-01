@@ -173,4 +173,4 @@ WordUpp's responsive design ensures a fabulous and consistent user experience ac
 </details>
 
 
-[NEXT ---> Surface Plane](./README/TXT/ux_surface.md)
+[NEXT ---> Surface Plane](ux_surface.md)

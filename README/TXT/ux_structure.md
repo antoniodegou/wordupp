@@ -119,4 +119,4 @@ Here's a step-by-step walkthrough of a typical user session on Word Up:
 - User-related error messages from the server are shown in the front end in a user-friendly manner.
 
 
- 
+ [NEXT ---> Skeleton Plane](ux_skeleton.md)

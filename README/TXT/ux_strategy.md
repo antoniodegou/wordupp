@@ -27,4 +27,4 @@ At the strategy level, wordUpp aims to make a small mark on text-based visual co
 - The main goal is to carve a specific new style in the global social media zeitgeist.
 - That comes with a premium price for maintenance and little profit. 
 
-[Next ---> Scope Plane](./README/TXT/ux_scope.md)
+[Next ---> Scope Plane](ux_scope.md)

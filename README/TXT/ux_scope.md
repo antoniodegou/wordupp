@@ -109,5 +109,5 @@ The following table outlines the user stories for the Word Up app.
 
 
 
-[NEXT ---> Structure Plane](./README/TXT/ux_structure.md)
+[NEXT ---> Structure Plane](ux_structure.md)
 

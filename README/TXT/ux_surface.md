@@ -36,4 +36,4 @@ I made a few animations to raise interest, especially on the homepage.
 
 <img src="../IMG/animations/hero.gif" width="80%">
 
-[NEXT ---> Techonologies](./README/TXT/tech.md)
+[NEXT ---> Techonologies](tech.md)
