@@ -1,40 +1,19 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import  redirect
 from django.contrib.auth.decorators import login_required
-from .models import SubscriptionPlan, UserSubscription
-from datetime import datetime, timedelta
 import stripe
 from django.conf import settings
-from django.contrib import messages  # Don't forget to add this at the top
+from django.contrib import messages 
 from django.urls import reverse
-from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.conf import settings
-import json
-import stripe
-from .models import UserSubscription, SubscriptionPlan  # Replace with your actual import
-from django.contrib.auth.models import User
-from datetime import datetime
+from .models import UserSubscription, SubscriptionPlan ,SubscriptionPlan
 from django.db import transaction
-from .models import UserSubscription, MyStripeEventModel  # Add the new model here
-from django.http import JsonResponse
-from django.contrib.auth import login
-
-
-
-# views.py
+from .models import UserSubscription, MyStripeEventModel 
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.conf import settings
- 
-from .models import UserSubscription, MyStripeEventModel  # Add the new model here
- 
 from datetime import datetime
 from django.http import JsonResponse, HttpResponseForbidden
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
- 
-print("Stripe API Key:", stripe.api_key)
-from django.urls import reverse
+
 
  
 
