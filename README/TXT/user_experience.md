@@ -33,7 +33,7 @@ At the strategy level, wordUpp aims to make a small mark on text-based visual co
 ### Bussiness Goals
 
 - The main goal is to carve a specific new style in the global social media zeitgeist.
-- That comes with a meager premium price for maintenance and little profit. 
+- That comes with a premium price for maintenance and little profit. 
 
 
 ---
@@ -195,7 +195,7 @@ Here's a step-by-step walkthrough of a typical user session on Word Up:
 * available to all the websites (dynamic according to logged or not)
 
 #### Footer 
-- **Privacy Policy & Terms of Service**: Legal links are located at the bottom of every page.
+- **Privacy Policy & Terms of Service**: Legal links are at the bottom of every page.
 - © 2023 WORDUPP. ALL RIGHTS RESERVED.
 
 
@@ -211,7 +211,7 @@ Here's a step-by-step walkthrough of a typical user session on Word Up:
 - you can click and drag horizontally to see all the tools from a category (works on mobile)
 - all changes are immediately reflected on the canvas
 - you have a download button 
-- you have the limit of downloads in the case of the free tier; when you reach a limit you get a message that the download button has become disabled. 
+- you have a limit of downloads in the case of the free tier; when you reach a limit, you get a message that the download button has become disabled. 
 
 
 ### Error Handling:
@@ -234,6 +234,9 @@ The skeleton of wordUpp is its foundational design blueprint. Through wireframes
 
 #### Buttons
 
+<img src="../IMG/components/4elements.png" width="80%">
+
+
 - **Sign Up / Log In Buttons**: Placed prominently on the landing page to guide users to create an account or log in.
 - **Download Buttons**: These are on the canvas workspace, enabling users to save their progress or download their creations.
 - **change details**
@@ -243,19 +246,25 @@ The skeleton of wordUpp is its foundational design blueprint. Through wireframes
 
 #### Text Boxes
 
+<img src="../IMG/components/1elements.png" width="80%">
+
 - **Username / Password Fields**: These are essential for the login and registration process, ensuring secure access.
-- **Text Input on Canvas**: Allows users to enter the text they wish to turn into word art.
+- **Text Input on Canvas**: Users can enter the text they wish to turn into word art.
 - **Email** input field for register
 - **Change details fields** for dashboard user options
 - **Change password fields** for dashboard user options
 
 #### Color Pickers
 
+<img src="../IMG/components/2elements.png" width="80%">
+
 - **for text colour**
 - **for background colour**
 - ** or the background presets**
 
 #### Sliders
+
+<img src="../IMG/components/3elements.png" width="80%">
 
 - **for horizontal lines**
 - **for vertical lines**
@@ -266,6 +275,8 @@ The skeleton of wordUpp is its foundational design blueprint. Through wireframes
 - **for background image offset y**
 
 #### Selects
+
+<img src="../IMG/components/0elements.png" width="80%">
 
 - **Fonts**
 - **Social media presets**
@@ -282,6 +293,8 @@ The skeleton of wordUpp is its foundational design blueprint. Through wireframes
 
 #### Modals
 
+<img src="../IMG/components/5elements.png" width="80%">
+
 - **terms**
 - **privacy**
 - **change pass**
@@ -291,7 +304,9 @@ The skeleton of wordUpp is its foundational design blueprint. Through wireframes
 
 ### Navigation
 
-- top menu, main way to navigate between pages, always present
+<img src="../IMG/components/6elements.png" width="80%">
+
+- top menu, leading way to navigate between pages, always present
 - buttons that take you to specific pages or open modals with relevant information
 
 ### Responsiveness 
@@ -394,8 +409,8 @@ On the surface, wordUpp showcases a modern and sleek design. With a harmonious b
 
 ### Color Scheme
 
-The design tries to assert itself as a strong-edge electric bubble gum, basically a huge contrast with strong colours, where it has three different accent colours that complement it. 
-The background is soft to complement the strong black-and-white contrast of the text. 
+The design tries to assert itself as a strong-edge electric bubble gum, a massive contrast with solid colours, with three different accent colours that complement it. 
+The background is soft to complement the black-and-white solid contrast of the text. 
 
 <img src="../IMG/design/design-01.jpg" width="80%">
 
@@ -403,7 +418,7 @@ The background is soft to complement the strong black-and-white contrast of the 
 
 Two fonts, One strong with a lot of weight and the other with a condensed width for buttons and other UI controls.
 
-I chose a good range of fonts from Google font for the canvas. Enough to give a variety of choices and moods to achieve any look and feel.
+I chose a good range of fonts from Google font for the canvas. Enough to give various choices and moods to achieve any look and feel.
 
 <img src="../IMG/design/design-02.jpg" width="80%">
 
@@ -423,5 +438,5 @@ I made a few animations to raise interest, especially on the homepage.
 
 * hero section:
 
-<img src="../IMG/animations/heros.gif" width="80%">
+<img src="../IMG/animations/hero.gif" width="80%">
 
