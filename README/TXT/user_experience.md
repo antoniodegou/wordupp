@@ -234,7 +234,7 @@ The skeleton of wordUpp is its foundational design blueprint. Through wireframes
 
 #### Buttons
 
-<img src="../IMG/components/4elements.png" width="80%">
+<img src="../IMG/components/4element.png" width="80%">
 
 
 - **Sign Up / Log In Buttons**: Placed prominently on the landing page to guide users to create an account or log in.
@@ -246,7 +246,7 @@ The skeleton of wordUpp is its foundational design blueprint. Through wireframes
 
 #### Text Boxes
 
-<img src="../IMG/components/1elements.png" width="80%">
+<img src="../IMG/components/1element.png" width="80%">
 
 - **Username / Password Fields**: These are essential for the login and registration process, ensuring secure access.
 - **Text Input on Canvas**: Users can enter the text they wish to turn into word art.
@@ -256,7 +256,7 @@ The skeleton of wordUpp is its foundational design blueprint. Through wireframes
 
 #### Color Pickers
 
-<img src="../IMG/components/2elements.png" width="80%">
+<img src="../IMG/components/2element.png" width="80%">
 
 - **for text colour**
 - **for background colour**
@@ -264,7 +264,7 @@ The skeleton of wordUpp is its foundational design blueprint. Through wireframes
 
 #### Sliders
 
-<img src="../IMG/components/3elements.png" width="80%">
+<img src="../IMG/components/3element.png" width="80%">
 
 - **for horizontal lines**
 - **for vertical lines**
@@ -276,7 +276,7 @@ The skeleton of wordUpp is its foundational design blueprint. Through wireframes
 
 #### Selects
 
-<img src="../IMG/components/0elements.png" width="80%">
+<img src="../IMG/components/0element.png" width="80%">
 
 - **Fonts**
 - **Social media presets**
@@ -293,7 +293,7 @@ The skeleton of wordUpp is its foundational design blueprint. Through wireframes
 
 #### Modals
 
-<img src="../IMG/components/5elements.png" width="80%">
+<img src="../IMG/components/5element.png" width="80%">
 
 - **terms**
 - **privacy**
@@ -304,7 +304,7 @@ The skeleton of wordUpp is its foundational design blueprint. Through wireframes
 
 ### Navigation
 
-<img src="../IMG/components/6elements.png" width="80%">
+<img src="../IMG/components/6element.png" width="80%">
 
 - top menu, leading way to navigate between pages, always present
 - buttons that take you to specific pages or open modals with relevant information
