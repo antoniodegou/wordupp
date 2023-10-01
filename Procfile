@@ -1,0 +1,1 @@
+web: wordupp-c.wsgi
