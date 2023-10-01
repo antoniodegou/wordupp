@@ -31,5 +31,20 @@ wordUpp is perfect for digital marketers looking to elevate their social media c
 - [Deployment](#Deployment)
 - [Credits](#Credits)
 
+---
 
-[Link to my Text File](./README/TXT/user_experience.md)
+* [User Experience ](./README/TXT/user_experience.md)
+
+	- [Strategy Plane](./README/TXT/ux_strategy.md)
+
+	- [Scope Plane](./README/TXT/ux_scope.md)
+
+	- [Structure Plane](./README/TXT/ux_structure.md)
+
+	- [Skeleton Plane](./README/TXT/ux_skeleton.md)
+
+	- [Surface Plane](./README/TXT/ux_surface.md)
+
+* [Technologies](./README/TXT/tech.md)
+
+* [Deployment](./README/TXT/dep.md)
