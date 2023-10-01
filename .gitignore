@@ -1,0 +1,44 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+
+# Databases
+*.sqlite3
+
+# Logs
+logs/
+*.log
+
+# Backup files
+*.bak
+
+# Directories created by virtualenv
+bin/
+include/
+lib/
+lib64/
+share/
+pyvenv.cfg
+.python-version
+venv/
+env/
+
+# IDE-specific files (depending on your IDE)
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Media and static folders (if using local storage)
+media/
+static/
+
+# Secret key (if externalized)
+secret_key.txt
+.env
