@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-sw(pn@gwp20l+duk=p#dd%vh1gx&l%16m-lzq)c@$q7nyh9cc6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['wordupp-c-cabc02e1ce9a.herokuapp.com', 'localhost', '127.0.0.1']
+
 
 
 # Application definition
@@ -139,6 +140,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Additional static file configuration
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core/static')]
+
+
 
 LOGIN_URL = 'login'  # or whatever your login url name is
 from dotenv import load_dotenv
