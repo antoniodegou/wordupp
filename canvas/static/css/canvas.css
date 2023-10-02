@@ -1,15 +1,18 @@
 @font-face {
   font-family: 'Inconsolata-Medium';
-  src: url('{% static "fonts/Inconsolata-Medium.ttf" %}');
+  src: url('/static/fonts/Inconsolata-Medium.ttf');
 }
+
 @font-face {
   font-family: 'MajorMonoDisplay-Regular';
-  src: url('{% static "fonts/MajorMonoDisplay-Regular.ttf" %}');
+  src: url('/static/fonts/MajorMonoDisplay-Regular.ttf');
 }
+
 @font-face {
   font-family: 'Pacifico-Regular';
-  src: url('{% static "fonts/Pacifico-Regular.ttf" %}');
+  src: url('/static/fonts/Pacifico-Regular.ttf');
 }
+
 
 
 #userText{

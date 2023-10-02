@@ -24,27 +24,29 @@
 
 @font-face {
   font-family: 'RobotoCondensed-Regular';
-  src: url('{% static "fonts/RobotoCondensed-Regular.ttf" %}');
+  src: url('/static/fonts/RobotoCondensed-Regular.ttf');
 }
 
 @font-face {
   font-family: 'RobotoCondensed-Bold';
-  src: url('{% static "fonts/RobotoCondensed-Bold.ttf" %}');
+  src: url('/static/fonts/RobotoCondensed-Bold.ttf');
+
 }
 
 @font-face {
   font-family: 'NotoSans-Black';
-  src: url('{% static "fonts/NotoSans-Black.ttf" %}');
+  src: url('/static/fonts/NotoSans-Black.ttf');
 }
 
 @font-face {
   font-family: 'NotoSans-Regular';
-  src: url('{% static "fonts/NotoSans-Regular.ttf" %}');
+ 
+  src: url('/static/fonts/NotoSans-Regular.ttf');
 }
 
 @font-face {
   font-family: 'NotoSans-Medium';
-  src: url('{% static "fonts/NotoSans-Medium.ttf" %}');
+  src: url('/static/fonts/NotoSans-Medium.ttf');
 }
 
 

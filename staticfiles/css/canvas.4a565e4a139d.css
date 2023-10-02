@@ -1,16 +1,16 @@
 @font-face {
   font-family: 'Inconsolata-Medium';
-  src: url('/static/fonts/Inconsolata-Medium.ttf');
+  src: url("/static/fonts/Inconsolata-Medium.69ee0a070826.ttf");
 }
 
 @font-face {
   font-family: 'MajorMonoDisplay-Regular';
-  src: url('/static/fonts/MajorMonoDisplay-Regular.ttf');
+  src: url("/static/fonts/MajorMonoDisplay-Regular.e7acc228230d.ttf");
 }
 
 @font-face {
   font-family: 'Pacifico-Regular';
-  src: url('/static/fonts/Pacifico-Regular.ttf');
+  src: url("/static/fonts/Pacifico-Regular.85bb2d0ec4a0.ttf");
 }
 
 
