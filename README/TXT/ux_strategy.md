@@ -21,6 +21,9 @@ At the strategy level, wordUpp aims to make a small mark on text-based visual co
 	- premium (0.99 Unlimited)
 - users get to combine their style with grid-based word art.
 - Users that want word art without thinking of the ugly word art from the 90s.
+- Users can downgrade
+- Users can cancel their subscription
+- Users can delete the account
 
 ## Bussiness Goals
 

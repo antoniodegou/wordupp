@@ -9,6 +9,8 @@
 
 * Bootstrap 5.2
 * Django
+* Stripe
+
 
 <details><summary>Python Packages</summary>
 
@@ -76,10 +78,12 @@
 
 ## Tools
 
-* Illustrator
+* Adobe Illustrator
 * Favicon.io
 * Google Chrome Dev Tools
-
+* HTML pretiffy
+* lint Python
+* javascript linter
 
 
 
