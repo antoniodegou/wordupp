@@ -1,7 +1,6 @@
 # Scope Plane
 
 
-In terms of scope, wordUpp offers a range of features tailored to textual design. The application encompasses all the essential tools to craft unique and visually appealing text visuals, from dynamic canvas rendering and novel text effects to predefined social media sizes.
 
 ## Core Features 
 
@@ -109,5 +108,9 @@ The following table outlines the user stories for the Word Up app.
 
 
 
-[NEXT ---> Structure Plane](ux_structure.md)
+
+
+
+| [Strategy Plane <---- Before](ux_strategy.md)  | [NEXT ---> Structure Plane](ux_structure.md)  |
+|:----------|:----------|
 

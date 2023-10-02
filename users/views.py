@@ -1,23 +1,34 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
-
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
-from users.forms import UserRegisterForm
-from django.contrib.auth.forms import AuthenticationForm
-
-from django.contrib.auth import logout
-from .forms import UserUpdateForm
+from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm
 from django.http import JsonResponse
-from datetime import datetime 
-from subscription.models import UserSubscription  # Adjust the import based on your project structure
-from subscription.models import SubscriptionPlan, UserSubscription 
-# Registration View
+from datetime import datetime
+from users.forms import UserRegisterForm, UserUpdateForm
+from subscription.models import SubscriptionPlan, UserSubscription  # Adjust the import based on your project structure
+
+
+
+
 def register(request):
+    """
+    This view handles the user registration process.
+
+    Parameters:
+    - request: The HTTP request object. This is used to capture the form data and any other request-related information.
+
+    Steps:
+    1. If the user is already authenticated, redirect them to the dashboard.
+    2. If the request method is POST, validate the form data and create a new user.
+    3. Log the user in automatically after successful registration.
+    4. Assign them to a free subscription plan.
+    5. Redirect them to the dashboard.
+
+    Note: 
+    - The UserRegisterForm is a custom Django form for user registration.
+    - The SubscriptionPlan and UserSubscription models are used for managing user subscriptions.
+    """
     if request.user.is_authenticated:
         return redirect('dashboard')  # If already logged go here
     
@@ -41,8 +52,24 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'register.html', {'form': form})  # Adjust template name if needed
 
-# Login View
+
+
 def user_login(request):
+    """
+    This view handles the user login process.
+
+    Parameters:
+    - request: The HTTP request object. This is used to capture the form data and any other request-related information.
+
+    Steps:
+    1. If the user is already authenticated, redirect them to the dashboard.
+    2. If the request method is POST, validate the form data and authenticate the user.
+    3. Log the user in and redirect them to the dashboard.
+
+    Note:
+    - The AuthenticationForm is a built-in Django form for user authentication.
+
+    """
     if request.user.is_authenticated:
         return redirect('dashboard') # If already logged go here
     
@@ -60,14 +87,46 @@ def user_login(request):
  
 
 def user_logout(request):
+    """
+    This view handles user logout.
+
+    Parameters:
+    - request: The HTTP request object. It is used to capture any request-related information, though in this case, it's not needed for much.
+
+    Steps:
+    1. Log the user out using Django's built-in logout function.
+    2. Redirect the user to the login page or any other page you wish.
+
+    Note:
+    - The logout function takes care of invalidating the user's session, so you don't have to worry about it.
+
+    """
     logout(request)
-    # After logging out, redirect the user to the homepage or login page.
     return redirect('login')  # adjust as needed
 
 
 
 @login_required
 def delete_account(request):
+    """
+    This view handles account deletion for authenticated users.
+
+    Parameters:
+    - request: The HTTP request object. It captures any request-related information.
+
+    Steps:
+    1. Check if the user is authenticated via the @login_required decorator.
+    2. Get the current logged-in user.
+    3. Log the user out to invalidate their session.
+    4. Delete the user from the database.
+    5. Display a success message.
+    6. Redirect the user to the registration page.
+
+    Note:
+    - The @login_required decorator ensures that only logged-in users can access this view.
+    - Deleting the user will remove all associated data from the database. Make sure this is what you want.
+
+    """
     user = request.user
     logout(request)
     user.delete()
@@ -77,15 +136,28 @@ def delete_account(request):
 
 
 
-"""
-    YA
- """
-
-
 @login_required
 def dashboard(request):
     """
-    Render the dashboard page.
+    This view handles rendering and functionality for the dashboard page.
+
+    Parameters:
+    - request: The HTTP request object.
+
+    Steps:
+    1. Print user authentication status (for debugging).
+    2. Initialize some variables, including the Stripe session ID and subscription status.
+    3. If the session ID exists, attempt to log the user in based on their subscription.
+    4. If the subscription status is 'success', display a success message.
+    5. Initialize the context dictionary for the template.
+    6. Check if the user is already subscribed.
+    7. If the request is a POST request, handle actions like updating user details or changing the password.
+    8. Otherwise, initialize the UserUpdateForm and PasswordChangeForm.
+    9. Calculate the remaining downloads based on the subscription and add this to the context.
+    10. Finally, render the dashboard template with the context.
+
+    Note:
+    - The @login_required decorator ensures that only logged-in users can access this view.
     """
     print(request.user.is_authenticated)
 
@@ -103,8 +175,6 @@ def dashboard(request):
 
 
     if subscription_status == 'success':
-        # You already have the user info because they're logged in
-        # login(request, request.user)
         messages.success(request, 'Yeehaw! Your subscription was successful, darlin\'!')
         
     context = {}
@@ -133,9 +203,7 @@ def dashboard(request):
             
             if "success" in password_change_response:
                 return JsonResponse(password_change_response)
-        
-        
-        # Handle other actions like upgrade_subscription here if needed
+
 
     else:
         # Only initialize these on a non-POST request
@@ -161,8 +229,26 @@ def dashboard(request):
 
 def handle_user_details_update(request):
     """
-    Process the user's details update and return the context.
+    This function handles the update of user details when called from the dashboard view.
+
+    Parameters:
+    - request: The HTTP request object.
+
+    Returns:
+    A dictionary containing:
+    - 'success': A boolean indicating if the update was successful.
+    - 'errors': A dictionary of field errors if the update failed.
+
+    Steps:
+    1. Initialize the UserUpdateForm with POST data and the current user instance.
+    2. Validate the form.
+    3. If the form is valid, save the changes and return a success status.
+    4. If the form is invalid, collect the errors and return them along with a failure status.
+
+    Note:
+    - This function is intended to be called within an AJAX request from the dashboard view.
     """
+
     u_form = UserUpdateForm(request.POST, instance=request.user)
     
     if u_form.is_valid():
@@ -177,7 +263,25 @@ def handle_user_details_update(request):
 
 def handle_password_change(request):
     """
-    Handle the password change functionality.
+    This function handles the password change action when called from the dashboard view.
+
+    Parameters:
+    - request: The HTTP request object.
+
+    Returns:
+    A dictionary containing:
+    - 'success': A boolean indicating if the password change was successful.
+    - 'errors': A dictionary of field errors if the password change failed.
+
+    Steps:
+    1. Initialize the PasswordChangeForm with POST data and the current user instance.
+    2. Validate the form.
+    3. If the form is valid, save the new password and re-authenticate the user.
+    4. If the form is invalid, collect the errors and return them along with a failure status.
+
+    Note:
+    - This function is intended to be called within an AJAX request from the dashboard view.
+    - The user is re-authenticated and logged in after the password change to update the session.
     """
     context = {}
     p_form = PasswordChangeForm(request.user, request.POST)
@@ -199,6 +303,25 @@ def handle_password_change(request):
 
 @login_required
 def delete_account(request):
+    """
+    This function allows logged-in users to permanently delete their account.
+
+    Parameters:
+    - request: The HTTP request object.
+
+    Returns:
+    An HTTP redirect response.
+
+    Steps:
+    1. Check if the request method is POST.
+    2. If it is POST, delete the user and associated data.
+    3. Display a success message and redirect to the login page.
+    4. If the request is not a POST request, redirect back to the dashboard.
+
+    Note:
+    - This function should be called when a user confirms they want to delete their account.
+    - The user must be logged in to access this function (@login_required).
+    """
     if request.method == "POST":
         user = request.user
         user.delete()  # This deletes the user and associated data.

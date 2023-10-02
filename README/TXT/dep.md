@@ -52,4 +52,9 @@ This project is built using Django and deployed on Heroku, with data stored in E
     git clone https://github.com/yourusername/projectname.git
     ```
 
-    [NEXT ---> Tests](tests.md)
+
+
+| [Features <---- Before](feat.md)  | [NEXT ---> Tests](tests.md) |
+|:----------|:----------|
+
+    

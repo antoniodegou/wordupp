@@ -100,3 +100,13 @@ All tests were conducted rigorously to ensure that each feature works as intende
 
 
 ## Bugs
+
+* Once the user registers, sometimes they get redirected to the dashboard already logged in, sometimes they get no logged and have to login again. i coulnt find out what makes this unpredictable behaviour.
+
+* Colour poicker work differently in firefox, so it only updates the canvas once you click off the picker. It doesnt produce any errors, just a less smooth user experience. 
+
+
+
+
+| [Deployment <---- Before](dep.md)  | [NEXT ---> Credits](credits.md) |
+|:----------|:----------|

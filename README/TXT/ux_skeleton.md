@@ -1,6 +1,6 @@
 # Skeleton Plane
 
-The skeleton of wordUpp is its foundational design blueprint. Through wireframes and basic layouts, wordUpp ensures a balanced placement of design tools, clear pathways for user tasks, and an organised interface that prioritises the user's design process, making it efficient and enjoyable.
+
 
 ## UI Components:
 
@@ -173,4 +173,7 @@ WordUpp's responsive design ensures a fabulous and consistent user experience ac
 </details>
 
 
-[NEXT ---> Surface Plane](ux_surface.md)
+ 
+
+| [Structure Plane <---- Before](ux_structure.md)  | [NEXT ---> Surface Plane](ux_surface.md)  |
+|:----------|:----------|

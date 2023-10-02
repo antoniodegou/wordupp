@@ -3,9 +3,9 @@
 At the strategy level, wordUpp aims to make a small mark on text-based visual content creation for social media. The primary goal is to empower users to create captivating word art effortlessly, ensuring their content stands out and resonates with their audience.
 
 
-## Target Audience
+## Target Audience 
 
-- mainly the Social media users that post.
+- mainly the Social Media users that post.
 - Any other case in which a user might need word art with this style
 
 ## Market Research
@@ -25,6 +25,12 @@ At the strategy level, wordUpp aims to make a small mark on text-based visual co
 ## Bussiness Goals
 
 - The main goal is to carve a specific new style in the global social media zeitgeist.
-- That comes with a premium price for maintenance and little profit. 
+- That comes with a premium price for maintenance and little profit.
+- Create a new look
 
-[Next ---> Scope Plane](ux_scope.md)
+| [UX <---- Before](user_experience.md)  | [Next ---> Scope Plane](ux_scope.md)  |
+|:----------|:----------|
+
+
+
+

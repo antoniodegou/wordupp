@@ -1,16 +1,18 @@
 from django.shortcuts import render
-from .models import UserSubscription
-from celery import shared_task
 from django.contrib import messages
-from django.shortcuts import render
-from .models import DownloadLog
-from subscription.models import UserSubscription
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
+from .models import UserSubscription, DownloadLog
+from celery import shared_task
+
 
 
  
 def canvas(request):
+    """
+Displays the canvas page, showing the user's download information based on their subscription level.
+The view checks if the user is on a premium plan to calculate the downloads left for the month.
+"""
     user = request.user
     user_subscription = UserSubscription.objects.get(user=user)
     is_premium = user_subscription.plan.name == 'WordUpp Premium'  # Replace 'Premium' with your actual premium plan name
@@ -30,6 +32,11 @@ def canvas(request):
 
 
 def handle_download(request):
+    """
+Handles the file download request.
+- Increments the user's download count for the month.
+- Checks if the user has reached their monthly download limit.
+"""
     try:
         user = request.user
         user_subscription = UserSubscription.objects.get(user=user)
@@ -61,8 +68,11 @@ def handle_download(request):
 
 
 
-
-
 @shared_task
 def reset_monthly_download_count():
+    """
+Celery task to reset the monthly download count for all users to 0.
+This should be scheduled to run at the beginning of each month.
+"""
     UserSubscription.objects.update(downloads_this_month=0)
+    

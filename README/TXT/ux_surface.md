@@ -1,6 +1,5 @@
 # Surface Plane
 
-On the surface, wordUpp showcases a modern and sleek design. With a harmonious blend of colours, typography, and visual elements, the application ensures that every interaction is functional and aesthetically pleasing, echoing the essence of creating stunning textual imagery.
 
 
 ## Color Scheme
@@ -36,4 +35,8 @@ I made a few animations to raise interest, especially on the homepage.
 
 <img src="../IMG/animations/hero.gif" width="80%">
 
-[NEXT ---> Techonologies](tech.md)
+ 
+
+
+| [Skeleton Plane <---- Before](ux_skeleton.md)  | [NEXT ---> Techonologies](tech.md)  |
+|:----------|:----------|

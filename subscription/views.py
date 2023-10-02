@@ -1,16 +1,14 @@
-from django.shortcuts import  redirect
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-import stripe
 from django.conf import settings
-from django.contrib import messages 
+from django.contrib import messages
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from .models import UserSubscription, SubscriptionPlan ,SubscriptionPlan
 from django.db import transaction
-from .models import UserSubscription, MyStripeEventModel 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
+import stripe
+from .models import UserSubscription, SubscriptionPlan, MyStripeEventModel
 from datetime import datetime
-from django.http import JsonResponse, HttpResponseForbidden
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -20,6 +18,12 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
  
 @login_required
 def subscribe_premium(request):
+    """
+    Handles the process of subscribing the user to a premium plan.
+    1. Creates a Stripe customer.
+    2. Associates the Stripe customer ID with the user.
+    3. Initiates a Stripe Checkout Session for the subscription.
+    """
     print(f"User authenticated after Stripe: {request.user.is_authenticated}")
 
     if not request.user.is_authenticated:
@@ -32,7 +36,6 @@ def subscribe_premium(request):
             }
         )
 
-   
         # Save the Stripe customer ID to your UserSubscription model
         user_subscription, created = UserSubscription.objects.get_or_create(
             user=request.user,
@@ -93,6 +96,11 @@ def subscribe_premium(request):
  
 @login_required
 def cancel_subscription(request):
+    """
+    Cancels the user's current subscription.
+    1. Deletes the Stripe subscription.
+    2. Updates the user's subscription record in the database.
+    """
     try:
         # Fetch the user's current subscription
         user_sub = UserSubscription.objects.get(user=request.user)
@@ -126,6 +134,9 @@ def cancel_subscription(request):
 
 @login_required
 def customer_portal(request):
+    """
+    Opens Stripe's customer portal for the user to manage their subscription.
+    """
     try:
         stripe_customer_id = request.user.subscription.stripe_customer_id
         if not stripe_customer_id:
@@ -148,6 +159,14 @@ def customer_portal(request):
 @transaction.atomic  # Makes sure all DB operations are atomic
 @csrf_exempt
 def stripe_webhook(request):
+    """
+    Handles various Stripe webhook events.
+    1. Subscription updates.
+    2. Subscription creation.
+    3. Subscription deletion.
+    4. Checkout session completion.
+    Logs the processed events to avoid duplicate handling.
+    """
     print("Webhook received")
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
@@ -167,7 +186,6 @@ def stripe_webhook(request):
     if MyStripeEventModel.objects.filter(stripe_event_id=stripe_event_id).exists():
         return HttpResponse(status=200)  # Already processed this event
 
-    # print("MYE EVENTS GURL:", event['type'])
  
     # Handle the event
     if event['type'] == 'customer.subscription.updated':

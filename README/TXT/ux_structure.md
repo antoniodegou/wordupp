@@ -1,7 +1,7 @@
 # Structure Plane
 
-wordUpp's structure is designed to provide a logical and seamless user flow. This includes intuitive navigation, categorisation of design tools, and a coherent pathway that guides users from selecting canvas size and choosing text effects to finalising their design masterpieces.
 
+<img src="../IMG/respons/cc.png" width="80%">
 
 <details><summary>My Information Strutucture</summary>
 
@@ -119,4 +119,8 @@ Here's a step-by-step walkthrough of a typical user session on Word Up:
 - User-related error messages from the server are shown in the front end in a user-friendly manner.
 
 
- [NEXT ---> Skeleton Plane](ux_skeleton.md)
+ 
+
+
+| [Scope Plane <---- Before](ux_scope.md)  | [NEXT ---> Skeleton Plane](ux_skeleton.md)  |
+|:----------|:----------|

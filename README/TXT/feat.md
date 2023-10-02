@@ -56,3 +56,7 @@
 2. **Backgrounds**: Section for customising the background of the design.
 3. **Lines**: Adjustments related to line designs on the canvas.
 4. **Brush**: Dedicated pane for brush tool customisations and settings.
+
+
+| [Technology <---- Before](tech.md)  | [NEXT ---> Deployment](dep.md)  |
+|:----------|:----------|

@@ -82,4 +82,7 @@
 
 
 
-[NEXT ---> Deployment](dep.md)
+
+
+| [Surface Plane <---- Before](ux_surface.md)  | [NEXT ---> Features](feat.md)  |
+|:----------|:----------|
