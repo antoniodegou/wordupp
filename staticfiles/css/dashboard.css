@@ -1,0 +1,57 @@
+root{
+    --bs-nav-tabs-link-active-bg: var(--white)!important;
+    --bs-body-bg: var(--pink)!important;
+}
+
+  .tab-pane{
+    border: var(--border);
+}
+
+#dashboard-tab,#profile-tab, #subscription-tab{
+    background-color: var(--red);
+    border-bottom: none;
+    /* color: var(--white); */
+}
+
+#subscription-tab.active, #profile-tab.active{
+    background-color: var(--red)!important;
+ 
+}
+
+.tab-pane{
+    background-color: var(--actual-white);
+   padding:1rem;
+}
+
+.my-plan{
+    border: var(--border);
+    background-color: var(--white);
+    padding: 0 1rem ;
+}
+
+form{
+    border: unset!important;;
+}
+
+
+.nav-tabs{
+    --bs-nav-tabs-border-color: rgba(0,0,0,0);
+}
+
+.lined-border{
+    border: 3px  dotted black;
+}
+
+.emoji {
+    font-size: 2em;  /* Adjust the size as you like */
+  }
+
+  .number-left{
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 2em;  /* Adjust the size as you like */
+    font-weight: 900;
+  }
+
+  .tier-card{
+    box-shadow: var(--shadow);
+  }
