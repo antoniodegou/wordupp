@@ -3,7 +3,9 @@
 WordUpp can be thought of as a creative word art canvas creation. You can use the power of words to emphasise an image or make the word grid the main character. What matters is that it has a very specific graphic tendency. Like the kids say, "It's a look."
 
 
-![Mockup](../IMG/home/mock.png)
+![Mockup](/README/IMG/home/mock.png)
+
+
 
 
 With a range of unique text effects, you can go beyond traditional text displays and create designs that are fresh, dynamic, and tailor-made to your specifications.
