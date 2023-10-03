@@ -25,6 +25,7 @@ def subscribe_premium(request):
     3. Initiates a Stripe Checkout Session for the subscription.
     """
     print(f"User authenticated after Stripe: {request.user.is_authenticated}")
+    wordupp_premium_plan = SubscriptionPlan.objects.get(name='WordUpp Premium')
 
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You need to be logged in to do that, darlin'!")
@@ -47,6 +48,7 @@ def subscribe_premium(request):
         if not created:
             user_subscription.stripe_customer_id = stripe_customer.id
             user_subscription.is_active = True
+            user_subscription.plan = wordupp_premium_plan
             user_subscription.save()
 
         # Fetch the premium plan
