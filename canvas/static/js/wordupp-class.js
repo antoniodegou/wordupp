@@ -529,10 +529,11 @@ class WordCanvas {
                         break;
                     case 'changeColor':
                         console.log("Applying change color brush effect.");
-                        if (word.opacity !== 0 && !word.brushed) { // Only change color if word isn't "deleted"
+                        // if (word.opacity !== 0 && !word.brushed) { // Only change color if word isn't "deleted"
                             word.color = brushColor;
                             word.brushed = true;
-                        }
+                            word.opacity = 1;
+                        // }
                         break;
                     case 'randomizeSize':
                         console.log("Applying randomize size brush effect.");

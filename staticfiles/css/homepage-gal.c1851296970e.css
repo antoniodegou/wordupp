@@ -1,0 +1,32 @@
+.carousel1 {
+    position: relative;
+    width: 400px;
+    height: 800px;
+    perspective: 1000px;
+ 
+  }
+  
+  .carousel-item1 {
+    position: absolute;
+    width: 350px;
+    object-fit: contain;
+    text-align: center;
+    line-height: 200px;
+    font-size: 2em;
+    transition: all 1s ease;
+    z-index: 0;
+    transform: rotate(0deg) translateX(0px);
+    object-fit: cover!important;
+    border: var(--border)!important;
+    object-fit: scale-down;
+  }
+  
+  /* Randomly generated rotation and translation for demonstration */
+  .carousel-item1:nth-child(odd) {
+    transform: rotate(-3deg) translateX(-5px);
+  }
+  
+  .carousel-item1:nth-child(even) {
+    transform: rotate(3deg) translateX(5px);
+  }
+  

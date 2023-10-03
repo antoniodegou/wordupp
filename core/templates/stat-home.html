@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="{% static '/css/homepage-hero.css' %}">
     <link rel="stylesheet" href="{% static '/css/homepage-features.css' %}">
     <link rel="stylesheet" href="{% static '/css/homepage-price.css' %}">
-    <script src="{% static '/js/hero.js' %}"></script>
-    <script src="{% static '/js/features.js' %}"></script>
+    <link rel="stylesheet" href="{% static '/css/homepage-gal.css' %}">
+
 {% endblock %}
 
 
@@ -139,12 +139,24 @@
         </div>
     </div>
 </section>
-
+<h2 class="big-title text-center">Examples</h2>
+<section class=" d-flex justify-content-center"> 
+   
+    <div class="carousel1">
+        <div class="carousel-item1 rounded-5" style="background: url(/static/images/wp01.png);  aspect-ratio: 1/ 1!important; background-size: cover;"> </div>
+        <div class="carousel-item1  rounded-5" style="background: url(/static/images/wp02.png);  aspect-ratio: 2/ 1!important; background-size: cover;"> </div>
+        <div class="carousel-item1  rounded-5" style="background: url(/static/images/wp03.png);  aspect-ratio: 4 / 7!important; background-size: cover;"> </div>
+        <div class="carousel-item1  rounded-5" style="background: url(/static/images/wp04.png);  aspect-ratio: 1/1!important; background-size: cover;"> </div>
+         
+      </div>
+</section>
 
 {% endblock %}
 
 
 
 {% block extra_js %}
-  <script src="{% static '/js/hero.js' %}"></script>
+<script src="{% static '/js/hero.js' %}"></script>
+<script src="{% static '/js/features.js' %}"></script>
+  <script src="{% static '/js/gal.js' %}"></script>
 {% endblock %}
