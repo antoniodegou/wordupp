@@ -163,12 +163,16 @@ def dashboard(request):
 
     print(f"User authenticated after Stripe: {request.user.is_authenticated}")
     downloads_left = 0  # Default value
+    downloads_this_month = 0  # Initialize to a default value
+
     session_id = request.GET.get('session_id')
     subscription_status = request.GET.get('subscription')
 
     if session_id:
         try:
             user_subscription = UserSubscription.objects.get(stripe_customer_id=session_id)
+            
+
             login(request, user_subscription.user)
         except UserSubscription.DoesNotExist:
             messages.warning(request, "Couldn't find a subscription with that session ID, sugar.")
@@ -182,6 +186,7 @@ def dashboard(request):
 
     try:
         user_subscription = UserSubscription.objects.get(user=request.user)
+        downloads_this_month = user_subscription.downloads_this_month  # Now it's safe to access
     except UserSubscription.DoesNotExist:
         pass  # User has no subscription        
 
@@ -222,7 +227,8 @@ def dashboard(request):
     context['downloads_left'] = downloads_left  # Add to context    
     context['user_subscription'] = user_subscription
     context['is_limit_reached'] = is_limit_reached  # Add to context
-    context['downloads_this_month'] = user_subscription.downloads_this_month  # Add to context
+    context['downloads_this_month'] = downloads_this_month  # Use the variable here
+
  
     return render(request, 'dashboard.html', context)
 

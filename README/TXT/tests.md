@@ -101,10 +101,11 @@ All tests were conducted rigorously to ensure that each feature works as intende
 
 ## Bugs
 
-* Once the user registers, sometimes they get redirected to the dashboard already logged in, sometimes they get no logged and have to login again. i coulnt find out what makes this unpredictable behaviour.
+* Once the user registers, sometimes they get redirected to the dashboard already logged in, and sometimes they get not logged in and have to login again. I couldn't find out what makes this unpredictable behaviour.
 
-* Colour poicker work differently in firefox, so it only updates the canvas once you click off the picker. It doesnt produce any errors, just a less smooth user experience. 
+* Colour picker works differently in Firefox, so it only updates the canvas once you click off the picker. It doesn't produce any errors, just a less smooth user experience. 
 
+* Fonts don't seem to load well on safari, i have seen this issue online but i couldn't find a way of making it work for my project
 
 
 
