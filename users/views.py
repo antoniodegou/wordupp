@@ -224,7 +224,8 @@ def dashboard(request):
     except UserSubscription.DoesNotExist:
         pass  # User has no subscription
 
-    context['downloads_left'] = downloads_left  # Add to context    
+    context['downloads_left'] = context['downloads_left'] = max(0, 10 - downloads_this_month)  # Use the variable here
+  # Add to context    
     context['user_subscription'] = user_subscription
     context['is_limit_reached'] = is_limit_reached  # Add to context
     context['downloads_this_month'] = downloads_this_month  # Use the variable here
