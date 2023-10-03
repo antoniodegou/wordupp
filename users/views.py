@@ -218,13 +218,14 @@ def dashboard(request):
         context['p_form'] = p_form
 
     try:
-        downloads_left = max(0, 10 - user_subscription.downloads_this_month)  # Replace 10 with your actual limit
+        downloads_left = max(0, 10 - downloads_this_month)  # Replace 10 with your actual limit
         is_limit_reached = downloads_left == 0
 
     except UserSubscription.DoesNotExist:
         pass  # User has no subscription
 
-    context['downloads_left'] = context['downloads_left'] = max(0, 10 - downloads_this_month)  # Use the variable here
+    context['downloads_left'] = max(0, 10 - downloads_this_month)
+
   # Add to context    
     context['user_subscription'] = user_subscription
     context['is_limit_reached'] = is_limit_reached  # Add to context
