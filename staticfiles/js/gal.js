@@ -24,7 +24,7 @@ setInterval(() => {
   let frontItem = items[0];
   
   // Slide the front item sideways
-  frontItem.style.transform = `rotate(0deg) translateX(250px)`;
+  frontItem.style.transform = `rotate(0deg) translateX(350px)`;
 
   setTimeout(() => {
     // Slide it back but lower the z-index so it goes to the back
