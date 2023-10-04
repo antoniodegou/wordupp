@@ -19,9 +19,11 @@
         <!--in case for some reason the user doesnt get assign to the free plan -->
         <p>Howdy, partner! Looks like you haven't picked a subscription plan yet.</p>
         <!-- Show the "Subscribe to Premium" button if the user has no subscription -->
-        <button class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4 mb-4" onclick="upgradeToPremium()">Upgrade to Premium</button>
+        <button class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4 mb-4 " onclick="upgradeToPremium()">Upgrade to Premium</button>
 
     {% endif %}
+
+<div class="mt-4">
 
 
     {% if user_subscription %}
@@ -30,18 +32,18 @@
             {% if user_subscription.end_date < today %}
                 <p>Your subscription has expired on {{ user_subscription.end_date }}. Please renew to continue enjoying the premium features.</p>
             {% else %}
-                <p>Your subscription is paused but will remain active until {{ user_subscription.end_date }}.</p>
+                <p>Your subscription is the Free tier  but will remain with Premium until {{ user_subscription.end_date }}.</p>
             {% endif %}
 
         {% elif user_subscription.end_date %}
-            <p>Your current subscription will end on {{ user_subscription.end_date }}.</p>
+            <p>Your current subscription renew on {{ user_subscription.end_date }}.</p>
         {% endif %}
 
     {% else %}
         <p>You are not currently subscribed to any plan. Subscribe now to enjoy premium features.</p>
     {% endif %}
 
-
+</div>
 
 
 </div>
