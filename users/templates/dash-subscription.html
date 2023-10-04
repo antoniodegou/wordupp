@@ -12,7 +12,8 @@
             <button class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4  " onclick="upgradeToPremium()">Upgrade to Premium</button>
         {% else %}
             <!-- Show the "Manage Your Subscription" button -->
-            <button  class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4  " href="{% url 'customer_portal' %}">Manage Your Subscription</button>
+            <a class="btn rounded-0 bg-yellow btn-lg black-border btn-lg me-4" href="{% url 'customer_portal' %}">Manage Your Subscription</a>
+
         {% endif %}
     {% else %}
         <!--in case for some reason the user doesnt get assign to the free plan -->
@@ -39,5 +40,8 @@
     {% else %}
         <p>You are not currently subscribed to any plan. Subscribe now to enjoy premium features.</p>
     {% endif %}
+
+
+
 
 </div>

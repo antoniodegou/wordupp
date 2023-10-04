@@ -1,5 +1,5 @@
 # Features
-
+## Dashboard
 ### **wordUpp Features Documentation**
 
 1. **Dynamic Canvas Rendering**:
@@ -56,6 +56,17 @@
 2. **Backgrounds**: Section for customising the background of the design.
 3. **Lines**: Adjustments related to line designs on the canvas.
 4. **Brush**: Dedicated pane for brush tool customisations and settings.
+
+## Dashboard
+
+1. change details: user details management
+2. change password: The user changes the password
+3. delete account: delete account and unsubscribe
+4. upgrade button: upgrade to premium sub
+5. manage subscription: stripe portal to manage subscription
+
+
+
 
 
 | [Technology <---- Before](tech.md)  | [NEXT ---> Deployment](dep.md)  |

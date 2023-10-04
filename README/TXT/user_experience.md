@@ -17,7 +17,7 @@ In terms of scope, wordUpp offers a range of features tailored to textual design
 
 * [Structure Plane](ux_structure.md)
 
-wordUpp's structure is designed to provide a logical and seamless user flow. This includes intuitive navigation, categorisation of design tools, and a coherent pathway that guides users from selecting canvas size and choosing text effects to finalising their design masterpieces.
+WordUpp's structure is designed to provide a logical and seamless user flow. This includes intuitive navigation, categorisation of design tools, and a coherent pathway that guides users from selecting canvas size and choosing text effects to finalising their design masterpieces.
 
 * [Skeleton Plane](ux_skeleton.md)
 
@@ -25,7 +25,7 @@ The skeleton of wordUpp is its foundational design blueprint. Through wireframes
 
 * [Surface Plane](ux_surface.md)
 
-On the surface, wordUpp showcases a modern and sleek design. With a harmonious blend of colours, typography, and visual elements, the application ensures that every interaction is functional and aesthetically pleasing, echoing the essence of creating stunning textual imagery.
+On the surface, wordUpp showcases a modern and sleek design. With a harmonious yet contrasting blend of colours, typography, and visual elements, the application ensures that every interaction is functional and aesthetically pleasing, echoing the essence of creating stunning textual imagery.
 
 
  [Next ---> Strategy Plane](ux_strategy.md)  

@@ -104,7 +104,8 @@ The following table outlines the user stories for the Word Up app.
 | US09          | User               | access a FAQ section in the footer      | get quick answers to common questions                  |
 | US10 		     | User 			  | read term and condition | be aware of how the information works|
 | US11			 | User 			  | read privacy            | know about user data|
-
+| US12 			| User 				| 	User can delete account| styop using the service|
+| US13 			| User 				| 	User change details and password| change the details |
 
 
 

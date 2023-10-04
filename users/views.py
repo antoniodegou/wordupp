@@ -7,7 +7,8 @@ from django.http import JsonResponse
 from datetime import datetime
 from users.forms import UserRegisterForm, UserUpdateForm
 from subscription.models import SubscriptionPlan, UserSubscription  # Adjust the import based on your project structure
-
+from datetime import date
+from django.shortcuts import render
 
 
 
@@ -29,6 +30,7 @@ def register(request):
     - The UserRegisterForm is a custom Django form for user registration.
     - The SubscriptionPlan and UserSubscription models are used for managing user subscriptions.
     """
+    
     if request.user.is_authenticated:
         return redirect('dashboard')  # If already logged go here
     
@@ -160,7 +162,7 @@ def dashboard(request):
     - The @login_required decorator ensures that only logged-in users can access this view.
     """
     print(request.user.is_authenticated)
-
+    today = date.today()
     print(f"User authenticated after Stripe: {request.user.is_authenticated}")
     downloads_left = 0  # Default value
     downloads_this_month = 0  # Initialize to a default value
@@ -230,6 +232,8 @@ def dashboard(request):
     context['user_subscription'] = user_subscription
     context['is_limit_reached'] = is_limit_reached  # Add to context
     context['downloads_this_month'] = downloads_this_month  # Use the variable here
+    context['today'] = date.today()
+    
 
  
     return render(request, 'dashboard.html', context)

@@ -34,7 +34,7 @@ WordUpp is perfect for digital marketers looking to elevate their social media c
 
 * [Technologies](./README/TXT/tech.md)
 
-* [Festures](./README/TXT/feat.md)
+* [Features](./README/TXT/feat.md)
 
 * [Deployment](./README/TXT/dep.md)
 

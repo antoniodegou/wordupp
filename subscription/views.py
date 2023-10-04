@@ -9,7 +9,10 @@ from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 import stripe
 from .models import UserSubscription, SubscriptionPlan, MyStripeEventModel
 from datetime import datetime
+import logging
 
+# Initialize your logger
+logger = logging.getLogger(__name__)
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
@@ -24,6 +27,15 @@ def subscribe_premium(request):
     2. Associates the Stripe customer ID with the user.
     3. Initiates a Stripe Checkout Session for the subscription.
     """
+
+
+    if settings.DEBUG:
+        base_url = 'http://localhost:8000'
+    else:
+        base_url = 'https://wordupp-c-cabc02e1ce9a.herokuapp.com'
+
+    success_url = f'{base_url}/dashboard/?subscription=success'
+    cancel_url = f'{base_url}/dashboard/?subscription=cancel'
     print(f"User authenticated after Stripe: {request.user.is_authenticated}")
     wordupp_premium_plan = SubscriptionPlan.objects.get(name='WordUpp Premium')
 
@@ -63,8 +75,8 @@ def subscribe_premium(request):
                 'quantity': 1,
             }],
             mode='subscription',
-            success_url='http://localhost:8000/dashboard/?subscription=success',
-            cancel_url='http://localhost:8000/dashboard/?subscription=cancel',
+                success_url=success_url,
+                cancel_url=cancel_url,
             metadata={
                 'username': request.user.username
             }
@@ -152,7 +164,9 @@ def customer_portal(request):
         return redirect(session.url)
 
     except Exception as e:
-        messages.error(request, f'Oh, sugar! Something went wrong: {str(e)}')
+        error_message = f'Oh, sugar! Something went wrong: {str(e)}'
+        messages.error(request, error_message)
+        logger.error(error_message)
         return redirect('dashboard')
     
 
@@ -178,9 +192,14 @@ def stripe_webhook(request):
         event = stripe.Webhook.construct_event(
             payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
         )
+        print(f"Event ID: {event['id']}")  # New log
+        print(f"Event Type: {event['type']}")  # New log
+        #print(f"Event Data: {event['data']}")  # New log
     except ValueError as e:
+        print(f"ValueError: {e}")  # New log
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
+        print(f"SignatureVerificationError: {e}")  # New log
         return HttpResponse(status=400)
 
     # Check if this event was already processed
@@ -191,6 +210,7 @@ def stripe_webhook(request):
  
     # Handle the event
     if event['type'] == 'customer.subscription.updated':
+        print("Handling customer.subscription.updated")  # New log
         stripe_subscription_id = event['data']['object']['id']
         subscription_status = event['data']['object']['status']
         previous_attributes = event['data'].get('previous_attributes', {})
@@ -224,6 +244,7 @@ def stripe_webhook(request):
  
 
     elif event['type'] == 'customer.subscription.created':
+        print("Handling customer.subscription.created")  # New log
         stripe_subscription_id = event['data']['object']['id']
         stripe_customer_id = event['data']['object']['customer']
 
@@ -246,6 +267,7 @@ def stripe_webhook(request):
             print("User Subscription not found.")
 
     elif event['type'] == 'customer.subscription.deleted':
+        print("Handling customer.subscription.deleted")  # New log
         print("Subscription deleted event triggered!")
         stripe_subscription_id = event['data']['object']['id']
         try:
@@ -259,7 +281,7 @@ def stripe_webhook(request):
             user_subscription.stripe_subscription_id = None  # You can set this to None since the subscription is deleted
             user_subscription.is_active = False  # Set to inactive
             user_subscription.save()
-            user_subscription.save()
+
 
             print("Subscription canceled and reverted to free plan.")
             
@@ -268,6 +290,7 @@ def stripe_webhook(request):
 
 
     elif event['type'] == 'checkout.session.completed':
+        print("Handling checkout.session.completed")  # New log
         stripe_customer_id = event['data']['object']['customer']
      
         try:
@@ -286,5 +309,5 @@ def stripe_webhook(request):
         stripe_event_id=stripe_event_id,
         type=event['type']
     )
-
+    print(f"Logged event with ID: {stripe_event_id}")  # New log
     return HttpResponse(status=200)

@@ -36,7 +36,9 @@ I made a few animations to raise interest, especially on the homepage.
 <img src="../IMG/animations/hero.gif" width="80%">
 
  
+* examples section:
 
+<img src="../IMG/animations/gal.gif" width="80%">
 
 | [Skeleton Plane <---- Before](ux_skeleton.md)  | [NEXT ---> Techonologies](tech.md)  |
 |:----------|:----------|

@@ -6,7 +6,7 @@
 
 On the HTML validation, there were no errors.
 
-There were warnings, but they were all related to Bootstrap 5 and how they designed their components. In this instance, the validator pointed out elements inside a p tag or button tag without any text.
+There were warnings, but they were all related to Bootstrap 5 and how they designed their components. In this instance, the validator pointed out elements inside a 'p' or button tag without text.
 
 another warning had to do with the tag that Bootstrap gave me the CDN; some fields seem not to be liked by the validator.
 
@@ -95,17 +95,22 @@ We've put our project to the test, darling, and here's how we fared against our 
 | US09          | Access FAQ section                        | ✅ Successful                      |
 | US10          | Read terms and conditions                 | ✅ Successful                      |
 | US11          | Read privacy policy                       | ✅ Successful                      |
+| US12          | Delete the account                      | ✅ Successful                      |
+| US13          | change details and password                   | ✅ Successful                      |
+
 
 All tests were conducted rigorously to ensure that each feature works as intended, providing a seamless experience for all users. 🌟
 
 
 ## Bugs
 
-* Once the user registers, sometimes they get redirected to the dashboard already logged in, and sometimes they get not logged in and have to login again. I couldn't find out what makes this unpredictable behaviour.
+* Once the user registers, sometimes they get redirected to the dashboard already logged in, and sometimes they get not logged in and have to log in again. I couldn't find out what makes this unpredictable behaviour.
 
 * Colour picker works differently in Firefox, so it only updates the canvas once you click off the picker. It doesn't produce any errors, just a less smooth user experience. 
 
-* Fonts don't seem to load well on safari, i have seen this issue online but i couldn't find a way of making it work for my project
+* Fonts don't seem to load well on Safari; I have seen this issue online but couldn't find a way to make it work for my project.
+
+
 
 
 

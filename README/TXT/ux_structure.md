@@ -102,7 +102,7 @@ Here's a step-by-step walkthrough of a typical user session on Word Up:
 
 - **Subscription Tier**: Displays the current subscription level of the user.
 - **Upgrade Prompt**: A call-to-action for free-tier users to upgrade to the premium tier.
-
+- **Manage subscription** button that takes to stripe portal (cancel or pause).
 
 #### Canvas
 
@@ -111,7 +111,6 @@ Here's a step-by-step walkthrough of a typical user session on Word Up:
 - all changes are immediately reflected on the canvas
 - you have a download button 
 - you have a limit of downloads in the case of the free tier; when you reach a limit, you get a message that the download button has become disabled. 
-
 
 ### Error Handling:
 
