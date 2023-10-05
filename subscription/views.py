@@ -38,7 +38,7 @@ def subscribe_premium(request):
     cancel_url = f'{base_url}/dashboard/?subscription=cancel'
     print(f"User authenticated after Stripe: {request.user.is_authenticated}")
     wordupp_premium_plan = SubscriptionPlan.objects.get(name='WordUpp Premium')
-
+   
     if not request.user.is_authenticated:
         return HttpResponseForbidden("You need to be logged in to do that, darlin'!")
     try:
@@ -57,6 +57,7 @@ def subscribe_premium(request):
                 'start_date': datetime.now()  # Set the start_date here
             }
         )
+        print("AAABBCC: ", stripe_customer.id ) 
         if not created:
             user_subscription.stripe_customer_id = stripe_customer.id
             user_subscription.is_active = True
@@ -213,7 +214,9 @@ def stripe_webhook(request):
         print("Handling customer.subscription.updated")  # New log
         stripe_subscription_id = event['data']['object']['id']
         subscription_status = event['data']['object']['status']
+        print(subscription_status)
         previous_attributes = event['data'].get('previous_attributes', {})
+        print("HELOW updated: ", stripe_subscription_id)
         
         try:
             user_subscription = UserSubscription.objects.get(stripe_subscription_id=stripe_subscription_id)
@@ -247,7 +250,7 @@ def stripe_webhook(request):
         print("Handling customer.subscription.created")  # New log
         stripe_subscription_id = event['data']['object']['id']
         stripe_customer_id = event['data']['object']['customer']
-
+        print("HELOW created: ", stripe_subscription_id)
         try:
             # Find the user by the saved Stripe customer ID
             user_subscription = UserSubscription.objects.get(stripe_customer_id=stripe_customer_id)
@@ -270,6 +273,7 @@ def stripe_webhook(request):
         print("Handling customer.subscription.deleted")  # New log
         print("Subscription deleted event triggered!")
         stripe_subscription_id = event['data']['object']['id']
+        print("HELOW deleted: ", stripe_subscription_id)
         try:
             user_subscription = UserSubscription.objects.get(stripe_subscription_id=stripe_subscription_id)
             
@@ -292,7 +296,7 @@ def stripe_webhook(request):
     elif event['type'] == 'checkout.session.completed':
         print("Handling checkout.session.completed")  # New log
         stripe_customer_id = event['data']['object']['customer']
-     
+        print("HELOW completed: ", stripe_subscription_id)
         try:
             user_subscription = UserSubscription.objects.get(stripe_customer_id=stripe_customer_id)
             
