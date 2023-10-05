@@ -65,7 +65,13 @@ def subscribe_premium(request):
             user_subscription.save()
 
         # Fetch the premium plan
-        premium_plan = SubscriptionPlan.objects.get(name='WordUpp Premium')
+        try:
+            premium_plan = SubscriptionPlan.objects.get(name='WordUpp Premium')
+            print(f"Found SubscriptionPlan: {premium_plan.id}")  # or some other field that identifies the object
+        except SubscriptionPlan.DoesNotExist:
+            print("SubscriptionPlan 'WordUpp Premium' not found.")
+            return HttpResponse(status=404)  # or some other appropriate status code
+
 
         # Create Stripe Checkout Session
         session = stripe.checkout.Session.create(
@@ -220,6 +226,7 @@ def stripe_webhook(request):
         
         try:
             user_subscription = UserSubscription.objects.get(stripe_subscription_id=stripe_subscription_id)
+            print(f"Found UserSubscription: {user_subscription.id}")  # or some other field that identifies the object
 
             # Check if the subscription was previously canceled
             if previous_attributes.get('canceled_at'):
@@ -242,7 +249,9 @@ def stripe_webhook(request):
             print("User Subscription updated successfully!")
 
         except UserSubscription.DoesNotExist:
-            print("User Subscription not found.")
+            print(f"User Subscription with stripe_subscription_id {stripe_subscription_id} not found.")
+            return HttpResponse(status=404)  # or some other appropriate status code
+
 
  
 
