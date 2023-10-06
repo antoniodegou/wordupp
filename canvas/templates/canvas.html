@@ -278,8 +278,12 @@
 </div>
 
  
-<p>You have <span id="downloads-left">{{ downloads_left }}</span> downloads left this month.</p>
-
+{% if user_subscription.plan.name == "WordUpp Premium" %}
+ 
+<p class="p-0 m-0">You have made  {{ downloads_this_month }} of downloads left this month.</p>
+{% else %}
+<p class="p-0 m-0">You have {{ downloads_left }} downloads left this month.</p>
+{% endif %}
 
 {% endblock %}
 

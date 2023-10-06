@@ -95,12 +95,40 @@ We've put our project to the test, darling, and here's how we fared against our 
 | US09          | Access FAQ section                        | ✅ Successful                      |
 | US10          | Read terms and conditions                 | ✅ Successful                      |
 | US11          | Read privacy policy                       | ✅ Successful                      |
-| US12          | Delete the account                      | ✅ Successful                      |
+| US12          | Delete the account  -deletes all and cancels subscription                    | ✅ Successful                      |
 | US13          | change details and password                   | ✅ Successful                      |
 
 
 All tests were conducted rigorously to ensure that each feature works as intended, providing a seamless experience for all users. 🌟
 
+
+## stripe related test
+
+1. Free user
+	
+* 1.1 needs to be informed of what tier they are. - ✅ Successful   
+* 1.2 needs to know the downloads left for the month - ✅ Successful   
+* 1.3 needs to have an upgrade button - ✅ Successful   
+	- The upgrade button has to go to Stripe portal to proceed with the payment - ✅ Successful   
+
+<img src="../IMG/testing/03.png" width="70%">
+
+2. Premium User
+* 2.1  needs to be informed of what tier they are. - ✅ Successful   
+* 2.2  needs to be how many downloads have been made - ✅ Successful   
+* 2.3 needs to have a manage subscription button - ✅ Successful  
+	- it should redirect to Stripe portal. - ✅ Successful  
+		- you can cancel the subscription - ✅ Successful  
+		- you can change payment details - ✅ Successful  
+		- you can see invoices for older payments - ✅ Successful  
+
+<img src="../IMG/testing/02.png" width="70%">
+
+3. Premium User that downgraded - ✅ Successful  
+* 3.1 same as a premium user - ✅ Successful  
+* 3.2 has a message saying until the user what date has the premium privileges from the last cycle. - ✅ Successful  
+
+<img src="../IMG/testing/01.png" width="70%">
 
 ## Bugs
 

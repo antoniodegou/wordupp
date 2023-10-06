@@ -3,7 +3,8 @@
 </div>
 
 <div class="bg-a-white black-border p-4 " >
-    {% if "Premium" in user_subscription.plan.name %}
+    {% if user_subscription.plan.name == "WordUpp Premium" %}
+ 
     <p class="p-0 m-0">You have made  {{ downloads_this_month }} of downloads left this month.</p>
     {% else %}
     <p class="p-0 m-0">You have {{ downloads_left }} downloads left this month.</p>
