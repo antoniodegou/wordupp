@@ -10,7 +10,7 @@ import stripe
 from .models import UserSubscription, SubscriptionPlan, MyStripeEventModel
 from datetime import datetime
 import logging
-
+import os
 # Initialize your logger
 logger = logging.getLogger(__name__)
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -28,14 +28,16 @@ def subscribe_premium(request):
     3. Initiates a Stripe Checkout Session for the subscription.
     """
 
+    DEPLOYMENT_ENV = os.environ.get('DEPLOYMENT_ENV', 'development')
 
-    if settings.DEBUG:
-        base_url = 'http://localhost:8000'
-    else:
+    if DEPLOYMENT_ENV == 'production':
         base_url = 'https://wordupp-c-cabc02e1ce9a.herokuapp.com'
+    else:
+        base_url = 'http://localhost:8000'
 
     success_url = f'{base_url}/dashboard/?subscription=success'
     cancel_url = f'{base_url}/dashboard/?subscription=cancel'
+
     print(f"User authenticated after Stripe: {request.user.is_authenticated}")
     wordupp_premium_plan = SubscriptionPlan.objects.get(name='WordUpp Premium')
    
