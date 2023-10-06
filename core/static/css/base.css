@@ -25,36 +25,39 @@
 @font-face {
   font-family: 'RobotoCondensed-Regular';
   src: url('/static/fonts/RobotoCondensed-Regular.ttf');
+ 
 }
 
 @font-face {
   font-family: 'RobotoCondensed-Bold';
-  src: url('/static/fonts/RobotoCondensed-Bold.ttf');
-
+  src: url('../fonts/RobotoCondensed-Bold.ttf');
+ 
 }
 
 @font-face {
   font-family: 'NotoSans-Black';
-  src: url('/static/fonts/NotoSans-Black.ttf');
+  src: url('../fonts/NotoSans-Black.ttf');
 }
 
 @font-face {
   font-family: 'NotoSans-Regular';
  
-  src: url('/static/fonts/NotoSans-Regular.ttf');
+  src: url('../fonts/NotoSans-Regular.ttf');
 }
 
 @font-face {
   font-family: 'NotoSans-Medium';
-  src: url('/static/fonts/NotoSans-Medium.ttf');
+  src: url('../fonts/NotoSans-Medium.ttf');
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap');
 
 html,body{
   position: relative; /* This allows us to position the pseudo-element relative to the body */
   height: 100%;
   margin: 0;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'NotoSans-Regular', sans-serif;
   color:var(--black);
 }
 
@@ -152,7 +155,7 @@ body::before {
 
 
 nav a, .btn, footer a, footer p, .pane-button{
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'RobotoCondensed-Bold', sans-serif;
     text-transform: uppercase;
 }
 
